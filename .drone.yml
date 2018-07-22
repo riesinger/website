@@ -18,7 +18,7 @@ pipeline:
     secrets: [ docker_username, docker_password ]
     commands:
       - docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD registry.pascal-riesinger.de
-      - docker build -t registry.pascal-riesinger.de/website:latest
+      - docker build -t registry.pascal-riesinger.de/website:latest .
       - docker push registry.pascal-riesinger.de/website:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
