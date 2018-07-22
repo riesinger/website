@@ -1,0 +1,35 @@
+pipeline:
+  restore-cache:
+    image: drillster/drone-volume-cache
+    restore: true
+    mount:
+      - ./node_modules
+    volumes:
+      - /tmp/cache-website:/cache
+
+  build-site:
+    image: node:10-slim
+    commands:
+      - npm install
+      - npm run build
+
+  publish-docker:
+    image: docker
+    secrets: [ docker_username, docker_password ]
+    commands:
+      - docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD registry.pascal-riesinger.de
+      - docker build -t registry.pascal-riesinger.de/website:latest
+      - docker push registry.pascal-riesinger.de/website:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    when:
+      event: tag
+
+  restore-cache:
+    image: drillster/drone-volume-cache
+    rebuild: true
+    mount:
+      - ./node_modules
+    volumes:
+      - /tmp/cache-website:/cache
+
