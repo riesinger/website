@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-	  "build": "parcel build"
+	  "build": "parcel build index.html"
   },
   "repository": {
     "type": "git",

@@ -25,7 +25,7 @@ pipeline:
     when:
       event: tag
 
-  restore-cache:
+  rebuild-cache:
     image: drillster/drone-volume-cache
     rebuild: true
     mount:
