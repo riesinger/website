@@ -36,6 +36,7 @@ steps:
     kubernetes_user: drone-pascal-deployments
     namespace: pascal
     deployment: pascal-riesinger-de
+    container: pascal-riesinger-de
     repo: registry.glidingthrough.space/pascal-riesinger-de
     tag: ${DRONE_TAG}
   when:
