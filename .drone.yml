@@ -31,6 +31,9 @@ steps:
       from_secret: kubernetes_apiserver
     kubernetes_token:
       from_secret: kubernetes_token
+    kubernetes_cert:
+      from_secret: kubernetes_cert
+    kubernetes_user: drone-pascal-deployments
     namespace: pascal
     deployment: pascal-riesinger-de
     repo: registry.glidingthrough.space/pascal-riesinger-de
