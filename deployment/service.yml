@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: pascal-riesinger-de
+  namespace: pascal
+spec:
+  selector:
+    app: pascal-riesinger-de
+  ports:
+  - name: http
+    port: 80
