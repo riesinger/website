@@ -25,7 +25,7 @@ steps:
       - tag
 
 - name: deploy-image
-  image: quay.io/honestbee/drone-kubernetes
+  image: quay.io/riesinger/drone-kubernetes
   settings:
     kubernetes_server:
       from_secret: kubernetes_apiserver
