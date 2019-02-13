@@ -15,17 +15,17 @@ steps:
     registry: registry.glidingthrough.space
     tags:
       - latest
-      - ${DRONE_TAG}
+      - dev-${DRONE_COMMIT}
     username:
       from_secret: registry_username
     password:
       from_secret: registry_password
   when:
-    event:
-      - tag
+    branch:
+      - master
 
 - name: deploy-image
-  image: quay.io/riesinger/drone-kubernetes
+  image: quay.io/riesinger/drone-kubernetes:latest
   settings:
     kubernetes_server:
       from_secret: kubernetes_apiserver
@@ -38,8 +38,8 @@ steps:
     deployment: pascal-riesinger-de
     container: pascal-riesinger-de
     repo: registry.glidingthrough.space/pascal-riesinger-de
-    tag: ${DRONE_TAG}
+    tag: dev-${DRONE_COMMIT}
   when:
-    event:
-      - tag
+    branch:
+      - master
 
