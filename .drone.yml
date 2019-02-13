@@ -15,7 +15,7 @@ steps:
     registry: registry.glidingthrough.space
     tags:
       - latest
-      - dev-${DRONE_COMMIT}
+      - ci-${DRONE_BUILD_NUMBER}
     username:
       from_secret: registry_username
     password:
@@ -38,7 +38,7 @@ steps:
     deployment: pascal-riesinger-de
     container: pascal-riesinger-de
     repo: registry.glidingthrough.space/pascal-riesinger-de
-    tag: dev-${DRONE_COMMIT}
+    tag: ci-${DRONE_BUILD_NUMBER}
   when:
     branch:
       - master
