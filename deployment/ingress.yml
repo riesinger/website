@@ -14,3 +14,10 @@ spec:
         backend:
           serviceName: pascal-riesinger-de
           servicePort: 80
+  - host: riesinger.dev
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: pascal-riesinger-de
+          servicePort: 80
