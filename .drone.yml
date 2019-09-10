@@ -2,44 +2,31 @@ kind: pipeline
 name: default
 
 steps:
-- name: build-site
-  image: node
+- name: build
+  image: docker
   commands:
-  - npm install
-  - npm run build
+    - docker build -t reg.infra.riesinger.dev/website:dev-$DRONE_COMMIT --target=builder .
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
 
-- name: push-registry
+- name: publish
   image: plugins/docker
   settings:
-    repo: registry.glidingthrough.space/pascal-riesinger.de
-    registry: registry.glidingthrough.space
+    repo: reg.infra.riesinger.dev/website
+    registry: reg.infra.riesinger.dev
     tags:
       - latest
-      - ci-${DRONE_BUILD_NUMBER}
+      - ${DRONE_TAG}
     username:
       from_secret: registry_username
     password:
       from_secret: registry_password
   when:
-    branch:
-      - master
+    event: tag
 
-- name: deploy-image
-  image: quay.io/riesinger/drone-kubernetes:latest
-  settings:
-    kubernetes_server:
-      from_secret: kubernetes_apiserver
-    kubernetes_token:
-      from_secret: kubernetes_token
-    kubernetes_cert:
-      from_secret: kubernetes_cert
-    kubernetes_user: drone-pascal-deployments
-    namespace: pascal
-    deployment: pascal-riesinger-de
-    container: pascal-riesinger-de
-    repo: registry.glidingthrough.space/pascal-riesinger-de
-    tag: ci-${DRONE_BUILD_NUMBER}
+- name: update-service
+  image: appropriate/curl
+  commands:
+    - curl -X POST https://portainer.infra.riesinger.dev/api/webhooks/8c2312e6-7602-4e8a-a8df-ebe6448192b1
   when:
-    branch:
-      - master
-
+    event: tag
