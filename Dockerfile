@@ -1,7 +1,10 @@
-FROM node:12-slim as builder
+FROM node:12 as builder
 RUN mkdir /build
 WORKDIR /build
-RUN npm ci && \
+COPY . /build
+RUN apt-get update && \
+		apt-get install python && \
+		npm ci && \
 		npm run build
 
 FROM nginx:1-alpine as runner
