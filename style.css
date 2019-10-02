@@ -2,6 +2,18 @@
 @tailwind base;
 /* purgecss end ignore */
 
+@keyframes cursor-blink {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
 @tailwind components;
 
 @tailwind utilities;

@@ -1,11 +1,14 @@
-import Navigation from './Navigation'
+import Navigation from './Navigation';
+import Container from './Container';
 
 const Layout = ({light, children}) => (
 	<div>
-		<header>
-			<Navigation light={light}/>
+		<header className={`${light ? 'bg-white text-background-gray' : 'bg-background-gray text-white'}`}>
+			<Container>
+				<Navigation light={light}/>
+			</Container>
 		</header>
-		<main>
+		<main className="text-gray-700">
 			{children}
 		</main>
 		<footer>
