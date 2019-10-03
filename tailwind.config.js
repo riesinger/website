@@ -7,6 +7,9 @@ module.exports = {
 			display: [ 'sans-serif' ],
 			body: [ 'sans-serif' ],
 		},
+		minWidth: {
+			'300': '300px',
+		},
 		extend: {
 			colors: {
 				'background-gray': '#161618',
