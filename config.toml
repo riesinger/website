@@ -1,0 +1,64 @@
+baseURL = "https://riesinger.dev"
+languageCode = "en-us"
+defaultContentLanguage = "en"
+title = "riesinger.dev"
+theme = "hermit"
+enableGitInfo = true
+pygmentsCodefences  = true
+pygmentsUseClasses  = true
+rssLimit = 15
+copyright = "All posts are licensed under the CC BY 4.0 license, all code is licensed under the MIT license"
+enableEmoji = true  # https://gohugo.io/functions/emojify/
+
+[author]
+  name = "Pascal Riesinger"
+
+[blackfriday]
+  # hrefTargetBlank = true
+  noreferrerLinks = true
+  # nofollowLinks = true
+
+[taxonomies]
+  tag = "tags"
+  # Categories are disabled by default.
+
+[params]
+  dateform        = ""
+  dateformShort   = "Jan 2"
+  dateformNum     = "2006-01-02"
+  dateformNumTime = "2006-01-02"
+
+  # Metadata mostly used in document's head
+  description = "Pascal Riesinger's blog about hardware, software and space."
+  # images = [""]
+  themeColor = "#494f5c"
+
+  homeSubtitle = "Musings about hardware, software and space"
+  footerCopyright = ' &#183; Posts: <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> &middot Code: <a href="https://spdx.org/licenses/MIT.html" target="_blank" rel="noopener">MIT License</a>'
+  # bgImg = ""  # Homepage background-image URL
+
+  # Prefix of link to the git commit detail page. GitInfo must be enabled.
+  gitUrl = "https://github.com/riesinger/website/commit/"
+  relatedPosts = true
+  code_copy_button = true
+
+  # Social Icons
+  # Check https://github.com/Track3/hermit#social-icons for more info.
+  [[params.social]]
+    name = "twitter"
+    url = "https://twitter.com/pascalriesinger"
+
+  [[params.social]]
+    name = "github"
+    url = "https://github.com/riesinger"
+
+[menu]
+  [[menu.main]]
+    name = "Posts"
+    url = "posts/"
+    weight = 10
+
+  [[menu.main]]
+    name = "About"
+    url = "about/"
+    weight = 20
