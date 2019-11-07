@@ -16,6 +16,7 @@ steps:
     registry: reg.infra.riesinger.dev
     target: builder
     dry_run: true
+    purge: false
 
 - name: publish
   image: plugins/docker
