@@ -1,0 +1,44 @@
+---
+kind: pipeline
+name: default
+type: docker
+
+steps:
+- name: build
+  image: plugins/docker
+  settings:
+    repo: reg.infra.riesinger.dev/website
+    registry: reg.infra.riesinger.dev
+    target: builder
+    dry_run: true
+
+- name: publish
+  image: plugins/docker
+  settings:
+    repo: reg.infra.riesinger.dev/website
+    registry: reg.infra.riesinger.dev
+    auto_tag: true
+    username:
+      from_secret: registry_username
+    password:
+      from_secret: registry_password
+
+- name: deploy-staging
+  image: appropriate/curl
+  environment:
+    URL:
+      from_secret: service_update_url_staging
+  commands:
+  - curl -X POST $URL
+  when:
+    branch:
+      - master
+- name: deploy-prod
+  image: appropriate/curl
+  environment:
+    URL:
+      from_secret: service_update_url
+  commands:
+  - curl -X POST $URL
+  when:
+    event: tag
