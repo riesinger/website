@@ -52,6 +52,10 @@ enableEmoji = true  # https://gohugo.io/functions/emojify/
     name = "github"
     url = "https://github.com/riesinger"
 
+	[[params.social]]
+		name = "pgp"
+		url = "https://files.pascal-riesinger.de/key-pascal-riesinger.asc"
+
 [menu]
   [[menu.main]]
     name = "Posts"

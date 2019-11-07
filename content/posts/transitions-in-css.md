@@ -1,5 +1,6 @@
 ---
 title: "Transitions in CSS"
+description: "This tutorial introduces you to CSS transitions and animations by creating an example app"
 date: 2017-04-29T14:09:54+01:00
 draft: false
 toc: false
