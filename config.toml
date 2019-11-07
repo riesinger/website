@@ -6,6 +6,7 @@ theme = "hermit"
 enableGitInfo = true
 pygmentsCodefences  = true
 pygmentsUseClasses  = true
+canonifyURLs = false
 rssLimit = 15
 copyright = "All posts are licensed under the CC BY 4.0 license, all code is licensed under the MIT license"
 enableEmoji = true  # https://gohugo.io/functions/emojify/
