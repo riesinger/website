@@ -1,14 +1,12 @@
-FROM node:12 as builder
-RUN mkdir /build
-WORKDIR /build
-COPY . /build
-RUN apt-get update && \
-		apt-get install python && \
-		npm ci && \
-		npm run build
+FROM alpine:latest as builder
+
+RUN apk add --update --no-cache hugo git
+
+WORKDIR /site
+COPY . /site
+
+RUN hugo
 
 FROM nginx:1-alpine as runner
-COPY --from=builder /build/dist /usr/share/nginx/html
-EXPOSE 80
 
-CMD [ "nginx", "-g", "daemon off;" ]
+COPY --from=builder /site/public/ /usr/share/nginx/html

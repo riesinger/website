@@ -7,8 +7,9 @@ steps:
 - name: build
   image: plugins/docker
   settings:
+    repo: reg.infra.riesinger.dev/website
+    registry: reg.infra.riesinger.dev
     target: builder
-    purge: true
     dry_run: true
 
 - name: publish
@@ -21,12 +22,23 @@ steps:
       from_secret: registry_username
     password:
       from_secret: registry_password
-  when:
-    event: tag
 
-- name: update-service
+- name: deploy-staging
   image: appropriate/curl
+  environment:
+    URL:
+      from_secret: service_update_url_staging
   commands:
-  - curl -X POST https://portainer.infra.riesinger.dev/api/webhooks/8c2312e6-7602-4e8a-a8df-ebe6448192b1
+  - curl -X POST $URL
+  when:
+    branch:
+      - master
+- name: deploy-prod
+  image: appropriate/curl
+  environment:
+    URL:
+      from_secret: service_update_url
+  commands:
+  - curl -X POST $URL
   when:
     event: tag
