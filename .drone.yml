@@ -9,15 +9,6 @@ steps:
   commands:
   - git submodule update --init --recursive
 
-- name: build
-  image: plugins/docker
-  settings:
-    repo: reg.infra.riesinger.dev/website
-    registry: reg.infra.riesinger.dev
-    target: builder
-    dry_run: true
-    purge: false
-
 - name: publish
   image: plugins/docker
   settings:
