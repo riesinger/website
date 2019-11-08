@@ -60,10 +60,10 @@ enableEmoji = true  # https://gohugo.io/functions/emojify/
 [menu]
   [[menu.main]]
     name = "Posts"
-    url = "posts/"
+    url = "/posts/"
     weight = 10
 
   [[menu.main]]
     name = "About"
-    url = "about/"
+    url = "/about/"
     weight = 20
