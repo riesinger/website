@@ -20,8 +20,7 @@ to do the following months:
 1. reading for at least 30 minutes each day
 2. showering for less than 5 minutes 
 3. no phone for the first hour after waking up
-4. waking up at 5:30 am
-5. meditating at least 30 minutes each day
+4. waking up at 5:00 am
 6. go for a walk every day
 7. stretch after waking up
 
