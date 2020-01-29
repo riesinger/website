@@ -26,7 +26,7 @@ steps:
     URL:
       from_secret: service_update_url_staging
   commands:
-  - curl -X POST $URL
+  - curl -f -X POST $URL
   when:
     branch:
       - master
@@ -36,6 +36,6 @@ steps:
     URL:
       from_secret: service_update_url
   commands:
-  - curl -X POST $URL
+  - curl -f -X POST $URL
   when:
     event: tag
