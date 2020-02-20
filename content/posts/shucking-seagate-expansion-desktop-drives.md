@@ -1,7 +1,7 @@
 ---
 title: "Shucking Seagate Expansion Desktop Drives"
 date: 2020-02-20T09:51:11+01:00
-draft: true
+draft: false
 tags:
   - Server
   - Storage
