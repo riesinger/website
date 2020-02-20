@@ -32,7 +32,7 @@ enableEmoji = true  # https://gohugo.io/functions/emojify/
   # Metadata mostly used in document's head
   description = "Pascal Riesinger's blog about hardware, software and space."
   # images = [""]
-  themeColor = "#494f5c"
+  themeColor = "#161618"
 
   homeSubtitle = "Musings about hardware, software and space"
   footerCopyright = ' &#183; Posts: <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> &middot Code: <a href="https://spdx.org/licenses/MIT.html" target="_blank" rel="noopener">MIT License</a>'
