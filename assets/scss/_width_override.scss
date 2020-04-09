@@ -1,0 +1,7 @@
+.post, .posts {
+  max-width: #{$desktop-max-width};
+}
+
+.header .header__inner {
+  width: #{$desktop-max-width - 40px};
+}

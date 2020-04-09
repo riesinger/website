@@ -72,3 +72,9 @@ enableEmoji = true  # https://gohugo.io/functions/emojify/
     name = "About"
     url = "/about/"
     weight = 20
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    style = "dracula"
+    tabWidth = 2
