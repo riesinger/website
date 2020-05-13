@@ -1,0 +1,83 @@
+---
+title: "Checking Out SerenityOS"
+date: 2020-05-13T15:55:44+02:00
+draft: false
+toc: false
+images:
+tags:
+  - os
+---
+
+Have you heard of SerenityOS yet? It's a free and open-source operating system whose development was
+initiated by [Andreas Kling](https://twitter.com/awesomekling) (also known as _awesomekling_) in
+October 2018 and now developed by over 140 contributers[^1]. Now, don't be fooled: This is not your
+typical "it can boot into a text console and has ls and mkdir"-toy-operating-system. SerenityOS has
+a full GUI with a whole suite of GUI and console applications to handle day-to-day tasks (a
+calculator, text editor, even a **Browser**), to entertain you (Snake, Doom, Minesweeper) and for
+hacking on the OS itself (an IDE with a visual debugger, `git`, ...).
+
+{{< figure caption="A screenshot of SerenityOS (Source: https://github.com/serenityos/serenity)" src="/checking-out-serenity-os/serenity-github.png" >}}
+
+I'm following Serenity's development since last year and the pace at which it has been going is just
+mind-blowing 🤯. Development on a JavaScript engine (`LibJS`) has begun and attracted even more
+contributors to the project.
+
+Since I've got exams coming up and needed a break from studying, I wanted to check out SerenityOS on
+my machine and figured I'd walk you through the process and findings.
+
+## Downloading and building SerenityOS
+
+To get started, make sure that you're on a machine with a proper install of `gcc` >= 8, GNU `make`,
+`curl` and `qemu`. While you probably _can_ build and use Serenity on Windows, you'll have a much
+better time on Linux or MacOS. After installing those requirements, grab Serenity's source code by
+checking out its repository on Github:
+
+```sh
+git clone https://github.com/serenityos/serenity
+```
+
+Next, switch to the `Toolchain/` directory and run the `BuildIt.sh` script. This will compile the
+toolchain needed to compile SerenityOS (it will require an internet connection). This should not
+take too long, depending on how powerful your machine is. My laptop (6th gen. Intel i7) took about
+15 minutes to build the toolchain, my desktop is _way_ faster. Now comes the fun part: building
+SerenityOS itself! Switch to the `Kernel/` directory and run `./makeall.sh`. It seems that it only
+uses one CPU core for building, which can be fixed by editing the script like so:
+
+```diff
+-MAKE="make"
++MAKE="make -j5"
+```
+
+Instead of `-j5`, you should insert the number of cores your CPU has plus one. Using 5 threads, this
+only took less than 3 minutes, even on my laptop. Nice, you're ready to start SerenityOS in qemu now
+🚀. Just run `./run` inside the `Kernel/` directory and a `qemu` window should appear:
+
+{{<figure caption="This is what you're greeted with when starting SerenityOS" src="/checking-out-serenity-os/start.png" >}}
+
+What's the first thing you do when running a hobby operating system? Right, opening your blog in its
+web browser:
+
+{{<figure caption="Houston, we have a problem!" src="/checking-out-serenity-os/blog.png" >}}
+
+Dang. Unfortunately, SerenityOS's TLS implementation is not complete yet and certain Cipher suites
+are not supported yet. This will get better soon through, since the TLS implementation is actively
+being worked on. Also, _some_ suites are supported already, for example `google.com` is loading
+properly.
+
+So, you've fiddled around with Serenity for a while now and want to relax a bit. Your're asking
+yourself: Where's Doom? You promised that it has Doom right at the beginning of the post! 
+
+See, ports are not compiled into SerenityOS by default (when using `makeall.sh`), you'll have to
+compile them seperately. To do that, switch to the `Ports/` directory, choose the port that you want
+to compile (in our case `doom/`). Now run `./package.sh` in this directory, which will download and
+compile the given port. After that run `./sync.sh` from the `Kernel/` directory. This will create a
+new disk image containing the port. If you now re-start Serenity (`./run`), you can run `doom` from
+the command line. Note however, that you'll need a proper `IWAD` file from the original doom, which
+is not totally free and therefore not part of this post.
+
+That covers setting up SerenityOS and playing around with it a bit. Now, there are lots more things
+you can play with. Or maybe you'll want to to contribute to SerenityOS on
+[Github](https://github.com/serenityos/serenity)?
+
+
+[^1]: https://github.com/SerenityOS/serenity/graphs/contributors
