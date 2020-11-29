@@ -1,12 +1,10 @@
-FROM alpine:latest as builder
+FROM klakegg/hugo:latest as builder
 
-RUN apk add --update --no-cache hugo git
-
-WORKDIR /site
-COPY . /site
+WORKDIR /src
+COPY . /src
 
 RUN hugo
 
 FROM nginx:1-alpine as runner
 
-COPY --from=builder /site/public/ /usr/share/nginx/html
+COPY --from=builder /src/public/ /usr/share/nginx/html
