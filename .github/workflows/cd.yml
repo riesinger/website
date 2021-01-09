@@ -23,6 +23,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: true
       - name: hugo
         uses: klakegg/actions-hugo@1.0.0
 
