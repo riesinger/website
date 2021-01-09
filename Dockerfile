@@ -1,4 +1,4 @@
-FROM klakegg/hugo:latest as builder
+FROM yanqd0/hugo:latest as builder
 
 WORKDIR /src
 COPY . /src
