@@ -21,13 +21,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
+        with:
+          submodule: true
       - name: Build image
         run: docker build . --file Dockerfile --tag $IMAGE_NAME
-
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
-
       - name: Push image
         run: |
           IMAGE_ID=docker.pkg.github.com/${{ github.repository }}
