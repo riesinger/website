@@ -34,9 +34,9 @@ jobs:
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
           # Strip git ref prefix from version, use latest instead of master
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,' | sed -e 's/^master$/latest/')
-          VERSIONS=VERSION
+          VERSIONS=$VERSION
           # If a tag was published, build all the versions (1, 1.2, 1.2.3)
-          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSIONS="$(echo $VERSION | sed -e 's/^v//') $(echo $VERSION | sed -E 's/^v//;s/[.].*//g') $(echo $VERSION | sed -E 's/^v//;s/(\d+[.]\d+)[.].*/\1/')"
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSIONS="$(echo $VERSION | sed -e 's/^v//') $(echo $VERSION | sed -E 's/^v//;s/[.].*//g') $(echo $VERSION | sed -E 's/^v//;s/^(\d+[.]\d+)[.].*/\1/') latest"
 
           for version in $VERSIONS; do
             echo IMAGE_ID=$IMAGE_ID
