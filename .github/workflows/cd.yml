@@ -10,29 +10,12 @@ on:
     tags:
       - v*
 
-  # Run tests for any PRs.
-  pull_request:
-
 env:
   IMAGE_NAME: website
 
 jobs:
-  # Run hugo to test for build-time errors with the site
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: true
-      - name: hugo
-        uses: klakegg/actions-hugo@1.0.0
-
-  # Push image to GitHub Packages.
-  push:
-    # Ensure test job passes before pushing image.
-    needs: test
-
+  # Build and push the docker image
+  build:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
 
