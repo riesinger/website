@@ -19,11 +19,11 @@ Shucking means removing a harddrive (HDD) from any sort of casing, mostly USB ad
 popular thing to do for home servers, since (for some reason), USB drives are often times **way**
 cheaper than internal drives without USB adaptors.
 
-{{< figure caption="As you'll later see, these are the same exact drives. However, the internal one is about 20€ more" src="/shucking-seagate/price_comparison.png" >}}
+{{< figure caption="As you'll later see, these are the same exact drives. However, the internal one is about 20€ more" src="price_comparison.png" >}}
 
 Why are USB drives cheaper than internal drives? Well, I don't know the exact reasoning behind this
 (and I doubt anyone outside the harddrive manufacturer's marketing department really does), but some
-kind soul 
+kind soul
 [on Reddit](https://www.reddit.com/r/buildapc/comments/7fjw0x/why_are_external_hard_drives_generally_cheaper/)
 suggests that it might come down to multiple factors:
 
@@ -70,7 +70,7 @@ The drive is mounted by friction, so it won't come out easily. **Do not shake th
 Now, after removing the unnecessary plastic casing, you need to take out the one screw marked in the
 image below.
 
-{{< figure caption="Remove this screw" src="/shucking-seagate/screw_marked.jpg" >}}
+{{< figure caption="Remove this screw" src="screw_marked.jpg" >}}
 
 You can also remove the rubber feet and the screws holding them on, and depending on how you'll go
 about mounting the drive, you might actually need to. I didn't bother.
@@ -79,7 +79,7 @@ The next step is to flip the drive over and carefully pry off the silver shieldi
 carefully lift up one corner with a knife, you should be able to pull it off by that corner with
 your hands.
 
-{{< figure caption="Lift the tape on one corner and then pull it off by hand" src="/shucking-seagate/tape.jpg" >}}
+{{< figure caption="Lift the tape on one corner and then pull it off by hand" src="tape.jpg" >}}
 
 That's it! You can now remove the SATA-to-USB doughter board by gently pulling it out and plug in
 the drive to your computer.

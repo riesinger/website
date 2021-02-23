@@ -5,7 +5,7 @@ date: 2017-04-29T14:09:54+01:00
 draft: false
 toc: false
 images:
-tags: 
+tags:
   - CSS
   - Web
 ---
@@ -13,12 +13,12 @@ tags:
 Movement and transitions are very important design aspects. They can guide your user through the
 application and help them understand states. If you are like me, you may have found yourself
 clicking some button over-and-over in an app with beautiful transitions, admiring the amazing work
-of designers and developers. 
-{{< figure src="/transitions-in-css/guide.gif" caption="A good example for motion in an app. Source: https://material.uplabs.com/posts/music-player-transition" >}}
+of designers and developers.
+{{< figure src="guide.gif" caption="A good example for motion in an app. Source: https://material.uplabs.com/posts/music-player-transition" >}}
 
 So you know a bit about HTML, CSS and JavaScript and did some basic websites? But you want to
 improve state transitions with some animation? Look no further, the following guide will walk you
-from basic transitions to more complex animations using keyframes :rocket: 
+from basic transitions to more complex animations using keyframes :rocket:
 
 ## The Base
 
@@ -29,9 +29,9 @@ follow this guide step-by-step, grab the boilerplate code from
 I suggest you use Chrome Webserver to serve your project folder. You can, of course, use any other
 web server you like. Now open the project in your browser of choice ~~(if you use Firefox, you need
 to enable WebP support on the flags page~~ *Update: This is not needed anymore*) and you should see
-the following: 
+the following:
 
-{{< figure src="/transitions-in-css/first.png" caption="I know this is not a perfect clone, but it will do the job :smile:" >}}
+{{< figure src="first.png" caption="I know this is not a perfect clone, but it will do the job :smile:" >}}
 
 So, we want to animate the transition from the paused/playlist view state to the playing/song view
 state. The first thing we probably want to do is slide the songs list and the “Playlist” info out of
@@ -39,7 +39,7 @@ the bottom, as this is probably the easiest thing to do.
 
 Go fire up your favorite editor, jump to the project directory and open up the `css/animations.css`
 file, this is where we will put all of out transitions, animations and transforms. Huh? Transforms?
-Never heard of that? No worries, I’ll explain what those are.  
+Never heard of that? No worries, I’ll explain what those are.
 
 ## CSS Transforms
 
@@ -52,9 +52,9 @@ the browser cannot know before-hand). As creating moving elements with those pro
 high cost, there is one property to do animations that doesn’t trigger a repaint. Enter the magical
 place of `transform`! The `transform` property has the following syntax:
 
-{{< highlight css >}}
+```css
 transform: <transform-function>+
-{{< /highlight >}}
+```
 
 There are many pre-defined transform functions, but I will only cover the most important ones:
 
@@ -66,7 +66,7 @@ Instead of giving you some horrible examples with boxes that are moving somewher
 playlist view out to the bottom of the screen (I think those properties are pretty
 self-explanatory). Go add the following to your `animations.css` file:
 
-{{< highlight css >}}
+```css
 .playlist {
   transform: translateY(0);
 }
@@ -74,18 +74,18 @@ self-explanatory). Go add the following to your `animations.css` file:
 main.playing .playlist {
   transform: translateY(100%);
 }
-{{< /highlight >}}
+```
 
 As you could probably guess, clicking on the play button toggles the `playing` class on the `main`
-element of the markup (take a look). Now clicking it should have the following effect: 
+element of the markup (take a look). Now clicking it should have the following effect:
 
-{{< figure src="/transitions-in-css/second.gif" >}}
+{{< figure src="second.gif" >}}
 
 Awesome, the playlist view now slides out of the bottom, by translating it 100% of its height down
 the Y axis. But we *definitely* need some transition for that, as it looks just ridiculous right
 now!
 
-{{< highlight css >}}
+```css
 .playlist {
   transform: translateY(0);
   transition: transform 0.2s ease-in-out;
@@ -94,14 +94,14 @@ now!
 main.playing .playlist {
   transform: translateY(100%);
 }
-{{< /highlight >}}
+```
 
 By adding the line `transition: transform 0.2s ease-in-out;`, we create a smooth motion when moving
 the element. The basic syntax for the transition property is:
 
-{{< highlight css >}}
+```css
 transition: (<what> <duration> <easing-function>)+
-{{< /highlight >}}
+```
 
 I know what you're thinking:
 
@@ -117,7 +117,7 @@ some elements.
 Okay, so after we made the playlist move out of the way, let’s make the `current-playing` display
 full height:
 
-{{< highlight css >}}
+```css
 .current-playing {
   transition: height .2s ease-in-out;
   will-change: height;
@@ -126,7 +126,7 @@ full height:
 main.playing .current-playing {
   height: 100%;
 }
-{{< /highlight >}}
+```
 
 
 You might stumble upon the `will-change` property, which is new (the rest should be pretty easy to
@@ -140,7 +140,7 @@ As you should have seen in our template animation, when clicking pause, the play
 immediately come back up, but does so with a slight delay. We can achieve the same effect with the
 `transition-delay` property. Go and modify the `.playlist` styles like so:
 
-{{< highlight css >}}
+```css
 .playlist {
   transform: translateY(0);
   transition: all .2s ease-in-out;
@@ -151,22 +151,22 @@ main.playing .playlist {
   transform: translateY(100%);
   transition-delay: 0s;
 }
-{{< /highlight >}}
+```
 
 Note that we set the `transition-delay` to zero in the `playing` state, so there is no delay when
 pressing the play button and the playlist slides down instantly.
 
 Now, let’s move the FAB into the center of the screen:
 
-{{< highlight css >}}
+```css
 .fab {
   transition: transform .2s ease-in-out;
 }
 
 main.playing .fab {
-  transform: translate(-300px, calc(-50vh + 16px)); 
+  transform: translate(-300px, calc(-50vh + 16px));
 }
-{{< /highlight >}}
+```
 
 There’s nothing really new here, if you don’t know what `vh` or `calc` are, you should definitely
 read that up! The values in the translate `function` are pre-calculated by me and are dependent on
@@ -174,7 +174,7 @@ the width and height I gave my elements. The title and author of the track move 
 the top and the bar should lose its background color, as we can see in the template animation. So
 let’s do that:
 
-{{< highlight css >}}
+```css
 .current-playing .info {
   transition: background .2s ease-in-out;
 }
@@ -207,7 +207,7 @@ main.playing .current-playing .song-info > * {
 main.playing .current-playing .progress {
   margin-right: 0;
 }
-{{< /highlight >}}
+```
 
 On line 10 you can see how to set transitions for multiple values. We could also just use the line
 `transition: all .2s ease-in-out`, but to squeeze even the last bit of performance out of the
@@ -221,7 +221,7 @@ To give the cover it’s awesome animation, we cannot just use a `transform: rot
 this transformation would only run once. We need to define a new animation that runs forever (or
 until the user clicks on pause). We define a new animation via the `@keyframes` keyword:
 
-{{< highlight css >}}
+```css
 @keyframes turntable-rotate {
   from {
     transform: rotate(0deg) translate(-50%, -50%);
@@ -230,15 +230,15 @@ until the user clicks on pause). We define a new animation via the `@keyframes` 
     transform: rotate(360deg) translate(-50%, -50%);
   }
 }
-{{< /highlight >}}
+```
 
-Our new animation has the name `turntable-rotate` and animates from 
+Our new animation has the name `turntable-rotate` and animates from
 `transform: rotate(0deg) translate(-50%, -50%)` to `transform: rotate(360deg) translate(-50%, -50%)`
 in one run. (Note: the translate part is needed because of a positioning trick: to center an element
 horizontally, give it `left: 50%` and `translateX(-50%)`, you can also do this vertically). Now
 let’s use this animation on the `.cover`:
 
-{{< highlight css >}}
+```css
 .current-playing .cover {
   transition: all .2s ease-in-out;
   transform-origin: top left;
@@ -252,7 +252,7 @@ main.playing .current-playing .cover {
   animation: turntable-rotate 2s linear infinite;
   animation-delay: .5s;
 }
-{{< /highlight >}}
+```
 
 So we tell the cover to use the animation on line 11, which means "use the animation named
 turntable-rotate, run it with a duration of 2 seconds per run, interpolate linearly (no easing) and
@@ -262,7 +262,7 @@ Chrome as Firefox does not support clip-path: circle() yet. I fixed this in the 
 don’t include the fix here for times sake).~~ Now after adding all of those animations, you should
 have the following result:
 
-{{< figure src="/transitions-in-css/third.gif" caption="The final result" >}}
+{{< figure src="third.gif" caption="The final result" >}}
 
 Thank you for reading this post, I hope you now have some basic understanding of CSS Animation,
 Transformation and Transitions. To download the project, visit

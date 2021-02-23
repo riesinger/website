@@ -16,7 +16,7 @@ a full GUI with a whole suite of GUI and console applications to handle day-to-d
 calculator, text editor, even a **Browser**), to entertain you (Snake, Doom, Minesweeper) and for
 hacking on the OS itself (an IDE with a visual debugger, `git`, ...).
 
-{{< figure caption="A screenshot of SerenityOS (Source: https://github.com/serenityos/serenity)" src="/checking-out-serenity-os/serenity-github.png" >}}
+{{< figure caption="A screenshot of SerenityOS (Source: https://github.com/serenityos/serenity)" src="serenity-github.png" >}}
 
 I'm following Serenity's development since last year and the pace at which it has been going is just
 mind-blowing 🤯. Development on a JavaScript engine (`LibJS`) has begun and attracted even more
@@ -52,12 +52,12 @@ Instead of `-j5`, you should insert the number of cores your CPU has plus one. U
 only took less than 3 minutes, even on my laptop. Nice, you're ready to start SerenityOS in qemu now
 🚀. Just run `./run` inside the `Kernel/` directory and a `qemu` window should appear:
 
-{{<figure caption="This is what you're greeted with when starting SerenityOS" src="/checking-out-serenity-os/start.png" >}}
+{{<figure caption="This is what you're greeted with when starting SerenityOS" src="start.png" >}}
 
 What's the first thing you do when running a hobby operating system? Right, opening your blog in its
 web browser:
 
-{{<figure caption="Houston, we have a problem!" src="/checking-out-serenity-os/blog.png" >}}
+{{<figure caption="Houston, we have a problem!" src="blog.png" >}}
 
 Dang. Unfortunately, SerenityOS's TLS implementation is not complete yet and certain Cipher suites
 are not supported yet. This will get better soon through, since the TLS implementation is actively
@@ -65,7 +65,7 @@ being worked on. Also, _some_ suites are supported already, for example `google.
 properly.
 
 So, you've fiddled around with Serenity for a while now and want to relax a bit. Your're asking
-yourself: Where's Doom? You promised that it has Doom right at the beginning of the post! 
+yourself: Where's Doom? You promised that it has Doom right at the beginning of the post!
 
 See, ports are not compiled into SerenityOS by default (when using `makeall.sh`), you'll have to
 compile them seperately. To do that, switch to the `Ports/` directory, choose the port that you want

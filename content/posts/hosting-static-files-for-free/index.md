@@ -3,7 +3,7 @@ title: "Hosting Static Files for Free"
 date: 2019-11-08T14:52:46+01:00
 draft: false
 toc: false
-tags: 
+tags:
   - Hosting
   - Servers
   - Web
@@ -26,14 +26,14 @@ all files in the bucket accessible without authentication, so **only store files
 be public!** After creating the bucket, head to the CORS rules for the bucket and set the rules to
 "Share everything in this bucket with every origin".
 
-{{< figure caption="Check the 'Share everything with every origin' radio button in the CORS settings of the bucket" src="/hosting-static-files-for-free/cors_settings.png" >}}
+{{< figure caption="Check the 'Share everything with every origin' radio button in the CORS settings of the bucket" src="cors_settings.png" >}}
 
-This will make the files in the bucket accessible from everywhere. 
+This will make the files in the bucket accessible from everywhere.
 
 Now use the "Upload/Download" button to upload one file (it can be anything you want). Click the
-file name and you should see the following: 
+file name and you should see the following:
 
-{{< figure caption="The important part is the 'Friendly URL'" src="/hosting-static-files-for-free/file_domain.png" >}}
+{{< figure caption="The important part is the 'Friendly URL'" src="file_domain.png" >}}
 
 Verify that you can access the file by clicking the "Friendly URL".
 That's basically it! If this is enough for you and you don't want to use cleaner URLs on your own
@@ -56,8 +56,7 @@ Afterwards, go to your DNS settings and add a new record. It should have a type 
 is the subdomain of your choosing and the target must be the B2 host. You can find it in the
 "Friendly URL" of any file in your bucket.
 
-{{< figure caption="The DNS entry for your files"
-src="/hosting-static-files-for-free/dns_settings.png" >}}
+{{< figure caption="The DNS entry for your files" src="dns_settings.png" >}}
 
 Make sure that the little cloud is orange and the proxy status is "Proxied". This will save you
 money for reasons I will explain later. Leave the TTL field on auto.
@@ -85,7 +84,7 @@ is one of the largest available.
 To optimize caching even more, head to the "Page Rules" section in Cloudflare and create a new one.
 In the URL field, enter `https://files.your.domain/*`, assuming `files` is the subdomain you chose
 earlier.
-Then add (at least) the following settings: 
+Then add (at least) the following settings:
 
 * **Edge Cache TTL**: This configures how long Cloudflare should save the file in their Edge Cache
   before downloading it from B2 again. Set it as high as you can afford for maximum performance.
@@ -112,8 +111,7 @@ When setting up your first worker, it will ask you for a domain name to use for 
 that you like, continue, choose the basic/free plan and continue again. Now you should see a button
 to create a new worker.
 
-{{< figure caption="This is the default view when creating a new worker"
-src="/hosting-static-files-for-free/new_worker_overview.png" >}}
+{{< figure caption="This is the default view when creating a new worker" src="new_worker_overview.png" >}}
 
 Now enter the following JS code into the code pane:
 

@@ -4,19 +4,20 @@ date: 2017-05-11T11:17:08+01:00
 draft: false
 toc: false
 images:
-tags: 
+tags:
   - CSS
   - Web
 ---
 
-![Example of the finished projects](/pure-css-tooltips/done.png)
+![Example of the finished project](done.png)
 
 There are many JQuery, Angular, React and VueJS plugins for doing tooltips, but sometimes, the
 simplest solution is the best. That’s why I am showing you how to implement great looking tooltips
 purely in CSS. Let’s get started by downloading my [boilerplate from
 Github](https://github.com/riesinger/pure-css-tooltips-tutorial). Jump into the folder and
 open the `index.html` file. You should see the following:
-{{< highlight html >}}
+
+```html
 <!DOCTYPE html>
 <html>
   <head>
@@ -31,11 +32,11 @@ open the `index.html` file. You should see the following:
     <button tooltip tooltip-left tooltip-content="This button will take you to google.com">Google it!</button>
   </body>
 </html>
-{{< /highlight >}}
+```
 
 The `style.css` file styles the body and the buttons and it should look like this:
 
-{{< highlight css >}}
+```css
 html, body {
   margin: 0;
 }
@@ -62,7 +63,7 @@ button {
   text-transform: uppercase;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
-{{< /highlight >}}
+```
 
 The `tooltips.css` file should be empty, as we’ll implement the tooltips together :wink:
 
@@ -70,7 +71,7 @@ You might have noticed the `tooltip`, `tooltip-left` and `tooltip-content` props
 element. We’ll use these to add a tooltip to the element, change its position and its content. Let’s
 dive into how to implement the desired behaviour.
 
-{{< highlight css >}}
+```css
 [tooltip] {
   position: relative;
 }
@@ -96,7 +97,7 @@ dive into how to implement the desired behaviour.
   opacity: 1;
   transform: translate(0, -50%);
 }
-{{< /highlight >}}
+```
 
 In CSS, you can select elements based on their props by putting the prop into square brackets, so
 `[tooltip]` selects every element that has the `tooltip` prop (our `button`). We add a `::before`
@@ -105,22 +106,22 @@ pseudo-element to the parent to display the tooltip content. By setting content 
 want to show tooltips to the left of the parent by default, so we position it `absolute`. The result
 of the above code should look like this:
 
-![Demo of a tooltip](/pure-css-tooltips/demo.gif)
+![Demo of a tooltip](demo.gif)
 
 This looks pretty good already, doesn’t it? Now let’s add the ability to show tooltips in different
 directions. First, let’s add some more buttons which feature the `tooltip-bottom`, `tooltip-right`
 and `tooltip-top` properties.
 
-{{< highlight html >}}
+```html
 <button tooltip tooltip-left tooltip-content="This button will take you to google.com">Google it!</button>
 <button tooltip tooltip-bottom tooltip-content="This tooltip is at the bottom">Bottom</button>
 <button tooltip tooltip-right tooltip-content="This tooltip is at the right">Right</button>
 <button tooltip tooltip-top tooltip-content="This tooltip is at the top">Top !</button>
-{{< /highlight >}}
+```
 
 Now, jump into the `tooltips.css` file and style the new tooltips based on their props:
 
-{{< highlight css >}}
+```css
 [tooltip-bottom]::before {
   top: calc(100% + 16px);
   left: 50%;
@@ -149,13 +150,13 @@ Now, jump into the `tooltips.css` file and style the new tooltips based on their
 [tooltip-top]:hover::before {
   transform: translate(-50%, 0);
 }
-{{< /highlight >}}
+```
 
 We obviously don’t need to style the `[tooltip-left]` selector, as that’s already handled by the
 default. You should now have a page that looks somewhat like this:
 Pretty cool, huh?
 
-![Demo of the finished project](/pure-css-tooltips/demo_full.gif)
+![Demo of the finished project](demo_full.gif)
 
 The cool thing about this is that we can easily add tooltips to every possbile element by just
 adding the `tooltip` and `tooltip-content` tags. We just needed 61 lines (53 if we strip the blank
