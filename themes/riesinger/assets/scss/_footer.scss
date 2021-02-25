@@ -1,0 +1,18 @@
+.footer {
+  padding: 40px 20px;
+  flex-grow: 0;
+  color: $light-color-secondary;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: $max-body-width;
+    width: 100%;
+
+    @media #{$media-size-tablet} {
+      flex-direction: column;
+    }
+  }
+}

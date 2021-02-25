@@ -1,0 +1,26 @@
+.header {
+  background: #fafafa;
+  align-items: center;
+  padding: 1rem 1rem;
+
+  &__right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 100%;
+    max-width: $max-body-width;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .header {
+    background: #252627;
+  }
+}

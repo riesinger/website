@@ -1,0 +1,17 @@
+<header class="header">
+  <div class="header__inner">
+    {{ partial "logo.html" . }}
+    <div class="header__right">
+      {{ if len .Site.Menus }}
+        <nav class="menu">
+            <ul class="menu__inner">
+                {{- $currentPage := . -}}
+                {{ range .Site.Menus.main -}}
+                    <li><a href="{{ .URL | absLangURL }}">{{ .Name }}</a></li>
+                {{- end }}
+            </ul>
+        </nav>
+      {{ end }}
+    </div>
+  </div>
+</header>

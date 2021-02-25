@@ -2,7 +2,7 @@ baseURL = "https://riesinger.dev"
 languageCode = "en-us"
 defaultContentLanguage = "en"
 title = "riesinger.dev"
-theme = "hello-friend-ng"
+theme = "riesinger"
 enableGitInfo = true
 # pygmentsCodefences  = true
 # pygmentsUseClasses  = true
@@ -44,7 +44,8 @@ enableEmoji = true  # https://gohugo.io/functions/emojify/
   code_copy_button = true
 
   [params.logo]
-    logoText = "cd riesinger.dev/"
+    path = "/logo.svg"
+    alt = "riesinger.dev"
     logoHomeLink = "/"
     logoCursorColor="#6C5CFF"
 
@@ -75,6 +76,12 @@ enableEmoji = true  # https://gohugo.io/functions/emojify/
 
 [markup]
   [markup.highlight]
-    codeFences = true
-    style = "dracula"
+    anchorLineNos = false
     tabWidth = 2
+    codeFences = true
+    guessSyntax = true
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    style = "native"

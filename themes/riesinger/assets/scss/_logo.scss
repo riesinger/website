@@ -1,0 +1,16 @@
+.logo {
+  display: flex;
+  align-items: center;
+
+  svg {
+    height: 4rem;
+    width: 4rem;
+    color: $light-color;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .logo svg {
+    color: $dark-color;
+  }
+}
