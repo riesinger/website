@@ -19,6 +19,7 @@
 {{ end }}
 
 <!-- CSS -->
+<link rel="preconnect" href="https://files.riesinger.dev" crossorigin="">
 {{ $options := (dict "targetPath" "main.css" "outputStyle" "compressed" "enableSourceMap" true) }}
 {{ $style := resources.Get "scss/main.scss" | resources.ToCSS $options | resources.Minify | resources.Fingerprint }}
 <link rel="stylesheet" href="{{ $style.RelPermalink }}">

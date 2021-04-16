@@ -1,17 +1,38 @@
 {{ define "main" }}
-    <main aria-role="main">
-        <div>
-            <h1>{{ .Site.Title }}</h1>
+    <main aria-role="main" class="landing-page">
+        <section class="hero-section">
+          <h1>Hi, I'm Pascal,</h1>
+          <p>
+            a software developer 👨‍💻, space enthusiast 🚀 and automation-nerd 🛠️  from Karlsruhe, Germany.
+          </p>
 
-            {{- with .Site.Params.homeSubtitle }}
-                <p>{{.}}</p>
-            {{- end }}
-
-            {{- with .Site.Params.social }}
-                <div>
+          <div class="cta-line">
+            <a class="button brand" href="/posts/">Read my blog</a>
+            <a class="button" href="#about">About me</a>
+            <div class="social-icons">
+                {{- with .Site.Params.social }}
                     {{ partial "social-icons.html" . }}
-                </div>
-            {{- end }}
-        </div>
+                {{- end }}
+            </div>
+          </div>
+        </section>
+        <section>
+          <a name="about"></a>
+          <h2>About me</h2>
+          <p>
+            I love playing around with different programming patterns and concepts, automation tools and
+            microcontrollers and sensors.
+          </p>
+          <p>
+            Also, I'm a big fan of self-hosting and de-clouding your life, which is why I experiment quite a bit
+            with networking and server administration.
+          </p>
+          <p>
+            Recently, one of my hobbies has been home automation and monitoring my appartment through various
+            litte sensors.
+          </p>
+        </section>
+
+
     </main>
 {{ end }}

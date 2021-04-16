@@ -2,26 +2,20 @@
     <main class="post">
 
         <article>
-            <h1 class="post-title">
-                <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
-            </h1>
-
+          <header>
+            <h1 class="post-title">{{ .Title | markdownify }}</h1>
             <div class="post-info">
                 <div>
-                    <span>
-                        {{ i18n "wordCount" .Page.WordCount }}, about {{ i18n "readingTime" .Page.ReadingTime }} to read;
-                    </span>
-                    <span>
-                        {{- with .Params.tags }}
-                            <span> tagged in </span>
-                            {{- range . -}}
-                                <span class="tag"><a href="{{ "tags/" | absLangURL }}{{ . | urlize }}">{{.}}</a></span>
-                            {{- end }}
+                    <span>{{ dateFormat "01 Jan 2006" .Date.Local}}{{- if not ( eq .Date.Local
+                        .Lastmod ) }} (updated {{ dateFormat "01 Jan 2006" .Lastmod }}) {{- end }} /</span>
+                  <span>{{ i18n "readingTime" .Page.ReadingTime }} read /</span>
+                  <span>
+                      {{- with .Params.tags }}
+                        {{- range . -}}
+                            <a class="tag" href="{{ "tags/" | absLangURL }}{{ . | urlize }}">{{.}}</a>
                         {{- end }}
+                      {{- end }}
                     </span>
-                </div>
-                <div>Written on {{ dateFormat "2006-01-02" .Date.Local }},
-                    last updated on {{ dateFormat "2006-01-02" .Lastmod }}
                 </div>
             </div>
 
@@ -35,34 +29,28 @@
             {{ with .Params.Cover }}
                 <img src="/img/{{ . }}" class="post-cover" />
             {{ end }}
-
-            <div class="post-content">
-                {{ .Content }}
-            </div>
+          </header>
+          <main class="post-content">
+            {{ .Content }}
+          </main>
         </article>
         <hr/>
 
         {{ if and (not $.Site.Params.DisableReadOtherPosts) (or .NextInSection .PrevInSection) }}
             <div class="pagination">
-                <div class="pagination__buttons">
-                    {{ if .NextInSection }}
-                        <span class="button previous">
-                            <a href="{{ .NextInSection.Permalink }}">
-                                <span class="button__icon">←</span>
-                                <span class="button__text">{{ .NextInSection.Title }}</span>
-                            </a>
-                        </span>
-                    {{ end }}
+                {{ if .NextInSection }}
+                <a href="{{ .NextInSection.Permalink }}" class="button previous">
+                    <span class="button__icon">←</span>
+                    <span class="button__text">{{ .NextInSection.Title }}</span>
+                </a>
+                {{ end }}
 
-                    {{ if .PrevInSection }}
-                        <span class="button next">
-                            <a href="{{ .PrevInSection.Permalink }}">
-                                <span class="button__text">{{ .PrevInSection.Title }}</span>
-                                <span class="button__icon">→</span>
-                            </a>
-                        </span>
-                    {{ end }}
-                </div>
+                {{ if .PrevInSection }}
+                <a href="{{ .PrevInSection.Permalink }}" class="button next">
+                    <span class="button__text">{{ .PrevInSection.Title }}</span>
+                    <span class="button__icon">→</span>
+                </a>
+                {{ end }}
             </div>
         {{ end }}
 

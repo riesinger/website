@@ -3,25 +3,23 @@
 /* light theme color */
 $light-background: #f0f0f0;
 $light-background-secondary: #e0e0e0;
+$light-background-header: #fafafa;
 $light-color: #111;
 $light-color-secondary: #999;
 $light-border-color: #dcdcdc;
 
 /* dark theme colors */
-$dark-background: #292a2d;
+$dark-background: hsl(222, 8%, 10%);
 $dark-background-secondary: #3b3d42;
-$dark-color: #e0e0e0;
-$dark-color-secondary: #73747b;
+$dark-background-header: hsl(222, 8%, 8%);
+$dark-color: hsl(222, 8%, 95%);
+$dark-color-secondary: hsl(222, 8%, 75%);
 $dark-border-color: #4a4b50;
 
-$max-body-width: 1000px;
-$max-content-width: 800px;
+$brand: hsl(222, 89%, 65);
+
+$max-body-width: 850px;
+$max-content-width: 850px;
 
 $media-size-phone: "(max-width: 684px)";
 $media-size-tablet: "(max-width: 900px)";
-
-/* variables for js, must be the same as these in @custom-media queries */
-:root {
-  --phoneWidth: (max-width: 684px);
-  --tabletWidth: (max-width: 900px);
-}

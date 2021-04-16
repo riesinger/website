@@ -9,20 +9,11 @@
     max-width: 660px;
   }
 
-  &:not(:last-of-type) {
-    border-bottom: 1px solid $light-border-color;
-
-    @media (prefers-color-scheme: dark) {
-      & {
-        border-color: $dark-border-color;
-      }
-    }
-  }
-
   &-group {
     display: flex;
     margin-bottom: 1.9em;
     line-height: normal;
+    align-items: flex-start;
 
     @media #{$media-size-tablet} {
       display: block;
@@ -43,7 +34,7 @@
     }
 
     &-year {
-      padding-top: 6px;
+      height: 3.25rem;
       margin-right: 1.8em;
       font-size: 1.6em;
       @include dimmed;
@@ -54,14 +45,14 @@
     }
 
     &-item {
-      border-bottom: 1px grey dashed;
 
       a {
         display: flex;
         justify-content: space-between;
         align-items: baseline;
-        padding: 12px 0;
+        height: 3.25rem;
         text-decoration: none;
+        color: inherit;
       }
     }
 

@@ -7,8 +7,8 @@ enableGitInfo = true
 # pygmentsCodefences  = true
 # pygmentsUseClasses  = true
 canonifyURLs = false
-rssLimit = 15
-copyright = "Posts: CC BY 4.0 license, Code: MIT license"
+rssLimit = 30
+copyright = "CC BY 4.0 license"
 enableEmoji = true  # https://gohugo.io/functions/emojify/
 
 [author]
@@ -68,11 +68,6 @@ enableEmoji = true  # https://gohugo.io/functions/emojify/
     name = "Posts"
     url = "/posts/"
     weight = 10
-
-  [[menu.main]]
-    name = "About"
-    url = "/about/"
-    weight = 20
 
 [markup]
   [markup.highlight]
