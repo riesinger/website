@@ -16,7 +16,7 @@ export type Post = {
   updated: string;
   featured?: boolean;
   fontFeatured?: string;
-  keywords?: string[];
+  tags?: string[];
   slug: string;
   subtitle: string;
   title: string;

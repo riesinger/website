@@ -24,7 +24,7 @@ html {
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
     "Helvetica Neue", sans-serif;
   box-sizing: border-box;
-  overflow-y: scroll;
+  overflow-y: auto;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }

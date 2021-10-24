@@ -1,5 +1,5 @@
+import styled from "@emotion/styled";
 import { ReactNode } from "react";
-import styled from "styled-components";
 
 const StyledBlockquote = styled("blockquote")`
   transition: 0.5s;

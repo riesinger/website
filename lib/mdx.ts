@@ -3,8 +3,6 @@ import matter from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
 import readingTime from "reading-time";
-import remarkAutolinkHeadings from "remark-autolink-headings";
-import remarkSlug from "remark-slug";
 import { FrontMatterPostType, PostByType, PostType } from "../models/Post";
 import { remarkFigure } from "./remark-figure";
 
@@ -13,21 +11,25 @@ const typeToPath = {
   [PostType.SNIPPET]: "snippets",
 };
 
-const root = process.cwd();
+const root = path.join(process.cwd(), "content");
 
 export const getFiles = async (type: PostType) => {
-  return fs.readdirSync(path.join(root, "content", typeToPath[type]));
+  return fs.readdirSync(path.join(root, typeToPath[type]));
 };
 
 // Regex to find all the custom static tweets in a MDX file
 const TWEET_RE = /<StaticTweet\sid="[0-9]+"\s\/>/g;
+
+export const readFile = (type: PostType, name: string) => {
+  return fs.readFileSync(path.join(root, typeToPath[type], name));
+};
 
 export const getFileBySlug = async <T extends PostType>(
   type: T,
   slug: string
 ): Promise<FrontMatterPostType<T>> => {
   const source = fs.readFileSync(
-    path.join(root, "content", typeToPath[type], `${slug}.mdx`),
+    path.join(root, typeToPath[type], `${slug}.mdx`),
     "utf8"
   );
 
@@ -39,8 +41,8 @@ export const getFileBySlug = async <T extends PostType>(
   const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [
-        remarkSlug,
-        remarkAutolinkHeadings,
+        // remarkSlug,
+        // remarkAutolinkHeadings,
         // remarkSectionize,
         remarkFigure,
       ],

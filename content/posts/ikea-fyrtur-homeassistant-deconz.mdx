@@ -1,0 +1,74 @@
+---
+title: "IKEA Fyrtur smart blinds with Home Assistant and deCONZ"
+subtitle: "A guide on how to integrate IKEA's blinds into your Zigbee network using deCONZ, so you can use them with Home Assistant."
+date: "2021-05-18T20:00:00+01:00"
+draft: false
+toc: false
+tags:
+  - home-assistant
+  - smart-home
+  - iot
+  - homelab
+slug: ikea-fyrtur-homeassistant-deconz
+featured: true
+---
+
+When searching the web for blackout blinds, I came across the IKEA Fyrtur line of ZigBee-controlled "smart blinds".
+Since I've had a great exprience with IKEA smart home products, mostly from the Tradfri line, I was instantly intrigued.
+
+I like Tradfri products, since they are controlled via [ZigBee](https://en.wikipedia.org/wiki/Zigbee), which integrates nicely into my existing Home Assistant and ConBee/deCONZ setup and they usually are at a great balance between quality and price.
+
+Since IKEA in Germany decided to reduce the pretty hefty price tag of the 120cm Fyrtur blinds by 100€ at some point, I couldn't resist buying one of them anymore and a few days later, here I was with a motorized roller blind, a "range extender" and a small remote control.
+
+The first thing I tried of course was, whether the blind itself worked. Since IKEA pre-pairs every remote-controlled device to the remote that comes in the box, this was as easy as inserting the battery into the Fyrtur blind housing, plugging the "range extender" (more on that later) into a power socket and clicking a button on the remote to see if something happens. And low and behold - the blinds started closing!
+
+## Connecting the blinds to deCONZ
+
+Now, it was time to connect the main blinds to the deCONZ network and therefore Home Assistant. It does not matter whether you're using the ConBee stick or the RaspBee, the setup will be the exact same in both cases (in fact, the devices also are the exact same).
+
+As a first step, open the deCONZ plugin in Home Assistant and launch the Phoscon web app.
+
+Now, head to your "Lights" tab (yes, the blinds are lights - or is the light blinding?) and click the "Add new lights" button to pair your device as usual.
+Once you see the "Searching lights" progress bar, keep both of the buttons on your Fyrtur blind pressed for 5-6 seconds, until a small light starts flashing on it. After a few more seconds, the blind should appear in the Phoscon app.
+
+Now, give your blind a proper name and add it to a Home Assistant dashboard. You should now be able to open and close the blinds via Home Assistant!
+
+One thing you might notice though, is that the "opening percentage" won't change, no matter how wide you opened or closed your blinds. Let's fix that next!
+
+## Fixing the blinds' reporting
+
+There currently is an issue with the Fyrtur blinds' reporting not being properly setup when connecting via Phoscon. This issue and a workaround is documented on the [deCONZ GitHub page](https://github.com/dresden-elektronik/deconz-rest-plugin/issues/1121#issuecomment-524617659).
+
+To get started, head into the deCONZ console (from the screen where you chose the Phoscon app earlier). You should see your ZigBee device graph or network now.
+
+![How my deCONZ network looks like](deconz-overview.png)
+
+Locate your blinds in the graph (you might need to spread the nodes out) and on the blinds' node, click the right one of the two little gray circles. This will open up the so-called "Cluster" overview of that device.
+
+Now open the _Bind Dropbox_ panel by clicking on _Panels_ and _Bind Dropbox_ in the menu bar and then selecting its tab in the bottom left corner of the window.
+
+Next, drag-and-drop the "Window Covering" Cluster from your blinds' node into the "Source" field of the Binding Dropbox. In my case, it has an ID of 0102, which it _should_ also have for you.
+
+Open the Cluster overview of your ConBee/RaspBee device (which should be called something like "Configuration Tool") and drag-and-drop its "Power Configuration" cluster into the destination field of the Binding Dropbox.
+
+You should end up with something like this:
+
+![A binding is configured between the blinds and a deCONZ device](deconz-binding.png)
+
+If you reached that point, press "Bind".
+
+Next, we need to tell the Window Covering Cluster of your blinds to report back at regular intervals. To do this, open the "Cluster Info" panel at the bottom left and double-click your device's Window Covering Cluster in the node graph. Double-click the "Current position Lift Percentage" entry in the attributes list at the bottom.
+
+![The attribute list of the Window Covering Cluster](window-covering-cluster.png)
+
+Enter the values seen in the following screenshot and click the "write config" button.
+
+![The new reporting values](reporting-values.png)
+
+You now should be good to go and see your blind's lift percentage in Home Assistant.
+
+## The range extender
+
+Together with the actual blind and remote controll, IKEA packages a "range extender", which basically is just a [ZigBee router](https://en.wikipedia.org/wiki/Zigbee#Device_types_and_operating_modes), which basically extends the range of your whole ZigBee network. If you were able to pair the blind with your ConBee device without pairing the range extender beforehand: Good news, you don't need it. You probably already have some always-on devices like ZigBee light bulbs acting as routers between your ConBee and Fyrtur, or they are just close enough to each other.
+
+However, should you need the range extender, it can easily be paired to deCONZ like every other device and will then extend the range of your network. This means that you could also use the range extender somewhere else in your home, completely unrelated to the blinds.

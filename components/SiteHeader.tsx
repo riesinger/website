@@ -1,29 +1,16 @@
+import styled from "@emotion/styled";
 import Link from "next/link";
-import styled from "styled-components";
+import { BlogButton } from "./Button";
+import Grid from "./Grid";
 import Logo from "./Logo";
 
 const StyledHeader = styled.header`
   border-top: 6px solid var(--riesinger-colors-brand);
-  width: 100vw;
+  width: 100%;
   box-sizing: border-box;
   padding: 0 1rem;
-  box-shadow: var(--riesinger-shadow-1);
-`;
-
-const HeaderContainer = styled.div`
-  height: 5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 1000px;
-  margin: 0 auto;
-`;
-
-const StyledLink = styled.a`
-  color: var(--riesinger-colors-brand);
-  list-style: none;
-  text-decoration: none;
-  font-weight: 600;
+  height: 6rem;
+  /* box-shadow: var(--riesinger-shadow-1); */
 `;
 
 const StyledNav = styled.nav`
@@ -32,25 +19,35 @@ const StyledNav = styled.nav`
   gap: 1rem;
 `;
 
+const HeaderContent = styled.div`
+  grid-column: 2;
+  height: inherit;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const SiteHeader = () => {
   return (
     <StyledHeader>
-      <HeaderContainer>
-        <Link href="/" passHref>
-          <a title="Back to riesinger.dev">
-            <Logo />
-          </a>
-        </Link>
-        <div />
-        <StyledNav>
-          <Link href="/projects" passHref>
-            <StyledLink>Projects</StyledLink>
+      <Grid columns="var(--layout-medium)" columnGap={20}>
+        <HeaderContent>
+          <Link href="/" passHref>
+            <a title="Back to riesinger.dev">
+              <Logo />
+            </a>
           </Link>
-          <Link href="/posts" passHref>
-            <StyledLink>Posts</StyledLink>
-          </Link>
-        </StyledNav>
-      </HeaderContainer>
+          <div />
+          <StyledNav>
+            {/* <Link href="/projects" passHref>
+              <WorkButton onClick={() => {}} />
+            </Link> */}
+            <Link href="/posts" passHref>
+              <BlogButton />
+            </Link>
+          </StyledNav>
+        </HeaderContent>
+      </Grid>
     </StyledHeader>
   );
 };

@@ -9,23 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/babel-plugin": "^11.3.0",
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
+    "framer-motion": "^4.1.17",
     "gray-matter": "^4.0.3",
     "next": "11.1.2",
-    "next-mdx-remote": "^3.0.5",
+    "next-mdx-remote": "^3.0.6",
     "prism-react-renderer": "^1.2.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "reading-time": "^1.5.0",
     "remark-autolink-headings": "^7.0.1",
     "remark-slug": "^7.0.0",
-    "styled-components": "^5.3.1",
+    "slug": "^5.1.0",
     "unist-util-find-after": "^4.0.0",
     "unist-util-visit-parents": "^5.1.0"
   },
   "devDependencies": {
-    "@types/react": "^17.0.27",
+    "@types/react": "^17.0.31",
     "@types/styled-components": "^5.1.15",
-    "babel-plugin-styled-components": "^1.13.2",
+    "babel-plugin-styled-components": "^1.13.3",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2"
   }

@@ -20,7 +20,7 @@ const Blog = ({ post, ogImage, tweets }: BlogProps) => {
   }
 
   return (
-    <BlogLayout frontMatter={post.frontMatter} ogImage={ogImage}>
+    <BlogLayout frontMatter={post.frontMatter}>
       <MDXRemote
         {...post.mdxSource}
         components={{

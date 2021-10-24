@@ -1,11 +1,12 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
+import Grid from "./Grid";
 import Logo from "./Logo";
 
 const StyledFooter = styled.footer`
   margin-top: 2rem;
   box-sizing: border-box;
   padding: 1rem 1rem 0rem 1rem;
-  width: 100vw;
+  width: 100%;
 `;
 
 const StyledRule = styled.hr`
@@ -25,20 +26,21 @@ const FooterContent = styled.div`
 `;
 
 const FooterContainer = styled.div`
-  max-width: 1000px;
-  margin: 0 auto;
+  grid-column: 2;
 `;
 
 const SiteFooter = () => {
   return (
     <StyledFooter>
-      <FooterContainer>
-        <StyledRule />
-        <FooterContent>
-          <span>&copy; {new Date().getFullYear()} Pascal Riesinger</span>
-          <Logo size="sm" />
-        </FooterContent>
-      </FooterContainer>
+      <Grid columns="var(--layout-medium)" columnGap={20}>
+        <FooterContainer>
+          <StyledRule />
+          <FooterContent>
+            <span>&copy; {new Date().getFullYear()} Pascal Riesinger</span>
+            <Logo size="sm" />
+          </FooterContent>
+        </FooterContainer>
+      </Grid>
     </StyledFooter>
   );
 };
