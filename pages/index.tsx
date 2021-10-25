@@ -53,7 +53,7 @@ export default function Home() {
         rowGap={100}
         css={css`
           padding-top: 128px;
-          > *:not(.fullbleed) {
+          > :not(.fullbleed) {
             grid-column: 2;
           }
         `}

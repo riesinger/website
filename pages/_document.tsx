@@ -5,6 +5,21 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <meta charSet="utf-8" />
+          <link
+            rel="preload"
+            href="/fonts/inter-var-latin.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/fonts/fira-code.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
           <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -31,6 +46,7 @@ export default class MyDocument extends Document {
           <link rel="shortcut icon" href="/favicon.ico?v=2" />
           <meta name="msapplication-TileColor" content="#2b5797" />
           <meta name="theme-color" content="#16181d" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
         <body>
           <Main />

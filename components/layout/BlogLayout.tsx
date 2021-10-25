@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 import { ReactNode } from "react";
 import { Post, ReadingTime } from "../../models/Post";
+import { Seo } from "../Seo";
 import Layout from "./Layout";
 
 type BlogLayoutProps = {
@@ -126,8 +127,17 @@ const TagLink = styled.a`
 `;
 
 const BlogLayout = ({ frontMatter, children }: BlogLayoutProps) => {
+  const path = `/posts/${frontMatter.slug}/`;
   return (
     <Layout header={true} footer={true}>
+      <Seo
+        title={frontMatter.title}
+        desc={frontMatter.subtitle}
+        // image={ogImage}
+        path={path}
+        date={frontMatter.date}
+        updated={frontMatter.updated}
+      />
       <StyledArticle>
         <ArticleHeader>
           <ArticleTitle>{frontMatter.title}</ArticleTitle>
