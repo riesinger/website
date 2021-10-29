@@ -46,7 +46,6 @@ export default class MyDocument extends Document {
           <link rel="shortcut icon" href="/favicon.ico?v=2" />
           <meta name="msapplication-TileColor" content="#2b5797" />
           <meta name="theme-color" content="#16181d" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
         <body>
           <Main />

@@ -13,6 +13,7 @@ function MyApp({ Component, pageProps }) {
           data-domain="riesinger.dev"
           src="https://plausible.riesinger.dev/count.js"
         ></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <DefaultSeo />
       <Component {...pageProps} />
