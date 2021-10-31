@@ -11,16 +11,15 @@ export type ReadingTime = {
 
 export type Post = {
   colorFeatured?: string;
-  cover?: string;
   date: string;
   updated: string;
   featured?: boolean;
-  fontFeatured?: string;
   tags?: string[];
   slug: string;
   subtitle: string;
   title: string;
   type: PostType.BLOGPOST;
+  draft?: boolean;
 };
 
 export type FrontMatterPost = {
@@ -39,6 +38,7 @@ export type Snippet = {
   description: string;
   snippetImage: string;
   type: PostType.SNIPPET;
+  draft?: boolean;
 };
 
 export type FrontMatterSnippet = {
