@@ -10,5 +10,5 @@
       }
     ]
   ],
-  "plugins": ["styled-components", "@emotion/babel-plugin"]
+  "plugins": ["@emotion/babel-plugin"]
 }
