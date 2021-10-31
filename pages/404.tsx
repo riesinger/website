@@ -31,8 +31,8 @@ function NotFound() {
         >
           <h1>Looks like you took a wrong turn</h1>
           <p>
-            Unfortunately, the page you were looking for doesn't exist. You can
-            head back to the{" "}
+            Unfortunately, the page you were looking for doesn&apos;t exist. You
+            can head back to the{" "}
             <Link href="/">
               <a>homepage</a>
             </Link>
