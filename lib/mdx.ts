@@ -24,6 +24,7 @@ export const readFile = (type: PostType, name: string) => {
   return fs.readFileSync(path.join(root, typeToPath[type], name));
 };
 
+// TODO: Think about generating slugs from file names automatically, so that we don't need to provide the slug attribute in posts
 export const getFileBySlug = async <T extends PostType>(
   type: T,
   slug: string
@@ -75,6 +76,7 @@ export const getFileBySlug = async <T extends PostType>(
       mdxSource,
       tweetIDs: tweetIDs || [],
       frontMatter: {
+        draft: data.draft || false,
         readingTime: readingTime(content),
         ...data,
       },
@@ -90,20 +92,22 @@ export const getFileBySlug = async <T extends PostType>(
 };
 
 export const getAllFilesFrontMatter = async <T extends PostType>(
-  type: T
+  type: T,
+  includeDrafts = false
 ): Promise<Array<PostByType<T>>> => {
   const files = fs.readdirSync(path.join(root, typeToPath[type]));
 
-  const posts = files
-    .map((postSlug: string) => {
-      const source = fs.readFileSync(
-        path.join(root, typeToPath[type], postSlug),
-        "utf8"
-      );
-      const parsedFile = matter(source);
+  const postSources = await Promise.all(
+    files.map(
+      async (postSlug) =>
+        await fs.promises.readFile(path.join(root, typeToPath[type], postSlug))
+    )
+  );
 
-      return parsedFile.data as PostByType<T>;
-    })
+  const posts = postSources
+    .map((source) => matter(source))
+    .map((parsedFile) => parsedFile.data as PostByType<T>)
+    .filter((post) => (includeDrafts ? true : !post.draft))
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
 
   return posts;

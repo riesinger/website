@@ -2,14 +2,12 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import Grid from "components/Grid";
 import { motion } from "framer-motion";
-import matter from "gray-matter";
-import { getFiles, readFile } from "lib/mdx";
+import { getAllFilesFrontMatter } from "lib/mdx";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import Link from "next/link";
-import slug from "slug";
 import Card from "../components/Card";
 import Layout from "../components/layout/Layout";
-import { Post, PostType } from "../models/Post";
+import { PostType } from "../models/Post";
 
 const FeaturedPostsLI = styled.li`
   list-style-type: none;
@@ -90,7 +88,10 @@ const DATE_OPTIONS: Intl.DateTimeFormatOptions = {
 
 let year = 0;
 
-const Posts = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Posts = ({
+  posts,
+  featured,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout header footer>
       <Grid
@@ -107,9 +108,7 @@ const Posts = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
         <section>
           <h2>Featured</h2>
           <List as="ul">
-            {posts
-              .filter(({ featured }) => featured)
-              .map((post, i) => (
+            {featured.map((post, i) => (
                 <motion.li
                   key={post.slug}
                   initial={{ y: 40, opacity: 0 }}
@@ -170,20 +169,8 @@ const Posts = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
 
 export default Posts;
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const posts = await getFiles(PostType.BLOGPOST);
-  const postData = posts
-    .map((post) => readFile(PostType.BLOGPOST, post))
-    .map((source) => matter(source))
-    .map((parsed) => parsed.data)
-    .map((data: Post) => ({
-      title: data.title,
-      subtitle: data.subtitle || "",
-      slug: data.slug || slug(data.title),
-      featured: data.featured || false,
-      date: data.date,
-    }))
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-  return { props: { posts: postData } };
+export const getStaticProps: GetStaticProps = async () => {
+  const posts = await getAllFilesFrontMatter(PostType.BLOGPOST);
+  const featured = [...posts].filter((post) => post.featured);
+  return { props: { posts, featured } };
 };
