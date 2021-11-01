@@ -21,9 +21,9 @@ type Alignments =
   | "legacy left"
   | "legacy center";
 
-interface Props {
+export interface GridProps {
   as?: ElementType;
-  children: ReactNode | ReactNodeArray;
+  children?: ReactNode | ReactNodeArray;
   gap?: number | string;
   columnGap?: number | string;
   rowGap?: number | string;
@@ -39,7 +39,7 @@ interface Props {
   "data-testid"?: string;
 }
 
-const StyledGrid = styled("div")<Props>`
+const StyledGrid = styled("div")<GridProps>`
   display: grid;
   column-gap: ${(p) => p.columnGap};
   row-gap: ${(p) => p.rowGap};
@@ -54,7 +54,7 @@ const StyledGrid = styled("div")<Props>`
   height: inherit;
 `;
 
-const Grid = (props: Props) => {
+const Grid = (props: GridProps) => {
   const {
     as = "div",
     gap = "none",

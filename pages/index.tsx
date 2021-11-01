@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { Button } from "components/Button";
-import Grid from "components/Grid";
+import Grid, { MainGrid } from "components/Grid";
 import { TwitterIcon } from "components/icons";
 import Layout from "components/layout/Layout";
 import { motion } from "framer-motion";
@@ -47,17 +47,7 @@ const Tweety = styled(TwitterIcon)`
 export default function Home() {
   return (
     <Layout header footer>
-      <Grid
-        columns="var(--layout-medium)"
-        columnGap={20}
-        rowGap={100}
-        css={css`
-          padding-top: 128px;
-          > :not(.fullbleed) {
-            grid-column: 2;
-          }
-        `}
-      >
+      <MainGrid>
         <Hero>
           <h1>
             <span
@@ -88,7 +78,9 @@ export default function Home() {
             <Link href="/posts" passHref>
               <Button primary>Blog</Button>
             </Link>
-            <Button secondary>Projects</Button>
+            <Link href="#about-me" passHref>
+              <Button secondary>About me</Button>
+            </Link>
             <TwitterLink href="https://twitter.com/pascalriesinger">
               <Button tertiary>
                 @pascalriesinger <Tweety />
@@ -96,7 +88,7 @@ export default function Home() {
             </TwitterLink>
           </ButtonContainer>
         </Hero>
-        <AboutSection className="fullbleed">
+        <AboutSection id="about-me" className="fullbleed">
           <Grid
             columns="var(--layout-medium)"
             columnGap={20}
@@ -164,7 +156,7 @@ export default function Home() {
             </a>
           </p>
         </section>
-      </Grid>
+      </MainGrid>
     </Layout>
   );
 }
