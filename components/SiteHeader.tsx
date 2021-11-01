@@ -42,7 +42,7 @@ const SiteHeader = () => {
             {/* <Link href="/projects" passHref>
               <WorkButton onClick={() => {}} />
             </Link> */}
-            <Link href="/posts" passHref>
+            <Link href="/posts">
               <BlogButton />
             </Link>
           </StyledNav>

@@ -1,5 +1,5 @@
 import { motion, useMotionValue } from "framer-motion";
-import { MouseEvent } from "react";
+import { ForwardedRef, forwardRef, MouseEvent } from "react";
 import { Tooltip } from "../Tooltip";
 import { LinkButton } from "./LinkButton";
 
@@ -8,7 +8,7 @@ interface Props {
   href?: string;
 }
 
-export const BlogButton = (props: Props) => {
+export const BlogButton = forwardRef((props: Props, ref) => {
   const { onClick } = props;
   const duration = 0.7;
 
@@ -29,6 +29,7 @@ export const BlogButton = (props: Props) => {
         whileTap="pressed"
         transition={{ duration }}
         onClick={(event) => onClick(event)}
+        ref={ref as ForwardedRef<HTMLButtonElement>}
       >
         <motion.svg
           width="24"
@@ -51,4 +52,4 @@ export const BlogButton = (props: Props) => {
       </LinkButton>
     </Tooltip>
   );
-};
+});
