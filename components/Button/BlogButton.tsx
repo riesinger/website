@@ -53,3 +53,5 @@ export const BlogButton = forwardRef((props: Props, ref) => {
     </Tooltip>
   );
 });
+
+BlogButton.displayName = "BlogButton";
