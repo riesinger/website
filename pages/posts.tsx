@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import Grid from "components/Grid";
+import Grid, { MainGrid } from "components/Grid";
 import { motion } from "framer-motion";
 import { getAllFilesFrontMatter } from "lib/mdx";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
@@ -9,15 +9,17 @@ import Card from "../components/Card";
 import Layout from "../components/layout/Layout";
 import { PostType } from "../models/Post";
 
-const FeaturedPostsLI = styled.li`
-  list-style-type: none;
-`;
-
-const Title = styled.h2`
+const TitleWithBackground = styled("h2")<{ background: string }>`
   color: var(--riesinger-colors-typeface-primary);
   margin-bottom: 0px !important;
   letter-spacing: -0.02em;
   margin-block-end: 0px;
+  background: ${(p) => p.background};
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
 `;
 
 const UnstyledLink = styled.a`
@@ -94,39 +96,31 @@ const Posts = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout header footer>
-      <Grid
-        columns="var(--layout-medium)"
-        columnGap={20}
-        rowGap={100}
-        css={css`
-          padding-top: 128px;
-          > * {
-            grid-column: 2;
-          }
-        `}
-      >
+      <MainGrid>
         <section>
           <h2>Featured</h2>
           <List as="ul">
             {featured.map((post, i) => (
-                <motion.li
-                  key={post.slug}
-                  initial={{ y: 40, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.4, delay: (i + 1) * 0.1 }}
-                >
-                  <Link href={`/posts/${post.slug}`} passHref>
-                    <UnstyledLink>
-                      <Card depth={1}>
-                        <Card.Body>
-                          <Title>{post.title}</Title>
-                          <p>{post.subtitle}</p>
-                        </Card.Body>
-                      </Card>
-                    </UnstyledLink>
-                  </Link>
-                </motion.li>
-              ))}
+              <motion.li
+                key={post.slug}
+                initial={{ y: 40, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.4, delay: (i + 1) * 0.1 }}
+              >
+                <Link href={`/posts/${post.slug}`} passHref>
+                  <UnstyledLink>
+                    <Card depth={1}>
+                      <Card.Body>
+                        <TitleWithBackground background={post.colorFeatured!}>
+                          {post.title}
+                        </TitleWithBackground>
+                        <p>{post.subtitle}</p>
+                      </Card.Body>
+                    </Card>
+                  </UnstyledLink>
+                </Link>
+              </motion.li>
+            ))}
           </List>
         </section>
         <section>
@@ -162,7 +156,7 @@ const Posts = ({
             })}
           </List>
         </section>
-      </Grid>
+      </MainGrid>
     </Layout>
   );
 };
