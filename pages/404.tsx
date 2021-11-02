@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import Grid from "components/Grid";
 import Layout from "components/layout/Layout";
