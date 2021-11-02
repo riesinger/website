@@ -11,7 +11,9 @@ import { PostType } from "../../models/Post";
 
 let year = 0;
 
-// TODO: Sanetize tags on the server & client
+function sanitize(tag: string) {
+  return tag.replaceAll(/[<>]/, "").toLowerCase();
+}
 
 const TagPage = ({
   posts,
@@ -37,7 +39,7 @@ const TagPage = ({
         `}
       >
         <section>
-          <h2>Posts for tag &quot;{tag}&quot;</h2>
+          <h2>Posts for tag &quot;{sanitize(tag)}&quot;</h2>
           <List as="ol" rowGap={4}>
             {posts.map((post) => {
               const currentYear = new Date(post.date).getFullYear();
@@ -92,8 +94,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
-    // TODO: Remove the type assertion by checking for an array and rendering an error page in case multiple tags were passed
-    const tag = params!.tag as string;
+    if (params!.tag instanceof Array) {
+      return { notFound: true };
+    }
+    const tag = sanitize(params!.tag);
     const allPosts = await getAllFilesFrontMatter(PostType.BLOGPOST);
     const postsForTag = allPosts.filter((post) =>
       post.tags?.map((t) => t.toLowerCase())?.includes(tag)
