@@ -1,6 +1,9 @@
 const config = {
   reactStrictMode: true,
   trailingSlash: true,
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
 };
 
 if (process.env.ANALYZE === "true") {
