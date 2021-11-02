@@ -12,11 +12,22 @@ Movement and transitions are very important design aspects. They can guide your 
 application and help them understand states. If you are like me, you may have found yourself
 clicking some button over-and-over in an app with beautiful transitions, admiring the amazing work
 of designers and developers.
-![A good example for motion in an app. Source: https://material.uplabs.com/posts/music-player-transition](guide.gif)
+
+<figure>
+  <video controls>
+    <source src="guide.mp4" type="video/mp4" />
+  </video>
+  <figcaption>
+    A good example for motion in an app. Source:{" "}
+    <a href="https://material.uplabls.com/posts/music-player-transition">
+      Uplabs
+    </a>
+  </figcaption>
+</figure>
 
 So you know a bit about HTML, CSS and JavaScript and did some basic websites? But you want to
 improve state transitions with some animation? Look no further, the following guide will walk you
-from basic transitions to more complex animations using keyframes :rocket:
+from basic transitions to more complex animations using keyframes 🚀
 
 ## The Base
 
@@ -77,7 +88,12 @@ main.playing .playlist {
 As you could probably guess, clicking on the play button toggles the `playing` class on the `main`
 element of the markup (take a look). Now clicking it should have the following effect:
 
-![The playlist is now animated](second.gif)
+<figure>
+  <video controls>
+    <source src="second.mp4" type="video/mp4" />
+  </video>
+  <figcaption>The playlist is now animated</figcaption>
+</figure>
 
 Awesome, the playlist view now slides out of the bottom, by translating it 100% of its height down
 the Y axis. But we _definitely_ need some transition for that, as it looks just ridiculous right
@@ -210,7 +226,7 @@ On line 10 you can see how to set transitions for multiple values. We could also
 `transition: all .2s ease-in-out`, but to squeeze even the last bit of performance out of the
 browser, we give it all properties to transition separately (I generally specify all properties
 until I have about 5 or 6, then I use all). Other than that there is nothing really new. Pretty
-boring, huh? Okay so let’s sprinke in a bit of animation and `@keyframes` :smile:
+boring, huh? Okay so let’s sprinke in a bit of animation and `@keyframes` 🙂
 
 ## Animation and keyframes
 
@@ -259,7 +275,12 @@ Chrome as Firefox does not support clip-path: circle() yet. I fixed this in the 
 don’t include the fix here for times sake).~~ Now after adding all of those animations, you should
 have the following result:
 
-![The final result](third.gif)
+<figure>
+  <video controls>
+    <source src="third.mp4" type="video/mp4" />
+  </video>
+  <figcaption>The final result</figcaption>
+</figure>
 
 Thank you for reading this post, I hope you now have some basic understanding of CSS Animation,
 Transformation and Transitions. To download the project, visit
