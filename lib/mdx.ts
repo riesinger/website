@@ -4,6 +4,7 @@ import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
 import readingTime from "reading-time";
 import { FrontMatterPostType, PostByType, PostType } from "../models/Post";
+import imageMetadata from "./rehype-image-metadata";
 import { remarkFigure } from "./remark-figure";
 
 const typeToPath = {
@@ -47,6 +48,7 @@ export const getFileBySlug = async <T extends PostType>(
         // remarkSectionize,
         remarkFigure,
       ],
+      rehypePlugins: [imageMetadata(data.slug)],
     },
   });
 
