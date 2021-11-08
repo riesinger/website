@@ -6,13 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate-feeds": "ts-node ./lib/generateFeeds.ts",
+    "prebuild": "npm run generate-feeds"
   },
   "browserslist": "> 0.5%, last 2 versions, Firefox ESR, not dead, not op_mini all, not IE 11",
   "dependencies": {
     "@emotion/babel-plugin": "^11.3.0",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
+    "feed": "^4.2.2",
     "framer-motion": "^4.1.17",
     "gray-matter": "^4.0.3",
     "image-size": "^1.0.0",
@@ -26,6 +29,7 @@
     "remark-autolink-headings": "^7.0.1",
     "remark-slug": "^7.0.0",
     "slug": "^5.1.0",
+    "ts-node": "^10.4.0",
     "unist-util-find-after": "^4.0.0",
     "unist-util-visit-parents": "^5.1.0"
   },
