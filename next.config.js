@@ -4,6 +4,15 @@ const config = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  redirects: async function () {
+    return [
+      {
+        source: "/posts/index.xml",
+        destination: "/feeds/feed.xml",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 if (process.env.ANALYZE === "true") {
