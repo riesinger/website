@@ -1,0 +1,66 @@
+---
+title: Why I moved my site to Next.JS
+subtitle: A quick explanation of why I moved on from Hugo and what benefits and drawbacks this has.
+slug: why-i-moved-my-site-to-nextjs
+date: "2021-11-10T21:13:57+0100"
+tags:
+  - webdev
+featured: true
+colorFeatured: "linear-gradient(120deg, rgba(254,98,220,1) 0%, rgba(255,144,4,1) 50%, rgba(255,115,52,1) 100%)"
+---
+
+Since [November of 2019][thecommit], my website has been powered by [Hugo](https://gohugo.io).
+For those who haven't heard of it yet; Hugo is a fantastic static-site generator written in [Go](https://go.dev), which is blazingly fast, has lots of pre-built templates available and is reasonably easy to use.
+
+I was quite happy with Hugo, after I switched themes a few times to find the right one.
+It was quite nice: Write posts in Markdown, have an automatic RSS feed generated, have the site built and deployed in less than a minute.
+
+Now, at some point I found myself creating [NoNonsense.cooking](https://nononsense.cooking) and since that needed some dynamic elements (recent recipes, most popular recipes, a search function, servings chooser), I decided to create that site using [Next.JS](https://nextjs.org).
+Next.JS is a React framework created by Vercel, which gives you a few nice things out of the box, namely:
+
+- Server-Side-Rendering (SSR) and Static Site Generation (SSG)
+- API Routes
+- Image optimization
+- Internationalization (i18n)
+
+After creating NoNonsense.cooking with Next.JS (which I will hopefully write about at some point), I was quite pleased with its developer experience.
+Most things "just work" and the automatic SSR and SSG are great for SEO and JavaScript-disabled devices.
+Also, React gave me the flexibility to easily add dynamic elements to the site wherever I wanted.
+
+## The case for Next.JS
+
+The flexibility was probably also the reason that tipped me over to decide to re-create my website using Next.JS.
+I wanted to do a re-design anyway and instead of using the rather inflexible nature of a static site generator, I chose to go with a DIY solution, which also provides me with more freedom and flexibility.
+
+Since I now write my posts in MDX instead of just Markdown, I have the option to include dynamic elements like so:
+
+<RandomColorButton />
+
+This is both fun and potentially useful, since sometimes, things are just better explained with an example. Also, I can now provide richer experiences in my posts.
+But not only posts can now be dynamic. I could have my latest commits from GitHub or my most-contributed-to repositories listed on a projects page and have them be updated in realtime by rendering fetching the information on the server during the page rendering.
+
+Another reason for choosing Next.JS is it's easy themability compared to Hugo or other static site generators. While you would have to create templates rendering some pre-defined parameters for Hugo, you decide how your website is rendered in NextJS.
+Don't like MDX? Write your posts directly in JSX/HTML. Or fetch them from a CMS. Or put them as plain text into a database and fetch them from there (even though that's probably not a good idea 😅).
+Also, you don't have to weirdly force webpack into a static site generator to be able to use autoprefixer/PostCSS when writing styles. Just choose and React styling option you already know and like.
+Another bit benefit regarding styling for me was the potential to re-use components I wrote for [NoNonsense.cooking](https://nononsense.cooking).
+Things played out differently, and I re-created the components from scratch, but I'm now planning to flesh them out a bit more and create a personal design system from them, which I will then apply to NoNonsense.cooking and could re-use in future projects.
+
+## The drawbacks
+
+Now, creating a personal website and blog with Next.JS isn't all sunshine and roses. There are a few hoops to jump through. First of all, Next.JS isn't built for creating blogs.
+When you use something like Jekyll or Hugo, you automatically get something like Markdown-to-HTML rendering.
+Not so much with Next.JS, you'll have to do it on your own (well, only the plumbing part, since there are great libraries to do that already).
+Also, nice things like `hugo new posts/whatever` to create a new post with template frontmatter don't exist out of the box.
+This is expected of course, if I would have wanted a better out of the box experience with React for blogging, I'd probably gone with [Gatsby](https://www.gatsbyjs.com/), which is configured via plugins.
+The same applies to RSS/Atom feeds. Want them? Create them yourself. For now, I've only implemented basic support where the body of the article is only its description instead of the actual full content.
+But I plan to get back to it at some point and properly render the MDX blog posts to the feeds.
+
+Another issue I mostly had while building NoNonsenseCooking is that Next.JS's serverless functions (which are used to do SSR) [don't have proper file-system access](https://github.com/vercel/next.js/issues/8251).
+This could be an issue in the future when adding more dynamic content to this site, though I've found ways to work around it.
+
+## Final thoughts
+
+As of now, I'm quite happy with Next.JS and how my "new" website turned out.
+Yes, there are quite a few things I had to do manually which were taken care of for me with Hugo, but I actually quite liked doing those things. I'm a tinkerer after all 😉
+
+[thecommit]: https://github.com/riesinger/website/commit/e68fa40e57fad4c3cd93fb5fb9b4d53c6aae6a35
