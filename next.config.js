@@ -11,6 +11,11 @@ const config = {
         destination: "/feeds/feed.xml",
         permanent: true,
       },
+      {
+        source: "/posts/ikea-fyrtur-homassistant-deconz/",
+        destination: "/posts/ikea-fyrtur-homeassistant-deconz/",
+        permanent: true,
+      },
     ];
   },
 };
