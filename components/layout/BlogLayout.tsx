@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import Grid from "components/Grid";
 import Link from "next/link";
 import { ReactNode } from "react";
 import { Post, ReadingTime } from "../../models/Post";
@@ -18,6 +19,23 @@ const StyledArticle = styled.article`
 
 const ArticleHeader = styled.header`
   padding-top: 4rem;
+  grid-column: 2;
+`;
+
+const ArticleFooter = styled.footer`
+  padding: 4rem;
+  color: var(--riesinger-colors-typeface-tertiary);
+  background: var(--riesinger-colors-emphasis);
+  grid-column: 1 / 4;
+
+  > div {
+    @media (max-width: 700px) {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    margin: 0 auto;
+    max-width: 700px;
+  }
 `;
 
 const ArticleTitle = styled.h1``;
@@ -41,6 +59,7 @@ const DATE_OPTIONS: Intl.DateTimeFormatOptions = {
 
 const StyledArticleContent = styled.main`
   color: var(--riesinger-colors-typeface-secondary);
+  grid-column: 2;
 
   figure {
     margin-bottom: 2.25rem;
@@ -138,7 +157,7 @@ const BlogLayout = ({ frontMatter, children }: BlogLayoutProps) => {
         date={frontMatter.date}
         updated={frontMatter.updated}
       />
-      <StyledArticle>
+      <Grid columns="var(--layout-small)" columnGap={20}>
         <ArticleHeader>
           <ArticleTitle>{frontMatter.title}</ArticleTitle>
           <ArticleMetadata>
@@ -179,8 +198,25 @@ const BlogLayout = ({ frontMatter, children }: BlogLayoutProps) => {
           </ArticleMetadata>
         </ArticleHeader>
         <StyledArticleContent>{children}</StyledArticleContent>
-        <footer></footer>
-      </StyledArticle>
+        <ArticleFooter>
+          <div>
+            <p>Thanks for reading, have a great day 🙂</p>
+          </div>
+          <div>
+            <em>Found an issue or have a suggestion? </em>
+            <a href="https://github.com/riesinger/website/issues">
+              Open an issue on GitHub
+            </a>
+          </div>
+          <div>
+            <em>Want to get notified about new posts? </em>
+            <Link href="/feeds">
+              <a>Subscribe to my RSS feed</a>
+            </Link>
+          </div>
+        </ArticleFooter>
+      </Grid>
+      <StyledArticle></StyledArticle>
     </Layout>
   );
 };
