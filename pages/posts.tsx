@@ -8,7 +8,7 @@ import { GetStaticProps, InferGetStaticPropsType } from "next";
 import Link from "next/link";
 import Card from "../components/Card";
 import Layout from "../components/layout/Layout";
-import { PostType } from "../models/Post";
+import { Post, PostType } from "../models/Post";
 
 const TitleWithBackground = styled("h2")<{ background: string }>`
   color: var(--riesinger-colors-typeface-primary);
@@ -127,7 +127,7 @@ const Posts = ({
         <section>
           <h2>All posts</h2>
           <List as="ol" rowGap={4}>
-            {posts.map((post) => {
+            {posts.map((post: Post) => {
               const currentYear = new Date(post.date).getFullYear();
               let printYear = currentYear !== year;
               year = currentYear;
@@ -165,7 +165,7 @@ const Posts = ({
 export default Posts;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = await getAllFilesFrontMatter(PostType.BLOGPOST);
-  const featured = [...posts].filter((post) => post.featured);
+  const posts: Post[] = await getAllFilesFrontMatter(PostType.BLOGPOST);
+  const featured: Post[] = [...posts].filter((post) => post.featured);
   return { props: { posts, featured } };
 };

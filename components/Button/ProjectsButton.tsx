@@ -1,13 +1,13 @@
 import { motion, useMotionValue } from "framer-motion";
-import { MouseEvent } from "react";
+import { ForwardedRef, forwardRef, MouseEvent } from "react";
 import { Tooltip } from "../Tooltip";
 import { LinkButton } from "./LinkButton";
 
 interface Props {
-  onClick: (event: MouseEvent) => void;
+  onClick?: (event: MouseEvent) => void;
 }
 
-export const WorkButton = (props: Props) => {
+export const ProjectsButton = forwardRef((props: Props, ref) => {
   const { onClick } = props;
   const duration = 0.7;
 
@@ -15,14 +15,14 @@ export const WorkButton = (props: Props) => {
 
   return (
     <Tooltip
-      id="workTooltip"
-      tooltipText="My work and projects"
-      tooltipVisuallyHiddenText={`Navigates to my work page, showcasing past and current projects`}
+      id="projectsTooltip"
+      tooltipText="My projects"
+      tooltipVisuallyHiddenText={`Navigates to the page showcasing past and current projects`}
     >
       <LinkButton
-        data-testid="work-button"
-        title="Work"
-        aria-describedby="workTooltip"
+        data-testid="project-button"
+        title="Projects"
+        aria-describedby="projectsTooltip"
         onClick={(event) => {
           onClick(event);
         }}
@@ -30,6 +30,7 @@ export const WorkButton = (props: Props) => {
         whileHover="hover"
         whileTap="pressed"
         transition={{ duration }}
+        ref={ref as ForwardedRef<HTMLButtonElement>}
       >
         <motion.svg
           width="24"
@@ -52,4 +53,4 @@ export const WorkButton = (props: Props) => {
       </LinkButton>
     </Tooltip>
   );
-};
+});

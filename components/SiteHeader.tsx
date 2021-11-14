@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
-import { BlogButton } from "./Button";
+import { BlogButton, ProjectsButton } from "./Button";
 import Grid from "./Grid";
 import Logo from "./Logo";
 
@@ -39,9 +39,9 @@ const SiteHeader = () => {
           </Link>
           <div />
           <StyledNav>
-            {/* <Link href="/projects" passHref>
-              <WorkButton onClick={() => {}} />
-            </Link> */}
+            <Link href="/projects" passHref>
+              <ProjectsButton />
+            </Link>
             <Link href="/posts" passHref>
               <BlogButton />
             </Link>
