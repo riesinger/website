@@ -54,3 +54,5 @@ export const ProjectsButton = forwardRef((props: Props, ref) => {
     </Tooltip>
   );
 });
+
+ProjectsButton.displayName = "ProjectsButton";
