@@ -30,6 +30,7 @@ const ProjectPage = ({
               layout="responsive"
               width={project.image.width}
               height={project.image.height}
+              alt=""
             />
           </ProjectImage>
           <p>{project.longDescription || project.description}</p>
