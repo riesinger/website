@@ -11,8 +11,10 @@ import { PostType } from "../../models/Post";
 
 let year = 0;
 
+const angleBrackets = /[<>]/g;
+
 function sanitize(tag: string) {
-  return tag.replaceAll(/[<>]/, "").toLowerCase();
+  return tag.replaceAll(angleBrackets, "").toLowerCase();
 }
 
 const TagPage = ({
