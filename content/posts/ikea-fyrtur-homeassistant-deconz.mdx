@@ -2,6 +2,7 @@
 title: "IKEA Fyrtur smart blinds with Home Assistant and deCONZ"
 subtitle: "A guide on how to integrate IKEA's blinds into your Zigbee network using deCONZ, so you can use them with Home Assistant."
 date: "2021-05-18T20:00:00+01:00"
+updated: "2021-11-30T21:42:45+0100"
 tags:
   - home-assistant
   - smart-home
@@ -17,7 +18,7 @@ Since I've had a great exprience with IKEA smart home products, mostly from the 
 
 I like Tradfri products, since they are controlled via [ZigBee](https://en.wikipedia.org/wiki/Zigbee), which integrates nicely into my existing Home Assistant and ConBee/deCONZ setup and they usually are at a great balance between quality and price.
 
-Since IKEA in Germany decided to reduce the pretty hefty price tag of the 120cm Fyrtur blinds by 100€ at some point, I couldn't resist buying one of them anymore and a few days later, here I was with a motorized roller blind, a "range extender" and a small remote control.
+Since IKEA in Germany decided to reduce the pretty hefty price tag of the 120cm Fyrtur blinds by quite a substantial amount at some point, I couldn't resist buying one of them anymore and a few days later, here I was with a motorized roller blind, a "range extender" and a small remote control.
 
 The first thing I tried of course was, whether the blind itself worked. Since IKEA pre-pairs every remote-controlled device to the remote that comes in the box, this was as easy as inserting the battery into the Fyrtur blind housing, plugging the "range extender" (more on that later) into a power socket and clicking a button on the remote to see if something happens. And low and behold - the blinds started closing!
 
@@ -35,6 +36,11 @@ Now, give your blind a proper name and add it to a Home Assistant dashboard. You
 One thing you might notice though, is that the "opening percentage" won't change, no matter how wide you opened or closed your blinds. Let's fix that next!
 
 ## Fixing the blinds' reporting
+
+<Callout variant="info">
+  <strong>Update</strong>: This might not be necessary anymore. Check whether
+  your Home Assistant properly reports the lift percentage before proceeding.
+</Callout>
 
 There currently is an issue with the Fyrtur blinds' reporting not being properly setup when connecting via Phoscon. This issue and a workaround is documented on the [deCONZ GitHub page](https://github.com/dresden-elektronik/deconz-rest-plugin/issues/1121#issuecomment-524617659).
 
