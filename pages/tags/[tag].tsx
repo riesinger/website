@@ -14,7 +14,7 @@ let year = 0;
 const angleBrackets = /[<>]/g;
 
 function sanitize(tag: string) {
-  return tag.replaceAll(angleBrackets, "").toLowerCase();
+  return tag.replace(angleBrackets, "").toLowerCase();
 }
 
 const TagPage = ({
