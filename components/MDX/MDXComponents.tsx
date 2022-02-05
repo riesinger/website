@@ -5,7 +5,8 @@ import Callout from "./Callout";
 import Code from "./Code";
 import InlineCode from "./InlineCode";
 import { ListItem } from "./ListItem";
-import NextImageWwrapper from "./NextImageWrapper";
+import NextImageWrapper from "./NextImageWrapper";
+import NextLink from "next/link";
 
 const RandomColorButton = dynamic(() => import("./custom/RandomColorButton"));
 
@@ -15,8 +16,9 @@ const MDXComponents = {
   pre: Code,
   inlineCode: InlineCode,
   li: ListItem,
-  img: NextImageWwrapper,
+  img: NextImageWrapper,
   RandomColorButton,
+  Link: NextLink,
 };
 
 export default MDXComponents;

@@ -238,3 +238,6 @@ textarea {
 textarea {
   overflow: auto;
 }
+a {
+  cursor: pointer;
+}
