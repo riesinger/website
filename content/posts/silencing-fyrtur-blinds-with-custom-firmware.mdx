@@ -1,0 +1,126 @@
+---
+title: Silencing your Fyrtur blinds with custom firmware
+subtitle: Are your Fyrtur blinds too loud? Don’t like waking up to a whirring noise but would rather wake up to sunlight? Boy do I have the solution for you!
+slug: silencing-fyrtur-blinds-with-custom-firmware
+date: "2022-02-04T20:50:43"
+tags:
+  - iot
+  - smart-home
+---
+
+I have IKEA Fyrtur blinds in my bedroom, as you might know if you’ve previously read [this](https://riesinger.dev/posts/ikea-fyrtur-homeassistant-deconz/) article of mine on how to connect your Fyrtur to deCONZ.
+
+Now, automatically opening your shades some time before you want to wake up to get some natural light in would be a great idea... if the Fyrtur blinds weren’t so loud.
+
+In my search on how to make the blinds a bit more quiet, so I can actually open them *before* I wake up, I found the following project:
+
+[https://github.com/mjuhanne/fyrtur-motor-board](https://github.com/mjuhanne/fyrtur-motor-board)
+
+So, I took my blinds off of the ceiling, used the chance to re-charge their batteries and grabbed my ST-Link V2, a soldering iron, a screwdriver kit and some jumper wires or Dupont wires, however you’d like to call them 🙂 
+
+<Callout variant="danger">
+Following this blog will most certainly void the warranty on your blinds! I’m not responsible for <strong>any</strong> damage to your blinds.
+</Callout>
+
+Now, while the firmware [@mjuhanne](https://github.com/mjuhanne) created is **awesome**, the disassembly instructions in the repo aren’t the best — which is the main reason for me to create this post instead of just starring the repo.
+
+Once you’ve taken down your blinds, you’ll need to remove the motor & control section from the structural section and the main roller. To do this, open the two screws at the top left side of your blinds and slide the “brains” out of the aluminium rail:
+
+![Remove the two screws circled in red, then slide the plastic housing out of the aluminium rail](diass-1.jpg)
+
+After you’ve done that, you should have the box containing the battery & controller and an aluminium tube, which was previously inside the main roller freed. The next step is to remove the aluminium rod, which actually contains the motor controller and motor. To do that, firmly pull on it, while holding the plastic case. This will require some force. Be **careful** though! There’s a small wire which connects the Zigbee controller to the motor controller:
+
+![Be very wary of the small cable! It’s crucial and quite fragile!](diass-2.jpg)
+
+Disconnect the cable. It’s easiest to reach in there with some tweezers or a flat-head screwdriver. Next, remove the three screws on the plastic end cap of the aluminium rod:
+
+![Quite interesting to learn when your blinds have been produced 🤔](diass-date.jpg)
+
+There are aluminium tabs which hold the plastic cover on the tube. These need to be bent open carefully. I did this with a screw driver, but if you have a better method please let me know! Note that you *only* need to do this on the plastic-covered side, not the motor’s side.
+
+![These are the tabs you’ll need to bend upwards](diass-tabs.jpg)
+
+Once you’ve done that, you should be able to slide out the plastic casing, which contains the motor controller. There’s another wire you’ll need to disconnect temporarily.
+
+![The motor controller is getting free 🚀](diass-controller-housing.jpg)
+
+We’re going to solder some wires to the IO1 connector, which is above the STM32 microprocessor in the picture below. Thankfully IKEA (or the subcontractor who designed the board) broke out these pins, which carry a SWD (Serial Wire Debug) signal.
+
+![It's free!](diass-controller-free.jpg)
+
+I’m stealing an image from [@mjuhanne](https://github.com/mjuhanne)’s project page to show you which colors I’ve used for which pin and which signals the wires carry. The reasons for this are twofold: 1. this makes it easy to refer back to the firmware project in the future. 2. I forgot to take a picture and am too lazy to disassemble my motor driver again 🙈
+
+![This image depicts which pin carries which signal. If you can, use the same color of wires, that will make it easier in the future 😉](Fyrtur-motor-SWD-wiring-1.jpg)
+
+If you only want to program the motor driver once, you don’t have to bother to route your cables any special way, but I’d highly suggest exposing the wires to the outside, since that can be done with only a tiny modification to the blind, but can save you from disassembling it again at a later point in time. I’ve chosen to keep my wires connected permanently. If you chose to do so too, you should be able to route the wires through the plastic holder, which conveniently enough has an extra free slot.
+
+![This is the slot you can route your wires through](assembly-wires.jpg)
+
+Unfortunately though, you’ll have to modify the end cap a bit to allow the wires to be routed through it. I used a Dremel to cut out the slot, but you could use a small hand saw, a file or a razor knife.
+
+![A small notch needs to be cut into the lid](assembly-lid.jpg)
+
+Now, onto flashing! Connect your flasher to your computer and download the Open-Source version of the ST-Link utility from [here](https://github.com/stlink-org/stlink) (on macOS, you can just `brew install stlink`). Test that the ST-Link software can find and identify your flasher by running
+
+```
+$ st-info --probe
+Found 1 stlink programmers
+ serial:     363f6b065250343857440343
+ hla-serial: "\x36\x3f\x6b\x06\x52\x50\x34\x38\x57\x44\x03\x43"
+ flash:      32768 (pagesize: 1024)
+ sram:       4096
+ chipid:     0x0444
+ descr:      F0xx small
+```
+
+Connect the wires from you blinds to your flasher, following the wiring “diagram” from earlier. Next, read the original firmware from your blinds’ motor controller. This is an important step in case the flashing fails later on.
+
+```
+$ st-flash read original-fyrtur-fw.bin 0x8000000 32768
+st-flash 1.6.1
+2020-11-15T14:19:51 INFO common.c: F0xx small: 4 KiB SRAM, 32 KiB flash in at least 1 KiB pages.
+```
+
+This will create a file called `original-fyrtur-fw.bin`. Now, for good measure, read the original firmware again
+
+```
+$ st-flash read original-fyrtur-fw2.bin 0x8000000 32768
+```
+
+and make sure that your flasher read the same thing twice (this ensures a good connection):
+
+```
+$ diff original-fyrtur-fw.bin original-fyrtur-fw2.bin
+```
+
+If the `diff` command yields no output, it means that the two files are the same.
+
+You’re now ready to flash the new firmware. Head to the [bin folder in the repository](https://github.com/mjuhanne/fyrtur-motor-board/tree/main/bin), and download the latest firmware with the `-sleep` suffix (in my case that was [`fyrtur-0.82-sleep.bin`](https://github.com/mjuhanne/fyrtur-motor-board/blob/main/bin/fyrtur-0.82-sleep.bin)). The non-sleep versions are meant for controllers which are connected to a permanent power source and will drain your battery rather quickly, so don’t use them if you intend to keep the original Zigbee module.
+
+Flash the new firmware with the following command:
+
+```
+$ st-flash write fyrtur-0.82-sleep.bin 0x8000000
+st-flash 1.6.1
+2020-11-15T14:17:14 INFO common.c: F0xx small: 4 KiB SRAM, 32 KiB flash in at least 1 KiB pages.
+file Release/fyrtur-motor-board.bin md5 checksum: 37264f7467389a6709a3f3bdea35977, stlink checksum: 0x00183980
+2020-11-15T14:17:14 INFO common.c: Attempting to write 17768 (0x4568) bytes to stm32 address: 134217728 (0x8000000)
+2020-11-15T14:17:14 INFO common.c: Flash page at addr: 0x08000000 erased
+2020-11-15T14:17:14 INFO common.c: Flash page at addr: 0x08000400 erased
+...
+2020-11-15T14:17:14 INFO common.c: Flash page at addr: 0x08004400 erased
+2020-11-15T14:17:14 INFO common.c: Finished erasing 18 pages of 1024 (0x400) bytes
+2020-11-15T14:17:14 INFO common.c: Starting Flash write for VL/F0/F3/F1_XL core id
+2020-11-15T14:17:14 INFO flash_loader.c: Successfully loaded flash loader in sram
+ 18/18 pages written
+2020-11-15T14:17:15 INFO common.c: Starting verification of write complete
+2020-11-15T14:17:15 INFO common.c: Flash written and verified! jolly good!
+```
+
+You’re pretty much set! Just follow the disassembly steps backwards and you should have a fully functioning blind again.
+
+During assembly, make sure that the aluminium tabs you bent outwards are bent back *really* firmly. Any deformation there will make the roller tube will rub on the inner (motor) tube which will create loud noises.
+
+Once you’ve assembled your blinds, push the down button on them and re-set the extension limit. In my case that was necessary for the blinds to correctly stop when retracing them (which is kind of weird, but this firmware wasn’t meant to be used with the original Zigbee controller 🤷). Now, once the down position is set, retract your blinds fully. Then, to set a new speed, press the up-button three times (slowly). The blind should “confirm” the new speed by moving down a tiny bit then retracting back up. This is what [@mjuhanne](https://github.com/mjuhanne) calls “FlexiSpeed”. There are 4 different speed presets: 3, 5, 15 and 25 RPM.
+
+I hope this post was of some help and you can finally wake up to the sun instead of the noise of your Fyrtur blinds 🙂
