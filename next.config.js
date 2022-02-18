@@ -18,6 +18,7 @@ const config = {
       },
     ];
   },
+  swcMinify: true,
 };
 
 if (process.env.ANALYZE === "true") {
