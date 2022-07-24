@@ -1,0 +1,23 @@
+---
+title: "Clearing the DNS cache on macOS"
+subtitle: "A quick list of commands with which you can clear your DNS cache on macOS"
+slug: clearing-dns-cache-macos
+date: "2022-07-24T16:10:07+0200"
+draft: false
+tags:
+  - macos
+---
+
+You're debugging some DNS changes in your network and Safari (or `curl` / any other tool) keeps sending requests to an old DNS entry? 
+With these commands, you can clear your system's DNS cache:
+
+macOS version | command
+--- | ---
+12 (Monterey)|`sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder`
+11 (Big Sur)|`sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder`
+10.15 (Catalina)|`sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder`
+10.14 (Mojave)|`sudo killall -HUP mDNSResponder`
+10.13 (High Sierra)|`sudo killall -HUP mDNSResponder`
+10.12 (Sierra)|`sudo killall -HUP mDNSResponder`
+
+I hope this helps 🙂
