@@ -241,3 +241,11 @@ textarea {
 a {
   cursor: pointer;
 }
+
+table {
+  margin-bottom: 2.25rem;
+}
+
+th { 
+  text-align: left
+}
