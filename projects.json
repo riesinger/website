@@ -43,10 +43,12 @@
           "url": "https://github.com/riesinger/plausible-exporter"
         }
       ],
-      "stack": [
-        "Go",
-        "Docker",
-      ]
+      "stack": ["Go", "Docker"],
+      "image": {
+        "filename": "plausible-exporter.png",
+        "width": 2868,
+        "height": 786
+      }
     },
     {
       "slug": "paper-tracker",
@@ -65,14 +67,7 @@
           "url": "https://github.com/glidingthroughspace/paper-tracker"
         }
       ],
-      "stack": [
-        "TinyPICO (ESP32)",
-        "C++",
-        "Go",
-        "Flutter",
-        "Dart",
-        "Python"
-      ]
+      "stack": ["TinyPICO (ESP32)", "C++", "Go", "Flutter", "Dart", "Python"]
     },
     {
       "slug": "8051-connect-four",
@@ -91,11 +86,7 @@
           "url": "https://github.com/riesinger/8051-gewinnt"
         }
       ],
-      "stack": [
-        "8051 microprocessor",
-        "MCU 8051 IDE",
-        "Assembly language"
-      ]
+      "stack": ["8051 microprocessor", "MCU 8051 IDE", "Assembly language"]
     }
   ]
 }
