@@ -32,6 +32,23 @@
       "development": "NoNonsense.cooking was my first proper Next.JS project. I learned a lot about its inner workings and started to enjoy webapps with it a lot. It provides many useful things, such as server-side rendering, out of the box, which made creating NoNonsense.cooking quick and easy.\nCreating NoNonsense.cooking has also taught me the importance of backgrounds in photography. Make it to empty and the photo looks bland, add too many things and it looks crowded."
     },
     {
+      "slug": "plausible-exporter",
+      "name": "plausible-exporter",
+      "description": "A Prometheus metrics exporter for Plausible analytics",
+      "longDescription": "plausible-exporter is a metrics exporter for Prometheus, enabling you to visualize your website's vital metrics from Plausible analytics via Grafana. I wrote it since I use Plausible analytics on my websites, but haven't found a way to get an overview into Prometheus from it.",
+      "links": [
+        {
+          "name": "GitHub",
+          "variant": "primary",
+          "url": "https://github.com/riesinger/plausible-exporter"
+        }
+      ],
+      "stack": [
+        "Go",
+        "Docker",
+      ]
+    },
+    {
       "slug": "paper-tracker",
       "name": "Paper Tracker",
       "description": "A system for tracking the location and workflow of documents.",
