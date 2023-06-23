@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
 import { BlogButton, ProjectsButton } from "./Button";
-import Grid from "./Grid";
 import Logo from "./Logo";
+import { ThemeToggleButton } from "./ThemeToggleButton";
 
 const StyledHeader = styled.header`
   border-top: 6px solid var(--riesinger-colors-brand);
@@ -29,26 +29,25 @@ const HeaderContent = styled.div`
 
 const SiteHeader = () => {
   return (
-    <StyledHeader>
-      <Grid columns="var(--layout-medium)" columnGap={20}>
-        <HeaderContent>
-          <Link href="/" passHref>
-            <a title="Back to riesinger.dev">
-              <Logo />
-            </a>
+    <header className="border-t-2 border-t-accent">
+      <HeaderContent>
+        <Link href="/" passHref>
+          <a title="Back to riesinger.dev">
+            <Logo />
+          </a>
+        </Link>
+        <div />
+        <StyledNav>
+          <Link href="/projects" passHref>
+            <ProjectsButton />
           </Link>
-          <div />
-          <StyledNav>
-            <Link href="/projects" passHref>
-              <ProjectsButton />
-            </Link>
-            <Link href="/posts" passHref>
-              <BlogButton />
-            </Link>
-          </StyledNav>
-        </HeaderContent>
-      </Grid>
-    </StyledHeader>
+          <Link href="/posts" passHref>
+            <BlogButton />
+          </Link>
+        </StyledNav>
+        <ThemeToggleButton />
+      </HeaderContent>
+    </header>
   );
 };
 

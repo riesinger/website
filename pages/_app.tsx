@@ -1,4 +1,5 @@
 import { DefaultSeo } from "components/Seo";
+import { ThemeProvider } from "components/ThemeProvider";
 import Head from "next/head";
 import "../styles/globals.css";
 import "../styles/typography.css";
@@ -16,7 +17,9 @@ function MyApp({ Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <DefaultSeo />
-      <Component {...pageProps} />
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   );
 }

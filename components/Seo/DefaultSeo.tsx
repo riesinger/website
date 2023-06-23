@@ -1,4 +1,4 @@
-import { BlogJsonLd, DefaultSeo as NextDefaultSeo } from "next-seo";
+import { ArticleJsonLd, DefaultSeo as NextDefaultSeo } from "next-seo";
 import siteConfig from "../../siteConfig";
 
 interface Props {
@@ -32,7 +32,7 @@ const DefaultSeo = (props: Props) => (
         cardType: "summary_large_image",
       }}
     />
-    <BlogJsonLd
+    <ArticleJsonLd
       authorName={siteConfig.author}
       dateModified={new Date().toISOString()}
       datePublished={new Date().toISOString()}

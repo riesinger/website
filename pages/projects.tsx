@@ -1,10 +1,9 @@
 import styled from "@emotion/styled";
-import { MainGrid } from "components/Grid";
 import Layout from "components/layout/Layout";
 import fs from "fs/promises";
 import { Project as IProject } from "models/Project";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import path from "path";
 
@@ -30,26 +29,24 @@ const Projects = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout header footer>
-      <MainGrid rowGap={96}>
-        <h1>My projects</h1>
-        {projects.map((project) => (
-          <Link href={`/projects/${project.slug}`} key={project.slug} passHref>
-            <Project>
-              <ProjectImage>
-                <Image
-                  src={`/projects/${project.image.filename}`}
-                  layout="responsive"
-                  width={project.image.width}
-                  height={project.image.height}
-                  alt=""
-                />
-              </ProjectImage>
-              <ProjectTitle>{project.name}</ProjectTitle>
-              <ProjectDescription>{project.description}</ProjectDescription>
-            </Project>
-          </Link>
-        ))}
-      </MainGrid>
+      <h1>My projects</h1>
+      {projects.map((project) => (
+        <Link href={`/projects/${project.slug}`} key={project.slug} passHref>
+          <Project>
+            <ProjectImage>
+              <Image
+                src={`/projects/${project.image.filename}`}
+                layout="responsive"
+                width={project.image.width}
+                height={project.image.height}
+                alt=""
+              />
+            </ProjectImage>
+            <ProjectTitle>{project.name}</ProjectTitle>
+            <ProjectDescription>{project.description}</ProjectDescription>
+          </Project>
+        </Link>
+      ))}
     </Layout>
   );
 };
