@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import Grid, { MainGrid } from "components/Grid";
+import Grid from "components/Grid";
 import { motion } from "framer-motion";
 import { getAllFilesFrontMatter } from "lib/mdx";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
@@ -97,67 +97,64 @@ const Posts = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout header footer>
-      <MainGrid>
-        <section>
-          <h2>Featured</h2>
-          <List as="ul">
-            {featured.map((post, i) => (
-              <motion.li
-                key={post.slug}
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.4, delay: (i + 1) * 0.1 }}
-              >
-                <Link href={`/posts/${post.slug}`} passHref>
-                  <UnstyledLink>
-                    <Card depth={1}>
-                      <Card.Body>
-                        <TitleWithBackground background={post.colorFeatured!}>
-                          {post.title}
-                        </TitleWithBackground>
-                        <p>{post.subtitle}</p>
-                      </Card.Body>
-                    </Card>
-                  </UnstyledLink>
-                </Link>
-              </motion.li>
-            ))}
-          </List>
-        </section>
-        <section>
-          <h2>All posts</h2>
-          <List as="ol" rowGap={4}>
-            {posts.map((post: Post) => {
-              const currentYear = new Date(post.date).getFullYear();
-              let printYear = currentYear !== year;
-              year = currentYear;
+      <section>
+        <h2>Featured</h2>
+        <List as="ul">
+          {featured.map((post, i) => (
+            <motion.li
+              key={post.slug}
+              initial={{ y: 40, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.4, delay: (i + 1) * 0.1 }}
+            >
+              <Link href={`/posts/${post.slug}`} passHref>
+                <UnstyledLink>
+                  <Card depth={1}>
+                    <Card.Body>
+                      <TitleWithBackground background={post.colorFeatured!}>
+                        {post.title}
+                      </TitleWithBackground>
+                      <p>{post.subtitle}</p>
+                    </Card.Body>
+                  </Card>
+                </UnstyledLink>
+              </Link>
+            </motion.li>
+          ))}
+        </List>
+      </section>
+      <section>
+        <h2>All posts</h2>
+        <List as="ol" rowGap={4}>
+          {posts.map((post: Post) => {
+            const currentYear = new Date(post.date).getFullYear();
+            let printYear = currentYear !== year;
+            year = currentYear;
 
-              return (
-                <li key={post.slug} data-testid="article-item">
-                  {printYear ? <YearBlock>{currentYear}</YearBlock> : null}
-                  <Link href={`/posts/${post.slug}/`}>
-                    <a
-                      css={css`
-                        text-decoration: none;
-                      `}
-                    >
-                      <Block data-testid="article-link">
-                        <DateBlock>
-                          {new Intl.DateTimeFormat(
-                            "en-US",
-                            DATE_OPTIONS
-                          ).format(new Date(post.date))}
-                        </DateBlock>
-                        <TitleBlock>{post.title}</TitleBlock>
-                      </Block>
-                    </a>
-                  </Link>
-                </li>
-              );
-            })}
-          </List>
-        </section>
-      </MainGrid>
+            return (
+              <li key={post.slug} data-testid="article-item">
+                {printYear ? <YearBlock>{currentYear}</YearBlock> : null}
+                <Link href={`/posts/${post.slug}/`}>
+                  <a
+                    css={css`
+                      text-decoration: none;
+                    `}
+                  >
+                    <Block data-testid="article-link">
+                      <DateBlock>
+                        {new Intl.DateTimeFormat("en-US", DATE_OPTIONS).format(
+                          new Date(post.date)
+                        )}
+                      </DateBlock>
+                      <TitleBlock>{post.title}</TitleBlock>
+                    </Block>
+                  </a>
+                </Link>
+              </li>
+            );
+          })}
+        </List>
+      </section>
     </Layout>
   );
 };
