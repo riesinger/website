@@ -5,7 +5,7 @@ export default function Feeds() {
   return (
     <Layout header footer>
       <LimitWidth>
-        <section className="mt-8 prose">
+        <section className="mt-8 prose dark:prose-invert">
           <h1>Feeds</h1>
           <section>
             <p>
