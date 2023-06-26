@@ -59,7 +59,7 @@ const BlogLayout = ({ frontMatter, children }: BlogLayoutProps) => {
                   <Link
                     key={tag}
                     href={`/tags/${tag.toLowerCase()}`}
-                    className="rounded bg-gray-200 dark:bg-gray-800 text-lime-600 dark:text-lime-400 py-1 px-2 font-normal"
+                    className="rounded bg-gray-200 dark:bg-gray-800 text-indigo-600 dark:text-indigo-400 py-1 px-2 font-normal"
                   >
                     {tag}
                   </Link>
@@ -81,7 +81,7 @@ const BlogLayout = ({ frontMatter, children }: BlogLayoutProps) => {
               target="_blank"
               rel="noreferrer"
               href="https://github.com/riesinger/website/issues"
-              className="cursor-pointer text-lime-600 dark:text-lime-400"
+              className="cursor-pointer text-indigo-600 dark:text-indigo-400"
             >
               Open an issue on GitHub
             </a>
@@ -90,7 +90,7 @@ const BlogLayout = ({ frontMatter, children }: BlogLayoutProps) => {
             Want to get notified about new posts?{" "}
             <Link
               href="/feeds"
-              className="cursor-pointer text-lime-600 dark:text-lime-400"
+              className="cursor-pointer text-indigo-600 dark:text-indigo-400"
             >
               Subscribe to my RSS feed
             </Link>
