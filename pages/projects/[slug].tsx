@@ -77,7 +77,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const { slug } = context.params;
+  const slug = context.params?.slug as string;
   const file = path.join(path.resolve(process.cwd()), "projects.json");
   const data = await fs.readFile(file);
   const { projects } = JSON.parse(data.toString());

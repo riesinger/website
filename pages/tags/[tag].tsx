@@ -54,10 +54,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
-    if (params!.tag instanceof Array) {
+    if (params?.tag instanceof Array) {
       return { notFound: true };
     }
-    const tag = sanitize(params!.tag);
+    const tag = sanitize(params?.tag ?? "");
     const allPosts = await getAllFilesFrontMatter(PostType.BLOGPOST);
     const postsForTag = allPosts.filter((post) =>
       post.tags?.map((t) => t.toLowerCase())?.includes(tag)

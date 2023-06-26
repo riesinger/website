@@ -1,6 +1,4 @@
 import { Feed } from "feed";
-import fs from "fs/promises";
-import path from "path";
 import { PostType } from "../models/Post";
 import siteConfig from "../siteConfig";
 import { getAllFilesFrontMatter } from "./mdx";
@@ -48,22 +46,5 @@ export async function generateFeeds() {
     });
   });
 
-  await fs.mkdir(path.resolve("./public", "feeds"), {
-    recursive: true,
-  });
-
-  await fs.writeFile(
-    path.resolve("./public", "feeds", "feed.xml"),
-    feed.rss2()
-  );
-  await fs.writeFile(
-    path.resolve("./public", "feeds", "feed.json"),
-    feed.json1()
-  );
-  await fs.writeFile(
-    path.resolve("./public", "feeds", "atom.xml"),
-    feed.atom1()
-  );
+  return feed;
 }
-
-generateFeeds().then().catch(console.error);
