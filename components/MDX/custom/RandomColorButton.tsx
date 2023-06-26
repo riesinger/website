@@ -15,8 +15,8 @@ const RandomColorButton = () => {
   function setRandomColor() {
     const body = document.querySelector<HTMLBodyElement>("body");
     const [bg, fg] = colors[Math.floor(Math.random() * colors.length)];
-    body.style.setProperty("--random-button-bg", bg);
-    body.style.setProperty("--random-button-fg", fg);
+    body?.style?.setProperty("--random-button-bg", bg);
+    body?.style?.setProperty("--random-button-fg", fg);
   }
 
   return (
