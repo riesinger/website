@@ -31,14 +31,14 @@ export default function Home() {
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             <Link
               href="mailto:hi@riesinger.dev"
-              className="inline-flex items-center hover:text-lime-600 hover:dark:text-lime-400"
+              className="inline-flex items-center hover:text-indigo-600 hover:dark:text-indigo-400"
             >
               <Mail className="w-4 h-4 mr-2" />
               hi@riesinger.dev
             </Link>
             <Link
               href="https://github.com/riesinger"
-              className="inline-flex items-center hover:text-lime-600 hover:dark:text-lime-400"
+              className="inline-flex items-center hover:text-indigo-600 hover:dark:text-indigo-400"
             >
               <Github className="w-4 h-4 mr-2" />
               riesinger
@@ -49,21 +49,24 @@ export default function Home() {
             </span>
             <Link
               href="https://www.linkedin.com/in/pascal-riesinger/"
-              className="inline-flex items-center hover:text-lime-600 hover:dark:text-lime-400"
+              className="inline-flex items-center hover:text-indigo-600 hover:dark:text-indigo-400"
             >
               <Linkedin className="w-4 h-4 mr-2" />
               LinkedIn
             </Link>
             <Link
               href="https://twitter.com/pascalriesinger"
-              className="inline-flex items-center hover:text-lime-600 hover:dark:text-lime-400"
+              className="inline-flex items-center hover:text-indigo-600 hover:dark:text-indigo-400"
             >
               <Twitter className="w-4 h-4 mr-2" />
               @pascalriesinger
             </Link>
           </div>
         </section>
-        <section id="about-me" className="mx-auto max-w-2xl prose">
+        <section
+          id="about-me"
+          className="mx-auto max-w-2xl prose dark:prose-invert"
+        >
           <h2>About me</h2>
           <p>
             I got into programming basic Windows Batch scripts in my early teens

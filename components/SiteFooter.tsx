@@ -9,7 +9,7 @@ const SiteFooter = () => {
           <span>&copy; {new Date().getFullYear()} Pascal Riesinger</span>
           <Link
             href="/feeds/"
-            className="inline-flex items-center hover:dark:text-lime-400 hover:text-lime-600"
+            className="inline-flex items-center hover:dark:text-indigo-400 hover:text-indigo-600"
           >
             <Rss className="w-4 h-4 mr-2" />
             Feed

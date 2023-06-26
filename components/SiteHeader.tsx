@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 
 const SiteHeader = () => {
   return (
-    <header className="border-t-4 border-t-lime-500 dark:border-t-lime-400 w-full box-border py-4">
+    <header className="border-t-4 border-t-indigo-500 dark:border-t-indigo-400 w-full box-border py-4">
       <div className="max-w-2xl flex justify-between items-center mx-auto px-8">
         <Link
           href="/"
