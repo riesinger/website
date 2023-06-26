@@ -5,6 +5,6 @@ Hi there 👋 You've found my personal website and blog.
 Currently, it's built using:
 
 - Next.JS
-- Emotion
+- TailwindCSS
 - MDX via Remark
 - Vercel

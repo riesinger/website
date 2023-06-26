@@ -1,4 +1,4 @@
-import visit from "unist-util-visit";
+import { visit } from "unist-util-visit";
 
 const replace = (source) => ({
   with: (target) => {
@@ -9,8 +9,8 @@ const replace = (source) => ({
   },
 });
 
-const transform = (tree) => {
-  visit(tree, "image", (node) => {
+const transform = (tree: import("mdast").Root) => {
+  visit(tree, "image", (node, index, parent) => {
     if (!node.alt) return;
 
     const figure = {
@@ -20,12 +20,18 @@ const transform = (tree) => {
           type: "image",
           url: node.url,
           title: null,
-          alt: null,
+          alt: node.alt,
           position: node.position,
         },
         {
-          type: "jsx",
-          value: `<figcaption>${node.alt}</figcaption>`,
+          type: "mdxJsxFlowElement",
+          name: "figcaption",
+          children: [
+            {
+              type: "text",
+              value: node.alt,
+            },
+          ],
         },
       ],
       data: {
@@ -33,10 +39,9 @@ const transform = (tree) => {
       },
     };
 
-    replace(node).with(figure);
+    replace(parent).with(figure);
   });
 };
-
 export const remarkFigure = () => {
   return transform;
 };

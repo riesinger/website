@@ -1,30 +1,32 @@
-import styled from "@emotion/styled";
-import { Button } from "components/Button";
+import { Button } from "@/components/ui/button";
 
 const colors = [
-  "--palette-red-35",
-  "--palette-blue-50",
-  "--palette-green-50",
-  "--palette-pink-40",
+  ["#7f1d1d", "#fecaca"],
+  ["#365314", "#d9f99d"],
+  ["#1e3a8a", "#bfdbfe"],
+  ["#701a75", "#f5d0fe"],
+  ["#581c87", "#e9d5ff"],
+  ["#0c4a6e", "#bae6fd"],
+  ["#a5f3fc", "#083344"],
+  ["#fbcfe8", "#500724"],
 ];
-
-const StyledButton = styled(Button)`
-  margin-bottom: 2.25rem;
-`;
 
 const RandomColorButton = () => {
   function setRandomColor() {
     const body = document.querySelector<HTMLBodyElement>("body");
-    body.style.setProperty(
-      "--riesinger-colors-brand",
-      `hsla(var(${colors[Math.floor(Math.random() * 4)]}), 100%)`
-    );
+    const [bg, fg] = colors[Math.floor(Math.random() * colors.length)];
+    body.style.setProperty("--random-button-bg", bg);
+    body.style.setProperty("--random-button-fg", fg);
   }
 
   return (
-    <StyledButton primary onClick={setRandomColor}>
-      Click me to set a random color
-    </StyledButton>
+    <Button
+      onClick={setRandomColor}
+      id="randomColor"
+      className="bg-[--random-button-bg] text-[--random-button-fg]"
+    >
+      Click me to set me to a random color
+    </Button>
   );
 };
 

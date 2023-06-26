@@ -1,6 +1,5 @@
-import styled from "@emotion/styled";
-import Box from "components/Box";
-import { Button } from "components/Button";
+import LimitWidth from "@/components/LimitWidth";
+import { Button } from "@/components/ui/button";
 import Layout from "components/layout/Layout";
 import fs from "fs/promises";
 import { Project } from "models/Project";
@@ -9,56 +8,56 @@ import Image from "next/legacy/image";
 import Link from "next/link";
 import path from "path";
 
-const ProjectImage = styled.div`
-  border-radius: var(--border-radius-2);
-  overflow: hidden;
-  margin-bottom: 2.5rem;
-`;
-
 const ProjectPage = ({
   project,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout header footer>
-      <section>
-        <h1>{project.name}</h1>
-        <ProjectImage>
-          <Image
-            src={`/projects/${project.image.filename}`}
-            layout="responsive"
-            width={project.image.width}
-            height={project.image.height}
-            alt=""
-          />
-        </ProjectImage>
-        <p>{project.longDescription || project.description}</p>
-        <p>
-          <Box gap={20}>
+      <LimitWidth>
+        <section className="mt-8">
+          <h1 className="text-2xl mb-12 leading-tight text-gray-900 dark:text-gray-100 font-bold">
+            {project.name}
+          </h1>
+          <div className="rounded-lg overflow-hidden mb-8">
+            <Image
+              src={`/projects/${project.image.filename}`}
+              width={project.image.width}
+              height={project.image.height}
+              alt=""
+            />
+          </div>
+          <p className="max-w-prose leading-relaxed mb-12">
+            {project.longDescription || project.description}
+          </p>
+          <section className="flex items-center flex-wrap gap-x-4 gap-y-2 mb-12">
             {project.links.map((link) => (
-              <Link href={link.url} passHref key={link.url}>
-                <Button
-                  primary={link.variant === "primary"}
-                  secondary={link.variant === "secondary"}
-                >
-                  {link.name}
-                </Button>
-              </Link>
+              <Button
+                key={link.url}
+                asChild
+                variant={link.variant === "primary" ? "default" : "secondary"}
+              >
+                <Link href={link.url}>{link.name}</Link>
+              </Button>
             ))}
-          </Box>
-        </p>
-        <h2>Stack</h2>
-        <ul>
-          {project.stack.map((tech) => (
-            <li key={tech}>{tech}</li>
-          ))}
-        </ul>
-      </section>
-      {project.development ? (
-        <section>
-          <h2>Personal development</h2>
-          <p>{project.development}</p>
+          </section>
+          <h2 className="text-xl mb-6 leading-tight text-gray-900 dark:text-gray-100">
+            Stack
+          </h2>
+          <ul className="list-disc ml-4 mb-12">
+            {project.stack.map((tech) => (
+              <li key={tech}>{tech}</li>
+            ))}
+          </ul>
         </section>
-      ) : null}
+        {project.development ? (
+          <section>
+            <h2 className="text-xl mb-6 leading-tight text-gray-900 dark:text-gray-100">
+              Personal development
+            </h2>
+            <p className="max-w-prose leading-relaxed">{project.development}</p>
+          </section>
+        ) : null}
+      </LimitWidth>
     </Layout>
   );
 };

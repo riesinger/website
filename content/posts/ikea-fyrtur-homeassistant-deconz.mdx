@@ -10,7 +10,7 @@ tags:
   - homelab
 slug: ikea-fyrtur-homeassistant-deconz
 featured: true
-colorFeatured: "linear-gradient(25deg, rgba(156,0,255,1) 0%, rgba(98,98,254,1) 50%, rgba(0,196,236,1) 100%)"
+colorFeatured: "redViolet"
 ---
 
 When searching the web for blackout blinds, I came across the IKEA Fyrtur line of ZigBee-controlled "smart blinds".
@@ -23,8 +23,10 @@ Since IKEA in Germany decided to reduce the pretty hefty price tag of the 120cm 
 The first thing I tried of course was, whether the blind itself worked. Since IKEA pre-pairs every remote-controlled device to the remote that comes in the box, this was as easy as inserting the battery into the Fyrtur blind housing, plugging the "range extender" (more on that later) into a power socket and clicking a button on the remote to see if something happens. And low and behold - the blinds started closing!
 
 <Callout variant="info">
-<strong>Update</strong>: The blinds were pretty loud though. If you want to make your Fyrtur blinds quieter, I have
-published a post on how to do just that <Link href="/posts/silencing-fyrtur-blinds-with-custom-firmware/"><a>here</a></Link>.
+  <strong>Update</strong>: The blinds were pretty loud though. If you want to
+  make your Fyrtur blinds quieter, I have published a post on how to do just
+  that{" "}
+  <Link href="/posts/silencing-fyrtur-blinds-with-custom-firmware/">here</Link>.
 </Callout>
 
 ## Connecting the blinds to deCONZ
@@ -81,6 +83,6 @@ If you too find your blinds to be a bit too loud, check out my post on [silencin
 
 ## The range extender
 
-Together with the actual blind and remote controll, IKEA packages a "range extender", which basically is just a [ZigBee router](https://en.wikipedia.org/wiki/Zigbee#Device_types_and_operating_modes), which basically extends the range of your whole ZigBee network. If you were able to pair the blind with your ConBee device without pairing the range extender beforehand: Good news, you don't need it. You probably already have some always-on devices like ZigBee light bulbs acting as routers between your ConBee and Fyrtur, or they are just close enough to each other.
+Together with the actual blind and remote control, IKEA packages a "range extender", which basically is just a [ZigBee router](https://en.wikipedia.org/wiki/Zigbee#Device_types_and_operating_modes), which basically extends the range of your whole ZigBee network. If you were able to pair the blind with your ConBee device without pairing the range extender beforehand: Good news, you don't need it. You probably already have some always-on devices like ZigBee light bulbs acting as routers between your ConBee and Fyrtur, or they are just close enough to each other.
 
 However, should you need the range extender, it can easily be paired to deCONZ like every other device and will then extend the range of your network. This means that you could also use the range extender somewhere else in your home, completely unrelated to the blinds.

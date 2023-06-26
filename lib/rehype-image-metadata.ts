@@ -6,7 +6,7 @@ import imageSize from "image-size";
 import path from "path";
 import { Processor } from "unified";
 import { Node } from "unist";
-import visit from "unist-util-visit";
+import { visit } from "unist-util-visit";
 import { promisify } from "util";
 import { VFile } from "vfile";
 
