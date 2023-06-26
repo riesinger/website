@@ -3,6 +3,8 @@ import matter from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
 import readingTime from "reading-time";
+import rehypeHighlight from "rehype-highlight";
+import remarkGfm from "remark-gfm";
 import { FrontMatterPostType, PostByType, PostType } from "../models/Post";
 import imageMetadata from "./rehype-image-metadata";
 import { remarkFigure } from "./remark-figure";
@@ -25,7 +27,6 @@ export const readFile = (type: PostType, name: string) => {
   return fs.readFileSync(path.join(root, typeToPath[type], name));
 };
 
-// TODO: Think about generating slugs from file names automatically, so that we don't need to provide the slug attribute in posts
 export const getFileBySlug = async <T extends PostType>(
   type: T,
   slug: string
@@ -37,7 +38,10 @@ export const getFileBySlug = async <T extends PostType>(
 
   const parsedFile = matter(source);
 
-  const data = parsedFile.data;
+  const data = {
+    ...parsedFile.data,
+    slug,
+  };
   const content = parsedFile.content;
 
   const mdxSource = await serialize(content, {
@@ -46,9 +50,10 @@ export const getFileBySlug = async <T extends PostType>(
         // remarkSlug,
         // remarkAutolinkHeadings,
         // remarkSectionize,
+        remarkGfm,
         remarkFigure,
       ],
-      rehypePlugins: [imageMetadata(data.slug)],
+      rehypePlugins: [imageMetadata(data.slug), rehypeHighlight],
     },
   });
 

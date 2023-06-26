@@ -1,4 +1,5 @@
 import MDXComponents from "components/MDX/MDXComponents";
+import "highlight.js/styles/github-dark.css";
 import { getFileBySlug, getFiles } from "lib/mdx";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { MDXRemote } from "next-mdx-remote";

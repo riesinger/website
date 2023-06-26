@@ -1,95 +1,25 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-import styled from "@emotion/styled";
-import Grid from "components/Grid";
+import LimitWidth from "@/components/LimitWidth";
+import PostLinkList from "@/components/PostLinkList";
+import { getAllFilesFrontMatter } from "@/lib/mdx";
+import { Post, PostType } from "@/models/Post";
+import { cva } from "class-variance-authority";
 import { motion } from "framer-motion";
-import { getAllFilesFrontMatter } from "lib/mdx";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import Link from "next/link";
-import Card from "../components/Card";
 import Layout from "../components/layout/Layout";
-import { Post, PostType } from "../models/Post";
 
-const TitleWithBackground = styled("h2")<{ background: string }>`
-  color: var(--riesinger-colors-typeface-primary);
-  margin-bottom: 0px !important;
-  letter-spacing: -0.02em;
-  margin-block-end: 0px;
-  background: ${(p) => p.background};
-  background-clip: text;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-`;
-
-const UnstyledLink = styled.a`
-  text-decoration: none;
-  color: var(--riesinger-colors-typeface-secondary);
-`;
-
-const List = styled(Grid)`
-  margin-left: 0px;
-  margin-bottom: 0px;
-
-  li {
-    list-style: none;
-    cursor: pointer;
+const featuredTitleProps = cva(
+  "text-gray-900 dark:text-gray-100 mb-0 tracking-tight bg-gradient-to-tr bg-clip-text [-moz-text-fill-color:transparent] [-webkit-text-fill-color:transparent]",
+  {
+    variants: {
+      colorScheme: {
+        blueViolet: "from-cyan-500 via-violet-500 to-pink-500",
+        greenBlue: "from-green-500 via-cyan-500 to-blue-500",
+        redViolet: "from-rose-500 via-fuchsia-500 to-violet-500",
+      },
+    },
   }
-
-  h3 {
-    color: var(--riesinger-colors-typeface-primary);
-  }
-`;
-
-const Block = styled("div")`
-  @media (max-width: 700px) {
-    height: 100px;
-  }
-
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding-left: 10px;
-  border-radius: var(--border-radius-2);
-  margin-left: -10px;
-
-  height: 60px;
-  box-shadow: none;
-
-  color: var(--riesinger-colors-typeface-primary);
-  transition: background-color 0.25s, box-shadow 0.25s, color 0.25s;
-
-  &:hover {
-    background-color: var(--riesinger-colors-foreground);
-    box-shadow: var(--riesinger-shadow-1);
-    color: var(--riesinger-colors-brand);
-  }
-`;
-
-const YearBlock = styled("div")`
-  padding: 30px 0px;
-  font-weight: 600;
-`;
-
-const DateBlock = styled("div")`
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--riesinger-colors-typeface-tertiary);
-  min-width: 50px;
-  margin-right: 32px;
-`;
-
-const TitleBlock = styled("div")`
-  font-weight: 500;
-`;
-
-const DATE_OPTIONS: Intl.DateTimeFormatOptions = {
-  month: "short",
-  day: "numeric",
-};
-
-let year = 0;
+);
 
 const Posts = ({
   posts,
@@ -97,64 +27,40 @@ const Posts = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout header footer>
-      <section>
-        <h2>Featured</h2>
-        <List as="ul">
-          {featured.map((post, i) => (
-            <motion.li
-              key={post.slug}
-              initial={{ y: 40, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.4, delay: (i + 1) * 0.1 }}
-            >
-              <Link href={`/posts/${post.slug}`} passHref>
-                <UnstyledLink>
-                  <Card depth={1}>
-                    <Card.Body>
-                      <TitleWithBackground background={post.colorFeatured!}>
-                        {post.title}
-                      </TitleWithBackground>
-                      <p>{post.subtitle}</p>
-                    </Card.Body>
-                  </Card>
-                </UnstyledLink>
-              </Link>
-            </motion.li>
-          ))}
-        </List>
-      </section>
-      <section>
-        <h2>All posts</h2>
-        <List as="ol" rowGap={4}>
-          {posts.map((post: Post) => {
-            const currentYear = new Date(post.date).getFullYear();
-            let printYear = currentYear !== year;
-            year = currentYear;
-
-            return (
-              <li key={post.slug} data-testid="article-item">
-                {printYear ? <YearBlock>{currentYear}</YearBlock> : null}
-                <Link href={`/posts/${post.slug}/`}>
-                  <a
-                    css={css`
-                      text-decoration: none;
-                    `}
-                  >
-                    <Block data-testid="article-link">
-                      <DateBlock>
-                        {new Intl.DateTimeFormat("en-US", DATE_OPTIONS).format(
-                          new Date(post.date)
-                        )}
-                      </DateBlock>
-                      <TitleBlock>{post.title}</TitleBlock>
-                    </Block>
-                  </a>
+      <LimitWidth>
+        <section className="mt-8">
+          <h2 className="text-2xl mb-12 leading-tight text-gray-900 dark:text-gray-100">
+            Featured
+          </h2>
+          <ul className="list-none ml-0 space-y-6">
+            {featured.map((post, i) => (
+              <motion.li
+                key={post.slug}
+                initial={{ y: 40, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.4, delay: (i + 1) * 0.1 }}
+              >
+                <Link href={`/posts/${post.slug}`}>
+                  <div className="bg-gray-50 dark:bg-gray-900 rounded-2xl shadow-sm px-6 py-8 border-2 dark:border-gray-800">
+                    <h2
+                      className={featuredTitleProps({
+                        colorScheme: post.colorFeatured,
+                      })}
+                    >
+                      {post.title}
+                    </h2>
+                    <p className="leading-normal">{post.subtitle}</p>
+                  </div>
                 </Link>
-              </li>
-            );
-          })}
-        </List>
-      </section>
+              </motion.li>
+            ))}
+          </ul>
+        </section>
+        <section>
+          <h2>All posts</h2>
+          <PostLinkList posts={posts} />
+        </section>
+      </LimitWidth>
     </Layout>
   );
 };

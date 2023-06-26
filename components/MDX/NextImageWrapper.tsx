@@ -1,12 +1,13 @@
-import NextImage from "next/legacy/image";
+import NextImage from "next/image";
 
-const NextImageWrapper = ({ src, height, width, ...props }) => {
+const NextImageWrapper = ({ src, alt, height, width, ...props }) => {
   return (
     <NextImage
-      layout="responsive"
+      alt={alt}
       src={src}
       height={height}
       width={width}
+      className="mx-auto"
       {...props}
     />
   );

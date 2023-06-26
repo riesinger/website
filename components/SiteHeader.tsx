@@ -1,52 +1,36 @@
-import styled from "@emotion/styled";
+import { Code2, Scroll } from "lucide-react";
 import Link from "next/link";
-import { BlogButton, ProjectsButton } from "./Button";
 import Logo from "./Logo";
 import { ThemeToggleButton } from "./ThemeToggleButton";
-
-const StyledHeader = styled.header`
-  border-top: 6px solid var(--riesinger-colors-brand);
-  width: 100%;
-  box-sizing: border-box;
-  padding: 0 1rem;
-  height: 6rem;
-  /* box-shadow: var(--riesinger-shadow-1); */
-`;
-
-const StyledNav = styled.nav`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-`;
-
-const HeaderContent = styled.div`
-  grid-column: 2;
-  height: inherit;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
+import { Button } from "./ui/button";
 
 const SiteHeader = () => {
   return (
-    <header className="border-t-2 border-t-accent">
-      <HeaderContent>
-        <Link href="/" passHref>
-          <a title="Back to riesinger.dev">
-            <Logo />
-          </a>
+    <header className="border-t-4 border-t-lime-500 dark:border-t-lime-400 w-full box-border py-4">
+      <div className="max-w-2xl flex justify-between items-center mx-auto px-8">
+        <Link
+          href="/"
+          title="Back to riesinger.dev"
+          className="hover:text-gray-950 dark:hover:text-gray-50"
+        >
+          <Logo />
         </Link>
-        <div />
-        <StyledNav>
-          <Link href="/projects" passHref>
-            <ProjectsButton />
-          </Link>
-          <Link href="/posts" passHref>
-            <BlogButton />
-          </Link>
-        </StyledNav>
+        <nav className="gap-4 ml-auto mr-4">
+          <Button asChild variant="ghost">
+            <Link href="/projects">
+              <Code2 className="w-4 h-4 mr-2" />
+              Projects
+            </Link>
+          </Button>
+          <Button asChild variant="ghost">
+            <Link href="/posts">
+              <Scroll className="w-4 h-4 mr-2" />
+              Posts
+            </Link>
+          </Button>
+        </nav>
         <ThemeToggleButton />
-      </HeaderContent>
+      </div>
     </header>
   );
 };

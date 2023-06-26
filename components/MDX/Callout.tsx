@@ -1,59 +1,20 @@
-import styled from "@emotion/styled";
-import React from "react";
-
-export enum VARIANT {
-  DANGER = "danger",
-  INFO = "info",
-}
+import { cva } from "class-variance-authority";
 
 interface Props {
-  variant: VARIANT;
+  variant: "danger" | "info";
 }
 
-const Callout = (props: Props) => <StyledCallout {...props} />;
+const calloutClasses = cva("rounded-md px-6 py-4", {
+  variants: {
+    variant: {
+      danger: "bg-red-200 text-red-900 dark:bg-red-900 dark:text-red-200",
+      info: "bg-blue-200 text-blue-900 dark:bg-blue-900 dark:text-blue-200",
+    },
+  },
+});
 
-const variantColors = {
-  [VARIANT.DANGER]: `
-    background-color: var(--riesinger-colors-danger-emphasis);
-    border-color: var(--riesinger-colors-danger);
-    color: var(--riesinger-colors-typeface-primary);
-    `,
-  [VARIANT.INFO]: `
-    background-color: var(--riesinger-colors-emphasis);
-    border-color: var(--riesinger-colors-brand);
-    color: var(--riesinger-colors-typeface-primary);
-  `,
-};
-
-const StyledCallout = styled("div")<{ variant: VARIANT }>`
-  @media (max-width: 700px) {
-    /**
-     * Make it fullbleed! 
-     */
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-
-    border-radius: 0px;
-  }
-
-  code {
-    background: none;
-  }
-
-  border-radius: var(--border-radius-0);
-  border-left: 3px solid;
-  padding: 30px 30px;
-  margin-bottom: 2.25rem;
-
-  *:last-child {
-    margin-bottom: 0px;
-  }
-
-  ${(p) => variantColors[p.variant]}
-`;
+const Callout = ({ variant = "info", ...props }: Props) => (
+  <div className={calloutClasses({ variant })} {...props} />
+);
 
 export default Callout;

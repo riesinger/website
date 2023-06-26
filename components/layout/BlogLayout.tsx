@@ -1,8 +1,7 @@
-import styled from "@emotion/styled";
-import Grid from "components/Grid";
 import Link from "next/link";
 import { ReactNode } from "react";
 import { Post, ReadingTime } from "../../models/Post";
+import LimitWidth from "../LimitWidth";
 import { Seo } from "../Seo";
 import Layout from "./Layout";
 
@@ -11,139 +10,11 @@ type BlogLayoutProps = {
   children: ReactNode;
 };
 
-const StyledArticle = styled.article`
-  padding: 0rem 1rem;
-  max-width: 700px;
-  margin: 0 auto;
-`;
-
-const ArticleHeader = styled.header`
-  padding-top: 4rem;
-  grid-column: 2;
-`;
-
-const ArticleFooter = styled.footer`
-  padding: 4rem;
-  color: var(--riesinger-colors-typeface-tertiary);
-  background: var(--riesinger-colors-emphasis);
-  grid-column: 1 / 4;
-
-  > div {
-    @media (max-width: 700px) {
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-    margin: 0 auto;
-    max-width: 700px;
-  }
-`;
-
-const ArticleTitle = styled.h1``;
-
-const ArticleMetadata = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 3rem;
-  color: var(--riesinger-colors-typeface-tertiary);
-  font-weight: 500;
-  font-size: 0.8rem;
-  gap: 1ch;
-  flex-wrap: wrap;
-`;
-
 const DATE_OPTIONS: Intl.DateTimeFormatOptions = {
   year: "numeric",
   month: "long",
   day: "numeric",
 };
-
-const StyledArticleContent = styled.main`
-  color: var(--riesinger-colors-typeface-secondary);
-  grid-column: 2;
-
-  figure {
-    margin-bottom: 2.25rem;
-  }
-
-  figcaption {
-    font-size: 14px;
-    text-align: left;
-    line-height: 1.5;
-    font-weight: 500;
-    color: var(--riesinger-colors-typeface-tertiary);
-    padding-top: 10px;
-  }
-
-  h2 {
-    margin-top: 2em;
-  }
-
-  h3 {
-    margin-top: 2em;
-  }
-
-  hr {
-    height: 2px;
-    width: 40%;
-    margin: 50px auto;
-    background-color: var(--riesinger-colors-typeface-primary);
-  }
-
-  ul {
-    margin-left: 0px;
-    li {
-      list-style: none;
-      display: flex;
-      span[data-arrow] {
-        padding-right: 8px;
-        transform: translateY(4px);
-      }
-    }
-  }
-
-  ol {
-    margin-left: 0px;
-    list-style: none;
-    li {
-      counter-increment: li;
-      display: flex;
-
-      svg {
-        display: none;
-      }
-
-      &:before {
-        content: counters(li, ".") ". ";
-        color: var(--riesinger-colors-brand);
-        padding-right: 12px;
-      }
-    }
-  }
-
-  a {
-    color: var(--riesinger-colors-brand);
-    word-break: break-word;
-  }
-
-  twitter-widget {
-    margin: 0 auto;
-  }
-`;
-
-const TagLink = styled.a`
-  border-radius: var(--border-radius-1);
-  background-color: var(--riesinger-colors-emphasis);
-  color: var(--riesinger-colors-brand);
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 6px;
-  padding-right: 6px;
-  font-size: 16px;
-  font-weight: 400 !important;
-  word-break: break-word;
-  text-decoration: none;
-  margin-right: 6px;
-`;
 
 const BlogLayout = ({ frontMatter, children }: BlogLayoutProps) => {
   const path = `/posts/${frontMatter.slug}/`;
@@ -157,10 +28,12 @@ const BlogLayout = ({ frontMatter, children }: BlogLayoutProps) => {
         date={frontMatter.date}
         updated={frontMatter.updated}
       />
-      <Grid columns="var(--layout-small)" columnGap={20}>
-        <ArticleHeader>
-          <ArticleTitle>{frontMatter.title}</ArticleTitle>
-          <ArticleMetadata>
+      <LimitWidth>
+        <header className="pt-16">
+          <h1 className="text-2xl text-gray-900 dark:text-gray-100 tracking-tight leading-snug">
+            {frontMatter.title}
+          </h1>
+          <div className="flex items-center mb-12 text-gray-600 dark:text-gray-400 text-xs gap-[1ch] flex-wrap">
             <time>
               {new Intl.DateTimeFormat("en-US", DATE_OPTIONS).format(
                 new Date(frontMatter.date)
@@ -182,41 +55,48 @@ const BlogLayout = ({ frontMatter, children }: BlogLayoutProps) => {
             {frontMatter.tags ? (
               <>
                 <span>/</span>
-                <div>
-                  {frontMatter.tags?.map((tag) => (
-                    <Link
-                      key={tag}
-                      href={`/tags/${tag.toLowerCase()}`}
-                      passHref
-                    >
-                      <TagLink>{tag}</TagLink>
-                    </Link>
-                  ))}
-                </div>
+                {frontMatter.tags?.map((tag) => (
+                  <Link
+                    key={tag}
+                    href={`/tags/${tag.toLowerCase()}`}
+                    className="rounded bg-gray-200 dark:bg-gray-800 text-lime-600 dark:text-lime-400 py-1 px-2 font-normal"
+                  >
+                    {tag}
+                  </Link>
+                ))}
               </>
             ) : null}
-          </ArticleMetadata>
-        </ArticleHeader>
-        <StyledArticleContent>{children}</StyledArticleContent>
-        <ArticleFooter>
+          </div>
+        </header>
+        <main className="prose prose-gray dark:prose-invert prose-figcaption:text-center prose-pre:bg-[#0d1117]">
+          {children}
+        </main>
+        <footer className="py-4 text-gray-600 dark:text-gray-400">
           <div>
             <p>Thanks for reading, have a great day 🙂</p>
           </div>
           <div>
-            <em>Found an issue or have a suggestion? </em>
-            <a href="https://github.com/riesinger/website/issues">
+            Found an issue or have a suggestion?{" "}
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://github.com/riesinger/website/issues"
+              className="cursor-pointer text-lime-600 dark:text-lime-400"
+            >
               Open an issue on GitHub
             </a>
           </div>
           <div>
-            <em>Want to get notified about new posts? </em>
-            <Link href="/feeds">
-              <a>Subscribe to my RSS feed</a>
+            Want to get notified about new posts?{" "}
+            <Link
+              href="/feeds"
+              className="cursor-pointer text-lime-600 dark:text-lime-400"
+            >
+              Subscribe to my RSS feed
             </Link>
           </div>
-        </ArticleFooter>
-      </Grid>
-      <StyledArticle></StyledArticle>
+        </footer>
+      </LimitWidth>
     </Layout>
   );
 };
