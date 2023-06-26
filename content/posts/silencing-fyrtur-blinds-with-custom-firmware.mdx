@@ -1,7 +1,6 @@
 ---
 title: Silencing your Fyrtur blinds with custom firmware
 subtitle: Are your Fyrtur blinds too loud? Don’t like waking up to a whirring noise but would rather wake up to sunlight? Boy do I have the solution for you!
-slug: silencing-fyrtur-blinds-with-custom-firmware
 date: "2022-02-04T20:50:43"
 tags:
   - iot
@@ -12,14 +11,15 @@ I have IKEA Fyrtur blinds in my bedroom, as you might know if you’ve previousl
 
 Now, automatically opening your shades some time before you want to wake up to get some natural light in would be a great idea... if the Fyrtur blinds weren’t so loud.
 
-In my search on how to make the blinds a bit more quiet, so I can actually open them *before* I wake up, I found the following project:
+In my search on how to make the blinds a bit more quiet, so I can actually open them _before_ I wake up, I found the following project:
 
 [https://github.com/mjuhanne/fyrtur-motor-board](https://github.com/mjuhanne/fyrtur-motor-board)
 
-So, I took my blinds off of the ceiling, used the chance to re-charge their batteries and grabbed my ST-Link V2, a soldering iron, a screwdriver kit and some jumper wires or Dupont wires, however you’d like to call them 🙂 
+So, I took my blinds off of the ceiling, used the chance to re-charge their batteries and grabbed my ST-Link V2, a soldering iron, a screwdriver kit and some jumper wires or Dupont wires, however you’d like to call them 🙂
 
 <Callout variant="danger">
-Following this blog will most certainly void the warranty on your blinds! I’m not responsible for <strong>any</strong> damage to your blinds.
+  Following this blog will most certainly void the warranty on your blinds! I’m
+  not responsible for <strong>any</strong> damage to your blinds.
 </Callout>
 
 Now, while the firmware [@mjuhanne](https://github.com/mjuhanne) created is **awesome**, the disassembly instructions in the repo aren’t the best — which is the main reason for me to create this post instead of just starring the repo.
@@ -36,7 +36,7 @@ Disconnect the cable. It’s easiest to reach in there with some tweezers or a f
 
 ![Quite interesting to learn when your blinds have been produced 🤔](diass-date.jpg)
 
-There are aluminium tabs which hold the plastic cover on the tube. These need to be bent open carefully. I did this with a screw driver, but if you have a better method please let me know! Note that you *only* need to do this on the plastic-covered side, not the motor’s side.
+There are aluminium tabs which hold the plastic cover on the tube. These need to be bent open carefully. I did this with a screw driver, but if you have a better method please let me know! Note that you _only_ need to do this on the plastic-covered side, not the motor’s side.
 
 ![These are the tabs you’ll need to bend upwards](diass-tabs.jpg)
 
@@ -119,7 +119,7 @@ file Release/fyrtur-motor-board.bin md5 checksum: 37264f7467389a6709a3f3bdea3597
 
 You’re pretty much set! Just follow the disassembly steps backwards and you should have a fully functioning blind again.
 
-During assembly, make sure that the aluminium tabs you bent outwards are bent back *really* firmly. Any deformation there will make the roller tube will rub on the inner (motor) tube which will create loud noises.
+During assembly, make sure that the aluminium tabs you bent outwards are bent back _really_ firmly. Any deformation there will make the roller tube will rub on the inner (motor) tube which will create loud noises.
 
 Once you’ve assembled your blinds, push the down button on them and re-set the extension limit. In my case that was necessary for the blinds to correctly stop when retracing them (which is kind of weird, but this firmware wasn’t meant to be used with the original Zigbee controller 🤷). Now, once the down position is set, retract your blinds fully. Then, to set a new speed, press the up-button three times (slowly). The blind should “confirm” the new speed by moving down a tiny bit then retracting back up. This is what [@mjuhanne](https://github.com/mjuhanne) calls “FlexiSpeed”. There are 4 different speed presets: 3, 5, 15 and 25 RPM.
 
