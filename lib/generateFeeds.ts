@@ -32,7 +32,8 @@ export async function generateFeeds() {
   });
 
   posts.forEach((post) => {
-    const url = `${siteConfig.url}/posts/${post.slug}`;
+    // Remove trailing slash from siteConfig.url, if present
+    const url = `${siteConfig.url.replace(/[/]$/, "")}/posts/${post.slug}`;
     feed.addItem({
       title: post.title,
       id: url,
