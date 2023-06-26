@@ -41,7 +41,7 @@ export const getFileBySlug = async <T extends PostType>(
   const data = {
     ...parsedFile.data,
     slug,
-  };
+  } as PostByType<T>;
   const content = parsedFile.content;
 
   const mdxSource = await serialize(content, {
@@ -58,30 +58,8 @@ export const getFileBySlug = async <T extends PostType>(
   });
 
   if (type === PostType.BLOGPOST) {
-    // TODO: maybe we want to extract this in its own lib?
-    /**
-     * Find all occurrence of <StaticTweet id="NUMERIC_TWEET_ID"/>
-     * in the content of the MDX blog post
-     */
-    const tweetMatch = content.match(TWEET_RE);
-
-    /**
-     * For all occurrences / matches, extract the id portion of the
-     * string, i.e. anything matching the regex /[0-9]+/g
-     *
-     * tweetIDs then becomes an array of string where each string is
-     * the id of a tweet.
-     * These IDs are then passed to the getTweets function to be fetched from
-     * the Twitter API.
-     */
-    const tweetIDs = tweetMatch?.map((mdxTweet) => {
-      const id = mdxTweet.match(/[0-9]+/g)![0];
-      return id;
-    });
-
     const result = {
       mdxSource,
-      tweetIDs: tweetIDs || [],
       frontMatter: {
         draft: data.draft || false,
         readingTime: readingTime(content),
@@ -105,15 +83,24 @@ export const getAllFilesFrontMatter = async <T extends PostType>(
   const files = fs.readdirSync(path.join(root, typeToPath[type]));
 
   const postSources = await Promise.all(
-    files.map(
-      async (postSlug) =>
-        await fs.promises.readFile(path.join(root, typeToPath[type], postSlug))
-    )
+    files.map(async (filename) => ({
+      filename,
+      content: await fs.promises.readFile(
+        path.join(root, typeToPath[type], filename)
+      ),
+    }))
   );
 
   const posts = postSources
-    .map((source) => matter(source))
-    .map((parsedFile) => parsedFile.data as PostByType<T>)
+    .map(({ filename, content }) => ({ filename, content: matter(content) }))
+    .map(({ filename, content }) => ({
+      filename,
+      post: content.data as PostByType<T>,
+    }))
+    .map(({ filename, post }) => ({
+      ...post,
+      slug: filename.replace(/.mdx?/, ""),
+    }))
     .filter((post) => (includeDrafts ? true : !post.draft))
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
 
