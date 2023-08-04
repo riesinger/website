@@ -6,7 +6,7 @@ function NotFound() {
   return (
     <Layout header footer>
       <LimitWidth>
-        <section className="prose mt-8">
+        <section className="prose dark:prose-invert mt-8">
           <h1>Looks like you took a wrong turn</h1>
           <p>
             Unfortunately, the page you were looking for doesn&apos;t exist. You
