@@ -19,7 +19,7 @@
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.9.0",
     "image-size": "^1.0.0",
-    "lucide-react": "^0.290.0",
+    "lucide-react": "^0.294.0",
     "next": "^13.5.4",
     "next-mdx-remote": "^4.4.1",
     "next-seo": "^6.4.0",
