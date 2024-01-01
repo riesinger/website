@@ -15,7 +15,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "feed": "^4.2.2",
-    "framer-motion": "^10.16.4",
+    "framer-motion": "^10.16.16",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.9.0",
     "image-size": "^1.0.0",
