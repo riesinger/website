@@ -42,7 +42,7 @@
     "@next/bundle-analyzer": "^14.1.0",
     "@tailwindcss/typography": "^0.5.10",
     "@types/mdast": "^4.0.3",
-    "@types/react": "^18.2.45",
+    "@types/react": "^18.2.53",
     "autoprefixer": "^10.4.17",
     "eslint": "8.56.0",
     "eslint-config-next": "^14.1.0",
