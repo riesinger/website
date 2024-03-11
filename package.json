@@ -33,7 +33,7 @@
     "remark-slug": "^7.0.0",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "^5.3.3",
+    "typescript": "^5.4.2",
     "unist-builder": "^4.0.0",
     "unist-util-find-after": "^5.0.0",
     "unist-util-visit": "^5.0.0"
