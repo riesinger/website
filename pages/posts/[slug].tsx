@@ -53,6 +53,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     return { props: { post } };
   } catch (error) {
+    if ("code" in error && error.code === "ENOENT") {
+      return { notFound: true };
+    }
     // eslint-disable-next-line
     console.log(error);
     return { notFound: true };
