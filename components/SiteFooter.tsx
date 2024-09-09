@@ -3,8 +3,8 @@ import Link from "next/link";
 
 const SiteFooter = () => {
   return (
-    <footer className="mt-8 border-box px-8 w-full">
-      <div className="max-w-2xl mx-auto border-t-2 border-t-gray-200 dark:border-t-gray-800 py-4">
+    <footer className="mt-8 border-box w-full px-8 max-w-2xl mx-auto">
+      <div className="border-t-2  border-t-gray-200 dark:border-t-gray-800 py-4">
         <div className="flex items-center justify-between text-sm">
           <span>&copy; {new Date().getFullYear()} Pascal Riesinger</span>
           <Link

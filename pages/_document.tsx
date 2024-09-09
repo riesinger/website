@@ -7,20 +7,6 @@ export default class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <link
-            rel="preload"
-            href="/fonts/inter-var-latin.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          />
-          {/* <link
-            rel="preload"
-            href="/fonts/fira-code.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          /> */}
-          <link
             rel="apple-touch-icon"
             sizes="180x180"
             href="/apple-touch-icon.png?v=2"
