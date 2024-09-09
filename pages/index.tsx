@@ -1,6 +1,5 @@
 import LimitWidth from "@/components/LimitWidth";
 import Layout from "components/layout/Layout";
-import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 import Link from "next/link";
 
@@ -10,23 +9,8 @@ export default function Home() {
       <LimitWidth>
         <section className="flex items-stretch justify-center flex-col my-8 max-w-2xl mx-auto lg:my-24 box-border">
           <h1 className="text-3xl leading-tight mb-10 text-gray-900 dark:text-gray-100 font-bold">
-            Hello{" "}
-            <motion.div
-              className="inline-block"
-              transition={{
-                delay: 0.5,
-                ease: "easeInOut",
-                type: "tween",
-                repeat: 7,
-                repeatType: "mirror",
-                duration: 0.2,
-              }}
-              animate={{ rotate: 20 }}
-            >
-              👋
-            </motion.div>{" "}
-            I&apos;m Pascal, a full-stack developer 👨‍💻 self-hosting enthusiast
-            🚀 and home-automation tinkerer 🤓 living in Karlsruhe 🇩🇪
+            Hello 👋 I&apos;m Pascal, a full-stack developer 👨‍💻 self-hosting
+            enthusiast 🚀 and home-automation tinkerer 🤓 living in Karlsruhe 🇩🇪
           </h1>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             <Link
