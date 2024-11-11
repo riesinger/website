@@ -39,7 +39,7 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^14.2.4",
+    "@next/bundle-analyzer": "^15.0.3",
     "@tailwindcss/typography": "^0.5.15",
     "@types/mdast": "^4.0.3",
     "@types/react": "^18.3.8",
