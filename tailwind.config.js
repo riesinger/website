@@ -31,6 +31,50 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
+    typography: {
+      DEFAULT: {
+        css: {
+          code: {
+            background: "rgba(0, 0, 0, 0.075)",
+            "border-radius": "3px",
+            display: "inline-block",
+            padding: "0px 4px",
+          },
+          "code::before": {
+            content: "",
+            display: "none",
+          },
+          "code::after": {
+            content: "",
+            display: "none",
+          },
+          "pre code": {
+            background: "inherit",
+          },
+        },
+      },
+      invert: {
+        css: {
+          code: {
+            background: "rgba(255, 255, 255, 0.1)",
+            "border-radius": "3px",
+            display: "inline-block",
+            padding: "0px 4px",
+          },
+          "code::before": {
+            content: "",
+            display: "none",
+          },
+          "code::after": {
+            content: "",
+            display: "none",
+          },
+          "pre code": {
+            background: "inherit",
+          },
+        },
+      },
+    },
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 };

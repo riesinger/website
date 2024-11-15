@@ -61,7 +61,7 @@ const BlogLayout = ({ frontMatter, children }: BlogLayoutProps) => {
                     href={`/tags/${tag.toLowerCase()}`}
                     className="rounded bg-gray-200 dark:bg-gray-800 text-indigo-600 dark:text-indigo-400 py-1 px-2 font-normal"
                   >
-                    {tag}
+                    #{tag}
                   </Link>
                 ))}
               </>
