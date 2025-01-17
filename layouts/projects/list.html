@@ -1,0 +1,19 @@
+{{ define "main" }}
+<main class="list-layout">
+    <h1>{{ page.Title }}</h1>
+    {{ .Content }}
+    <ol>
+        {{ range page.Pages }}
+        <li>
+            <a href="{{ .Permalink }}">
+                <h2>{{ .Title }}</h2>
+            </a>
+            <p>{{ .Params.summary }}</p>
+            {{ if ne .Params.cover "" nil }}
+            <img src="{{ .Permalink }}/{{ .Params.cover }}" />
+            {{ end }}
+        </li>
+        {{ end }}
+    </ol>
+</main>
+{{ end }}

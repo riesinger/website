@@ -1,0 +1,11 @@
+{{ define "main" }}
+<main class="post-layout">
+    <h1>{{ page.Title }}</h1>
+    <div class="metadata">
+        <span>{{ printf "%d minute read" .ReadingTime }}</span>
+        {{ partial "tags" . }}
+    </div>
+
+    <article>{{ .Content }}</article>
+</main>
+{{ end }}

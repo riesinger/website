@@ -1,0 +1,7 @@
+<header>
+    <a href="/">
+        <img src="/android-chrome-192x192.png" alt="riesinger.dev logo" />
+    </a>
+    {{- block "nav" . }} {{ partial "nav" (dict "menuID" "main" "page" .) }} {{
+    end -}}
+</header>

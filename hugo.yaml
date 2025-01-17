@@ -1,0 +1,19 @@
+baseURL: "https://riesinger.dev/"
+languageCode: "en-US"
+title: "Pascal Riesinger"
+author: "Pascal Riesinger"
+description: "Personal web site of Pascal Riesinger"
+sectionPagesMenu: main
+
+taxonomies:
+  category: categories
+  series: series
+  tag: tags
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: true
+    style: monokai
