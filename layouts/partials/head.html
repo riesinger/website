@@ -8,6 +8,9 @@
 
     <!-- TODO: Dynamic page titles -->
     <title>{{ site.Title }}</title>
+    {{ with .OutputFormats.Get "rss" -}} {{ printf `
+    <link rel="%s" type="%s" href="%s" title="%s" />
+    ` .Rel .MediaType.Type .Permalink site.Title | safeHTML }} {{ end }}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="{{ site.Title }}" />
     <meta property="og:title" content="{{ site.Title }}" />

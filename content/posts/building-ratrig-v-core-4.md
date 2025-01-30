@@ -69,6 +69,27 @@ Also, the diffusors in the corner brackets don't hold on, so I added a miniscule
 
 ### Part 12: Electronics
 
-This was a mess of instructions. Somehow they got lazy apparently. Luckily there are comments on douzuki!
+This took me the better part of 10h of work. All the crimping, wiring, tidying and especially the backtracking was _a lot_.
 
-In [Step 10](https://ratrig.dozuki.com/Guide/12.+Electronics/250#s2957) I've used M3x6 countersink screws, since that's what I got in the kit. I think those are correct instead of the M3x8 they mention.
+This was a mess of instructions. Somehow they got lazy apparently. Luckily there are comments on douzuki!
+In [Step 10](https://ratrig.dozuki.com/Guide/12.+Electronics/250#s2957) I've used M3x6 countersink screws, since that's what I got in the kit. I think those are correct instead of the M3x8 they mention - later on they also mention the M3x6 screws.
+
+Especially crimping those Molex connectors on the fans should have been done before installing them on the toolheads.
+
+Thanks for the comments! They really made this easier. I really wish I would've read JohnM's comment in Part 9 where I've assembled the toolheads and did the fan wiring while they weren't mounted yet.
+
+### Part 13: Enclosure
+
+I've skipped this, I didn't buy an enclosure. I will probably do that in the near future though.
+
+### Part 14: Hybrid+Idex Y Belts
+
+Another 30min of building. This part was super simple and I didn't encounter any hickups. Except for the heated inserts not being mentioned _again_.
+
+### Part 15: IDEX Accessories
+
+This took me 1h 30 minutes. The instructions for this part specifically were good, but we were missing heat set inserts again. This time in the coupler pieces for the X axis, which hold the ooze guards. Luckily I could easily reach those places with my pinecil.
+
+### Commissioning
+
+I moved the "attach bed heater step" right to the beginning.

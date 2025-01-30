@@ -204,13 +204,19 @@ body > footer,
 body > main:not(.fullbleed) {
     width: 100%;
     padding: 1rem 1.5rem;
-    max-width: var(--max-page-width);
+    max-width: var(--content-width);
     margin: 0 auto;
     box-sizing: border-box;
 }
 
 body > footer {
     color: var(--color-text-tertiary);
+    display: flex;
+    justify-content: space-between;
+
+    a:hover {
+        color: var(--color-text-primary);
+    }
 }
 
 body > header {
