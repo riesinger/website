@@ -1,95 +1,112 @@
 +++
 date = '2025-01-12T15:47:47+01:00'
-draft = true
-title = 'Building a Ratrig V-Core 4'
+title = 'Building a RatRig V-Core 4'
 subtitle = 'A build log of my new 3D printer'
 tags = ['3dp']
 +++
 
-This is basically a build log for my new 3D printer, a Ratrig V-Core 4.
+This is my build log for the [RatRig V-Core 4](https://ratrig.com/3d-printers/rat-rig-v-core-4.html), a high-end IDEX CoreXY 3D printer that I've been wanting to build for a while. I'm documenting the experience while it's still fresh in my mind, since there are definitely some things that could be improved in the build process.
 
-## Order experience
+Overall, I really like both the printer and the build experience. The engineering is solid and the end result is impressive, especially if you're coming from an Ender 3 S1 Pro like me. However, there are some issues with the instruction ordering and clarity that RatRig could address. The good news is that they actively listen to feedback and update their documentation regularly.
 
-- They came up with a "this is our selection we'd recommend" set, which made choosing the parts way easier.
-- Earlier, there were _a lot_ of options to choose from, which was quite overwhelming
+## Ordering Experience
 
-## Pre-Shipping
+The ordering process was very smooth. When the V-Core 4 was first released, RatRig only offered a "build your own" configuration, where you had to mix & match from a lot of component choices. I was pleased to see that they now also offer a "recommended configuration" option, which simplifies the selection process significantly. I chose to order this option with the IDEX kit.
 
-- Long lead time, but that was known before ordering
-- The lead time they had on the website was right on spot, they were 6 days quicker than what they estimated
-- Bed issues, I've gotten a mail and a voucher code of unknown value
+The lead time was about 11 weeks, but RatRig was transparent about this upfront. They estimated delivery within a certain timeframe on their website, and they actually delivered 6 days earlier than promised, which was a pleasant surprise.
 
-## Assembly
+There was one hiccup: I received an email about the cast aluminum bed, which would differ from the spec they showed on their website when ordering. The new spec has different hole locations, which would still work completely fine. However, they'd still offer a voucher to use on next orders. The value of the voucher wasn't specified in the email, which was a bit unclear, but I appreciated the proactive communication about this "issue".
 
-### Part 1: The frame
+## Assembly Process
 
-This part took me 4h 15min. That's a lot. I've mostly got issues with the "Quick Connectors". While they did work super well in most extrusions, in the 540mm long 3030 extrusion, they might have forgotten to ream the bores? Somehow I had to hammer in the quick connectors with _a lot_ of force. This made getting them just even slightly misaligned a **pain**, since I'd have to hammer them back out and in again.
-Overall assembly went smoothly, nothing was hard and the manual was super easy to follow.
+If you're building your own V-Core 4, I highly recommend using the [Dozuki documentation](https://ratrig.dozuki.com/c/01._V-Core_4) instead of following the documentation on their own website, specifically for one reason: **the comments**. Pay attention to them! I only found them quite late in the build process, but they contain a lot of useful tips and corrections that aren't in the official documentation.
 
-### Part 2: The Z Axis
+### Part 1: The Frame (4h 15min)
 
-This took me about 2h 15min. While almost everything was smooth sailing, I noticed (just from the pictures!) that the rear Z axis arm is missing heated inserts. In fact, I've completely skipped over the heat set insert installation instructions in part 0. Whoops... However, going back, there it only mentions one part needing inserts. Not this one. I think that's an issue in the instructions and I will report it to Ratrig.
+This took longer than expected, mainly due to issues with the Quick Connectors. While these connectors worked perfectly in most extrusions, the 540mm long 3030 extrusions seemed to have improperly reamed holes. I had to hammer the quick connectors in with significant force, which made any misalignment extremely frustrating to correct.
 
-### Part 3: The Y Linear Rails
+The real problem with this approach is that once you've hammered a connector in crooked, you have to hammer it back out and start over. This happened to me several times and added considerable time to what should have been a straightforward assembly.
 
-This part only took me about 15min. It was super straight forward and I encountered no issues.
+Despite the connector issues, the overall frame assembly was well-documented and logical. The manual was easy to follow, and nothing else presented any real challenges.
 
-### Part 4: Core XY Motion System
+### Part 2: The Z Axis (2h 15min)
 
-I didn't need to do this part, since I opted for the IDEX kit, meaning I'll have to do the next part.
+This section went smoothly overall, but I discovered an instruction error that might catch other builders. Looking at the assembly pictures, I noticed that the rear Z-axis arms were missing heated inserts. This sent me back to Part 0 of the instructions to double-check the heat-set insert installation steps.
 
-### Part 5: Hybrid Motion System
+The problem is that Part 0 only mentions one component needing inserts, not the rear Z-axis arms. This seems like a documentation oversight that I'll be reporting to RatRig. The good news is that if you catch this early, it's easy to fix with a soldering iron.
 
-This took me the better part of 2h. I don't recall any hickups, it was smooth sailing, with _a lot_ of bearings and aluminium spacers.
+### Part 3: The Y Linear Rails (15min)
 
-### Part 6: X-Axis
+This was refreshingly straightforward after the previous hiccups. Everything fit perfectly, the instructions were clear, and I encountered no issues whatsoever.
 
-This took about 1h 30min, most of which was spent on belt routing. It's a pain. Two things that stuck out: Yes, you need to cut the long belt into two halves to have one "upper" and one "lower" Core XY belt. The instructions aren't 100% obvious here. The easiest way I found for routing the belts through the tensioners is to completely remove the tensioner arms from their housing. Then stick the belt through and re-install the arm. I don't know how routing them through would even be possible otherwise.
+### Part 4: Core XY Motion System (Skipped)
 
-### Part 7: Bed Assembly
+I opted for the IDEX (Independent Dual Extruder) configuration, so I skipped this section in favor of the hybrid motion system in Part 5.
 
-This only took 5min. My bed came "out of spec", as mentioned in [Pre-Shipping](#pre-shipping). The instructions were a tiny bit unclear to read at first, but nothing that can't be managed.
+### Part 5: Hybrid Motion System (2h)
 
-### Part 9: RatRig V-Core 4 Toolhead - IDEX
+This section involved installing a lot of bearings and aluminum spacers, but the process was well-documented and I didn't encounter any significant problems. The hybrid system is more complex than a standard CoreXY setup, but the instructions walked through each step clearly.
 
-This part took me about 3h 30min, of which quite a bit of time was spent inserting heat set inserts. This is relatively tedious.
+The main thing to note here is that you'll be handling a lot of small parts, so good organization and lighting are essential. Take your time with the bearing installation to avoid dropping anything into the frame.
 
-There's a typo in step 14: Where the parts list says M3x35 Countersink Screw, what they mean is M3x40.
-The standoffs between the extruders and the mounts for the toolhead boards are brass in the manual, but are aluminium or stainless steel in the kit. That's a bit confusing.
+### Part 6: X-Axis (1h 30min)
 
-### Part 10: Gantry Alignment
+Most of this time was spent on belt routing, which is genuinely challenging. Two important points that could save you time:
 
-This was super quick and took about 10min. And that's only because one of my pulleys was missing a setscrew, so I had to dig though the extra parts bag to find a spare. Luckily there was one, so the missing setscrew was just a minor nuisance.
+First, yes, you do need to cut the long belt into two equal halves to create separate "upper" and "lower" CoreXY belts. This isn't completely obvious from the instructions, and I initially hesitated to cut the belt.
 
-### Part 11: Accessories
+Second, routing the belts through the tensioners is much easier if you completely remove the tensioner arms from their housings first. Thread the belt through the removed arm, then reinstall the entire assembly. I can't imagine how difficult it would be to thread the belts through the tensioners while they're installed.
 
-This took 2h.
-Now was the time that I've noticed that I'm missing heated inserts in the bed mount arms.
-Also, the diffusors in the corner brackets don't hold on, so I added a miniscule amount of hot glue to keep them in place. 
+### Part 7: Bed Assembly (5min)
 
-### Part 12: Electronics
+This should have been the quickest part, and it was mechanically simple. However, my bed came "out of spec" as mentioned in the pre-shipping email. The mounting instructions were slightly unclear on first reading, but nothing that couldn't be figured out with a bit of common sense.
 
-This took me the better part of 10h of work. All the crimping, wiring, tidying and especially the backtracking was _a lot_.
+### Part 9: RatRig V-Core 4 Toolhead - IDEX (3h 30min)
 
-This was a mess of instructions. Somehow they got lazy apparently. Luckily there are comments on douzuki!
-In [Step 10](https://ratrig.dozuki.com/Guide/12.+Electronics/250#s2957) I've used M3x6 countersink screws, since that's what I got in the kit. I think those are correct instead of the M3x8 they mention - later on they also mention the M3x6 screws.
+This was one of the more time-consuming sections, largely because of the heat-set insert installation. If you're not experienced with heated inserts, this process can be tedious and requires patience to get right.
 
-Especially crimping those Molex connectors on the fans should have been done before installing them on the toolheads.
+I found a typo in step 14: the parts list calls for M3x35 countersink screws, but the correct size is M3x40. Also, the manual shows brass standoffs between the extruders and toolhead board mounts, but my kit came with aluminum or stainless steel standoffs. This discrepancy was confusing but didn't affect the build.
 
-Thanks for the comments! They really made this easier. I really wish I would've read JohnM's comment in Part 9 where I've assembled the toolheads and did the fan wiring while they weren't mounted yet.
+### Part 10: Gantry Alignment (10min)
 
-### Part 13: Enclosure
+This section was quick and straightforward. My only issue was a missing setscrew on one of the pulleys, but the kit included spare hardware so this was just a minor inconvenience. The alignment process itself was well-documented and easy to follow.
 
-I've skipped this, I didn't buy an enclosure. I will probably do that in the near future though.
+### Part 11: Accessories (2h)
 
-### Part 14: Hybrid+Idex Y Belts
+This is where I encountered the heated insert issue again - the bed mount arms were missing their required inserts, which wasn't mentioned in the instructions. This seems to be a recurring documentation problem.
 
-Another 30min of building. This part was super simple and I didn't encounter any hickups. Except for the heated inserts not being mentioned _again_.
+Another minor issue: the diffusers in the corner brackets don't stay in place on their own. I added a tiny amount of hot glue to keep them secure, which solved the problem completely.
 
-### Part 15: IDEX Accessories
+### Part 12: Electronics (10h)
 
-This took me 1h 30 minutes. The instructions for this part specifically were good, but we were missing heat set inserts again. This time in the coupler pieces for the X axis, which hold the ooze guards. Luckily I could easily reach those places with my pinecil.
+This was by far the most time-consuming and frustrating section. The combination of crimping, wiring, cable management, and constant backtracking to fix mistakes added up to a full day of work.
+
+The instruction quality really suffered here. The documentation felt rushed and incomplete compared to the mechanical assembly sections. Fortunately, the community comments were incredibly helpful and filled in many gaps.
+
+In step 10, I used M3x6 countersink screws instead of the M3x8 screws listed in the instructions, since that's what came in my kit. Later steps confirm that M3x6 is correct, so this appears to be another documentation error.
+
+The biggest mistake I made was not reading the community comments earlier. JohnM's comment in Part 9 specifically recommends doing the fan wiring before mounting the toolheads, which would have saved me significant time and frustration. Crimping Molex connectors on fans that are already installed is unnecessarily difficult.
+
+### Part 13: Enclosure (Skipped)
+
+I didn't purchase an enclosure with my kit, so I skipped this section. I'm planning to add one in the future, but wanted to get the printer operational first.
+
+### Part 14: Hybrid+IDEX Y Belts (30min)
+
+This section was refreshingly simple after the electronics marathon. The instructions were clear and I didn't encounter any problems. However, the heated insert documentation issue appeared again - certain components needed inserts that weren't mentioned in the instructions.
+
+### Part 15: IDEX Accessories (1h 30min)
+
+The instructions for this section were much better than the electronics section, but we're still dealing with the recurring heated insert problem. This time, the coupler pieces for the X-axis ooze guards needed inserts that weren't documented.
+
+Fortunately, these locations were easily accessible with my Pinecil soldering iron, so I could install the missing inserts without disassembling anything.
 
 ### Commissioning
 
-I moved the "attach bed heater step" right to the beginning.
+I moved the bed heater attachment step to the very beginning of the commissioning process, which made more sense from a workflow perspective.
+
+## Final Thoughts
+
+The RatRig V-Core 4 is an impressive machine and the build process is mostly quite fun if you like tinkering (with some exceptions). The mechanical design is solid and most of the instructions are clear and detailed. However, there are definitely areas for improvement, especially in the electronics section.
+
+If you're considering building a V-Core 4, I'd recommend reading through the community comments on each section before starting, and don't hesitate to reach out to the RatRig community for help when you get stuck.
