@@ -18,7 +18,7 @@ td {
 }
 
 table {
-    width: 1200px;
+    width: 950px;
     max-width: 95vw;
     transform: translateX(-50%);
     position: relative;
@@ -56,19 +56,19 @@ This is a mirror of the data on https://acriss.org/car-codes/, since it's too sl
             <td id="CATEGORY_M">M - Mini</td>
             <td id="TYPE_B">B - 2-3 Door</td>
             <td id="TRANSMISSION_M">M - Manual Unspecified Drive</td>
-            <td id="FUEL_R">R - Unspecified Fuel/Power AC</td>
+            <td id="FUEL_R">R - Unspecified Fuel, AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_N">N - Mini Elite</td>
             <td id="TYPE_C">C - 2/4 Door</td>
             <td id="TRANSMISSION_N">N - Manual 4WD</td>
-            <td id="FUEL_N">N - Unspecified Fuel/Power, no AC</td>
+            <td id="FUEL_N">N - Unspecified Fuel, no AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_E">E - Economy</td>
             <td id="TYPE_D">D - 4-5 Door</td>
             <td id="TRANSMISSION_C">C - Manual AWD</td>
-            <td id="FUEL_D">D - Diesel AC</td>
+            <td id="FUEL_D">D - Diesel, AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_H">H - Economy Elite</td>
@@ -104,43 +104,43 @@ This is a mirror of the data on https://acriss.org/car-codes/, since it's too sl
             <td id="CATEGORY_S">S - Standard</td>
             <td id="TYPE_F">F - SUV</td>
             <td id="TRANSMISSION_F">F - Level 5 Full Automation</td>
-            <td id="FUEL_L">L - LPG/Compressed Gas AC</td>
+            <td id="FUEL_L">L - LPG/CNG, AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_R">R - Standard Elite</td>
             <td id="TYPE_J">J - Open Air All Terrain</td>
             <td></td>
-            <td id="FUEL_S">S - LPG/Compressed Gas, no AC</td>
+            <td id="FUEL_S">S - LPG/CNG, no AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_F">F - Fullsize</td>
             <td id="TYPE_X">X - Special</td>
             <td></td>
-            <td id="FUEL_A">A - Hydrogen AC</td>
+            <td id="FUEL_A">A - Hydrogen, AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_G">G - Fullsize Elite</td>
-            <td id="TYPE_P">P - Pick up (single/extended cab) 2 door</td>
+            <td id="TYPE_P">P - Pick up, 2 door</td>
             <td></td>
             <td id="FUEL_B">B - Hydrogen, no AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_P">P - Premium</td>
-            <td id="TYPE_Q">Q - Pick up (double cab) 4 door</td>
+            <td id="TYPE_Q">Q - Pick up, 4 door</td>
             <td></td>
-            <td id="FUEL_M">M - Multi Fuel/Power AC</td>
+            <td id="FUEL_M">M - Multi Fuel, AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_U">U - Premium Elite</td>
             <td id="TYPE_Z">Z - Special Offer Car</td>
             <td></td>
-            <td id="FUEL_F">F - Multi fuel/power, no AC</td>
+            <td id="FUEL_F">F - Multi Fuel, no AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_L">L - Luxury</td>
             <td id="TYPE_E">E - Coupe</td>
             <td></td>
-            <td id="FUEL_V">V - Petrol AC</td>
+            <td id="FUEL_V">V - Petrol, AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_W">W - Luxury Elite</td>
@@ -152,7 +152,7 @@ This is a mirror of the data on https://acriss.org/car-codes/, since it's too sl
             <td id="CATEGORY_O">O - Oversize</td>
             <td id="TYPE_R">R - Recreational Vehicle</td>
             <td></td>
-            <td id="FUEL_U">U - Ethanol AC</td>
+            <td id="FUEL_U">U - Ethanol, AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_X">X - Special</td>
@@ -211,4 +211,3 @@ document.querySelector("input#decode").onkeyup = function(e) {
 
 }
 </script>
-
