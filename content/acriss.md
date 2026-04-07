@@ -56,25 +56,25 @@ This is a mirror of the data on https://acriss.org/car-codes/, since it's too sl
             <td id="CATEGORY_M">M - Mini</td>
             <td id="TYPE_B">B - 2-3 Door</td>
             <td id="TRANSMISSION_M">M - Manual Unspecified Drive</td>
-            <td id="FUEL_R">R - Unspecified Fuel/Power With Air</td>
+            <td id="FUEL_R">R - Unspecified Fuel/Power AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_N">N - Mini Elite</td>
             <td id="TYPE_C">C - 2/4 Door</td>
             <td id="TRANSMISSION_N">N - Manual 4WD</td>
-            <td id="FUEL_N">N - Unspecified Fuel/Power Without Air</td>
+            <td id="FUEL_N">N - Unspecified Fuel/Power, no AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_E">E - Economy</td>
             <td id="TYPE_D">D - 4-5 Door</td>
             <td id="TRANSMISSION_C">C - Manual AWD</td>
-            <td id="FUEL_D">D - Diesel Air</td>
+            <td id="FUEL_D">D - Diesel AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_H">H - Economy Elite</td>
             <td id="TYPE_W">W - Wagon/Estate</td>
             <td id="TRANSMISSION_A">A - Auto Unspecified Drive</td>
-            <td id="FUEL_Q">Q - Diesel No Air</td>
+            <td id="FUEL_Q">Q - Diesel, no AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_C">C - Compact</td>
@@ -91,74 +91,74 @@ This is a mirror of the data on https://acriss.org/car-codes/, since it's too sl
         <tr>
             <td id="CATEGORY_I">I - Intermediate</td>
             <td id="TYPE_S">S - Sport</td>
-            <td></td>
+            <td id="TRANSMISSION_Q">Q - Level 3 Conditional Automation</td>
             <td id="FUEL_E">E - Electric</td>
         </tr>
         <tr>
             <td id="CATEGORY_J">J - Intermediate Elite</td>
             <td id="TYPE_T">T - Convertible</td>
-            <td></td>
+            <td id="TRANSMISSION_H">H - Level 4 High Automation</td>
             <td id="FUEL_C">C - Electric</td>
         </tr>
         <tr>
             <td id="CATEGORY_S">S - Standard</td>
             <td id="TYPE_F">F - SUV</td>
-            <td></td>
-            <td id="FUEL_L">L - LPG/Compressed Gas Air</td>
+            <td id="TRANSMISSION_F">F - Level 5 Full Automation</td>
+            <td id="FUEL_L">L - LPG/Compressed Gas AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_R">R - Standard Elite</td>
             <td id="TYPE_J">J - Open Air All Terrain</td>
             <td></td>
-            <td id="FUEL_S">S - LPG/Compressed Gas No Air</td>
+            <td id="FUEL_S">S - LPG/Compressed Gas, no AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_F">F - Fullsize</td>
             <td id="TYPE_X">X - Special</td>
             <td></td>
-            <td id="FUEL_A">A - Hydrogen Air</td>
+            <td id="FUEL_A">A - Hydrogen AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_G">G - Fullsize Elite</td>
             <td id="TYPE_P">P - Pick up (single/extended cab) 2 door</td>
             <td></td>
-            <td id="FUEL_B">B - Hydrogen No Air</td>
+            <td id="FUEL_B">B - Hydrogen, no AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_P">P - Premium</td>
             <td id="TYPE_Q">Q - Pick up (double cab) 4 door</td>
             <td></td>
-            <td id="FUEL_M">M - Multi Fuel/Power Air</td>
+            <td id="FUEL_M">M - Multi Fuel/Power AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_U">U - Premium Elite</td>
             <td id="TYPE_Z">Z - Special Offer Car</td>
             <td></td>
-            <td id="FUEL_F">F - Multi fuel/power No Air</td>
+            <td id="FUEL_F">F - Multi fuel/power, no AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_L">L - Luxury</td>
             <td id="TYPE_E">E - Coupe</td>
             <td></td>
-            <td id="FUEL_V">V - Petrol Air</td>
+            <td id="FUEL_V">V - Petrol AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_W">W - Luxury Elite</td>
             <td id="TYPE_M">M - Monospace</td>
             <td></td>
-            <td id="FUEL_Z">Z - Petrol No Air</td>
+            <td id="FUEL_Z">Z - Petrol, no AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_O">O - Oversize</td>
             <td id="TYPE_R">R - Recreational Vehicle</td>
             <td></td>
-            <td id="FUEL_U">U - Ethanol Air</td>
+            <td id="FUEL_U">U - Ethanol AC</td>
         </tr>
         <tr>
             <td id="CATEGORY_X">X - Special</td>
             <td id="TYPE_H">H - Motor Home</td>
             <td></td>
-            <td id="FUEL_X">X - Ethanol No Air</td>
+            <td id="FUEL_X">X - Ethanol, no AC</td>
         </tr>
         <tr>
             <td></td>
