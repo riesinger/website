@@ -1,12 +1,13 @@
 {{ define "main" }}
-<main class="list-layout">
-    <h1>Pages tagged with &quot;{{ page.Title | lower }}&quot;</h1>
-    <ul>
-        {{ range .Data.Pages }}
-        <li>
-            <a href="{{.RelPermalink}}"><h2>{{ .Title }}</h2></a>
-        </li>
-        {{ end }}
-    </ul>
+<main id="content">
+    <div class="rail">
+        <p class="rail-aside label">Tag</p>
+        <h1 class="doc-title">{{ .Title | lower }}</h1>
+        <p class="doc-subtitle">
+            {{ len .Pages }} {{ cond (eq (len .Pages) 1) "entry" "entries" }} ·
+            <a href="/tags/">browse all tags</a>
+        </p>
+    </div>
+    {{ partial "entries" (dict "pages" .Pages) }}
 </main>
 {{ end }}

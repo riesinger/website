@@ -1,0 +1,26 @@
+{{- $destination := strings.TrimPrefix "./" .Destination -}}
+{{- $resource := .Page.Resources.GetMatch $destination -}}
+{{- if and $resource (eq $resource.MediaType.MainType "image") -}}
+  {{- $widths := slice 480 768 1200 -}}
+  {{- $srcset := slice -}}
+  {{- range $width := $widths -}}
+    {{- if lt $width $resource.Width -}}
+      {{- $variant := $resource.Resize (printf "%dx webp q82" $width) -}}
+      {{- $srcset = $srcset | append (printf "%s %dw" $variant.RelPermalink $variant.Width) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $fallback := $resource.Resize (printf "%dx webp q82" $resource.Width) -}}
+  {{- $srcset = $srcset | append (printf "%s %dw" $fallback.RelPermalink $fallback.Width) -}}
+  <img
+    src="{{ $fallback.RelPermalink }}"
+    srcset="{{ delimit $srcset ", " }}"
+    sizes="(min-width: 57rem) 44rem, calc(100vw - 2.5rem)"
+    width="{{ $fallback.Width }}"
+    height="{{ $fallback.Height }}"
+    alt="{{ .Text | plainify }}"
+    loading="lazy"
+    decoding="async"
+  >
+{{- else -}}
+  <img src="{{ .Destination | safeURL }}" alt="{{ .Text | plainify }}" loading="lazy" decoding="async">
+{{- end -}}

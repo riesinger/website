@@ -1,7 +1,9 @@
-
 {{ define "main" }}
-<main>
-    <h1>{{ page.Title }}</h1>
-    <article>{{ .Content }}</article>
+<main id="content" class="rail">
+    <h1 class="doc-title">{{ .Title }}</h1>
+    {{ with .Params.subtitle }}
+    <p class="doc-subtitle">{{ . }}</p>
+    {{ end }}
+    <article class="doc-body prose">{{ .Content }}</article>
 </main>
 {{ end }}

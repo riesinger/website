@@ -1,0 +1,22 @@
+{{- /* Project rows. Year hangs in the margin, like the dates in the archive. */ -}}
+{{- $statusLabels := dict "active" "in progress" "maintenance" "maintained" "done" "finished" "archived" "archived" }}
+<ul class="projects">
+    {{- range .pages }}
+    <li class="project">
+        <a class="project-link" href="{{ .RelPermalink }}">
+            <time class="project-year" datetime="{{ .Date.Format "2006" }}">{{ .Date.Format "2006" }}</time>
+            <div class="project-body">
+                <h3 class="project-title">{{ .Title }}</h3>
+                {{- with .Params.summary }}
+                <p class="project-summary">{{ . }}</p>
+                {{- end }}
+                {{- with .Params.status }}
+                <p class="project-status label" data-status="{{ . }}">
+                    {{- index $statusLabels . | default . -}}
+                </p>
+                {{- end }}
+            </div>
+        </a>
+    </li>
+    {{- end }}
+</ul>

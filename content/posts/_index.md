@@ -1,3 +1,4 @@
 ---
-title: Posts
+title: Writing
+weight: 1
 ---

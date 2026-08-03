@@ -1,0 +1,44 @@
+{{- /* Posts per year, drawn from the archive itself. */ -}}
+{{- $posts := where site.RegularPages "Section" "posts" }}
+{{- $counts := dict }}
+{{- $first := 9999 }}
+{{- $last := 0 }}
+{{- range $posts }}
+{{- $year := .Date.Year }}
+{{- $key := printf "%d" $year }}
+{{- $counts = merge $counts (dict $key (add 1 (int (or (index $counts $key) 0)))) }}
+{{- if lt $year $first }}{{ $first = $year }}{{ end }}
+{{- if gt $year $last }}{{ $last = $year }}{{ end }}
+{{- end }}
+
+{{- if gt $last $first }}
+{{- $span := seq $first $last }}
+{{- $max := 1 }}
+{{- range $counts }}{{ if gt . $max }}{{ $max = . }}{{ end }}{{ end }}
+
+<div class="rail cadence reveal reveal-3">
+    <h2 class="rail-aside label">Entries per year</h2>
+    <div class="cadence-plot" aria-hidden="true">
+        {{- range $i, $year := $span }}
+        {{- $count := int (or (index $counts (printf "%d" $year)) 0) }}
+        {{- $fade := add 0.45 (mul 0.55 (div (float $i) (float (sub (len $span) 1)))) }}
+        <div
+            class="cadence-year"
+            data-count="{{ $count }}"
+            title="{{ $year }}: {{ $count }} {{ cond (eq $count 1) "entry" "entries" }}"
+            style="opacity: {{ printf "%.2f" $fade }}; animation-delay: {{ printf "%dms" (mul $i 45) }}"
+        >
+            {{- if gt $count 0 }}
+            {{- range seq $count }}<span class="tally"></span>{{ end }}
+            {{- end }}
+        </div>
+        {{- end }}
+    </div>
+    <div class="cadence-scale" aria-hidden="true">
+        {{- range $span }}<span>{{ printf "%d" . | strings.TrimPrefix "20" }}</span>{{ end }}
+    </div>
+    <p class="cadence-total">
+        {{ len $posts }} posts between {{ $first }} and {{ $last }}, mostly about whatever I was building at the time.
+    </p>
+</div>
+{{- end }}

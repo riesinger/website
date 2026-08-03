@@ -6,30 +6,36 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- TODO: Dynamic page titles -->
-    <title>{{ site.Title }}</title>
-    {{ with .OutputFormats.Get "rss" -}} {{ printf `
-    <link rel="%s" type="%s" href="%s" title="%s" />
-    ` .Rel .MediaType.Type .Permalink site.Title | safeHTML }} {{ end }}
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="{{ site.Title }}" />
-    <meta property="og:title" content="{{ site.Title }}" />
+    {{ $title := site.Title }}
+    {{ if and .Title (not .IsHome) }}
+    {{ $title = printf "%s — %s" .Title site.Title }}
+    {{ end }}
+    {{ $description := or .Params.subtitle .Params.summary .Description site.Params.description }}
 
-    <!-- <meta name="description" content="" /> -->
-    <!-- <meta name="twitter:description" content="" /> -->
-    <!-- <meta property="og:description" content="" /> -->
+    <title>{{ $title }}</title>
+    <meta name="description" content="{{ $description }}" />
+    <link rel="canonical" href="{{ .Permalink }}" />
 
-    <!-- <meta
-        name="twitter:image"
-        content="https://clig.dev/CLIG-social-card.jpg"
-    />
-    <meta
-        property="og:image"
-        content="https://clig.dev/CLIG-social-card.jpg"
-    /> -->
+    <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
+    <meta property="og:title" content="{{ $title }}" />
+    <meta property="og:description" content="{{ $description }}" />
+    <meta property="og:url" content="{{ .Permalink }}" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="{{ $title }}" />
+    <meta name="twitter:description" content="{{ $description }}" />
 
-    {{ $css := resources.Get "css/main.css" | minify | fingerprint }}
-    <link rel="stylesheet" media="screen" href="{{ $css.Permalink }}" />
+    {{ with .OutputFormats.Get "rss" -}}
+    <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ site.Title }}" />
+    {{- end }}
+
+    {{/* Each syntax theme is scoped to its scheme: stacking them would leave
+         light-only token colours behind on a dark background. */}}
+    {{ $main := resources.Get "css/main.css" }}
+    {{ $light := printf "@media (prefers-color-scheme: light) {\n%s\n}" (resources.Get "css/chroma-light.css").Content | resources.FromString "css/chroma-light-scoped.css" }}
+    {{ $dark := printf "@media (prefers-color-scheme: dark) {\n%s\n}" (resources.Get "css/chroma-dark.css").Content | resources.FromString "css/chroma-dark-scoped.css" }}
+    {{ $css := slice $main $light $dark | resources.Concat "css/bundle.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+
     <script
         defer
         data-domain="riesinger.dev"

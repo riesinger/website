@@ -1,8 +1,11 @@
 <!doctype html>
-<html lang="{{ site.LanguageCode }}">
+<html lang="{{ site.Language.Locale }}">
     {{ partial "head" . }}
-    <body>
-        {{ partial "header" . }} {{- block "main" . }}{{- end }}{{ partial
-        "footer" . }}
+    <body{{ if .Params.wide }} class="wide"{{ end }}>
+        <a class="skip-link" href="#content">Skip to content</a>
+        {{ partial "header" . }}
+        {{- block "main" . }}{{- end }}
+        {{ partial "footer" . }}
+        {{- block "scripts" . }}{{- end }}
     </body>
 </html>

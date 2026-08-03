@@ -1,3 +1,42 @@
 {{ define "main" }}
-<main>{{ .Content }}</main>
+{{ $posts := where site.RegularPages "Section" "posts" }}
+{{ $projects := (site.GetPage "/projects").Pages }}
+<main id="content">
+    <section class="hero">
+        <div class="rail">
+            <h1 class="hero-name reveal">
+                {{ .Params.firstName | default "Pascal" }}<span class="surname">{{ .Params.lastName | default "Riesinger" }}</span>
+            </h1>
+            <div class="hero-lead reveal reveal-2">{{ .Content }}</div>
+        </div>
+        {{ partial "cadence" . }}
+    </section>
+
+    {{ with $posts }}
+    <section class="block">
+        <div class="rail block-head">
+            <h2 class="rail-aside label">Writing</h2>
+            <a class="more" href="/posts/">All {{ len . }} posts</a>
+        </div>
+        {{ partial "entries" (dict "pages" (first 5 .)) }}
+    </section>
+    {{ end }}
+
+    {{ with $projects }}
+    <section class="block">
+        <div class="rail block-head">
+            <h2 class="rail-aside label">Projects</h2>
+            <a class="more" href="/projects/">All {{ len . }} projects</a>
+        </div>
+        {{ partial "projects" (dict "pages" (first 3 .)) }}
+    </section>
+    {{ end }}
+
+    {{ with site.GetPage "/about" }}
+    <section class="block rail about">
+        <h2 class="rail-aside label">{{ .Title }}</h2>
+        <div class="prose">{{ .Content }}</div>
+    </section>
+    {{ end }}
+</main>
 {{ end }}

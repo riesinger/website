@@ -1,0 +1,23 @@
+{{ define "main" }}
+<main id="content">
+    <div class="rail">
+        <h1 class="doc-title">{{ .Title }}</h1>
+        <p class="doc-subtitle">
+            Every subject on the site, most-written-about first.
+        </p>
+    </div>
+    <div class="rail rail-gap">
+        <p class="rail-aside label">{{ len .Data.Terms }} tags</p>
+        <ul class="tag-cloud">
+            {{ range .Data.Terms.ByCount }}
+            <li>
+                <a href="{{ .Page.RelPermalink }}">
+                    {{ .Page.Title | lower }}
+                    <span class="count">{{ .Count }}</span>
+                </a>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+</main>
+{{ end }}

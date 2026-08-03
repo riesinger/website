@@ -1,47 +1,65 @@
 ---
 title: "ACRISS Car Codes"
+wide: true
 ---
 
 <style>
-table, tr, td {
-    border: 1px solid light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.5));
+/* Scoped to .prose so these win over the site's markdown table styles, which
+   assume a borderless table sitting in a column of running text. */
+.prose table {
+    width: 100%;
     border-collapse: collapse;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
 }
 
-td {
-    padding: 0.25rem 0.5rem;
+.prose th,
+.prose tr > td,
+.prose tr > th:first-child,
+.prose tr > td:first-child {
+    padding: 0.4rem 0.6rem;
+}
+
+.prose td {
+    border: 1px solid var(--rule-strong);
+    vertical-align: top;
 
     &.highlight {
-        background: yellow;
-        color: rgba(0, 0, 0, 0.95);
+        background: var(--accent);
+        color: var(--paper);
     }
 }
 
-table {
-    width: 950px;
-    max-width: 95vw;
-    transform: translateX(-50%);
-    position: relative;
-    left: 50%;
-    font-family: monospace;
+.prose tr:nth-child(2n) td {
+    background: var(--panel);
 }
 
-tr:nth-child(2n) {
-    background: light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.15));
+.prose tr:nth-child(2n) td.highlight {
+    background: var(--accent);
 }
 
 input {
-    padding: 0.25rem;
     width: 100%;
-    margin-bottom: 2rem;
+    max-width: 20rem;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid var(--rule-strong);
+    border-radius: 3px;
+    background: var(--panel);
+    color: var(--ink);
+    font: inherit;
+    font-size: 0.9375rem;
 }
 
+input:focus-visible {
+    border-color: var(--accent);
+}
 </style>
 
 This is a mirror of the data on https://acriss.org/car-codes/, since it's too slow of a site for my tastes.
 
 <input type="text" id="decode" placeholder="Enter an ACRISS code to decode" maxlength="4"/>
 
+<div class="scroll-x">
 <table>
     <thead>
         <tr>
@@ -186,6 +204,7 @@ This is a mirror of the data on https://acriss.org/car-codes/, since it's too sl
         </tr>
     </tbody>
 </table>
+</div>
 
 
 <script>

@@ -1,16 +1,42 @@
 {{ define "main" }}
-<main class="list-layout">
-    <h1>{{ page.Title }}</h1>
-    {{ .Content }}
-    <ol>
-        {{ range page.Pages }}
-        <li class="post-list-item">
-            <time>{{ .Date.Format "2006-01-02" }}</time>
-            <a href="{{ .Permalink }}">
-                <h2>{{ .Title }}</h2>
-            </a>
-        </li>
-        {{ end }}
-    </ol>
+{{ $pages := page.Pages }}
+<main id="content">
+    <div class="rail">
+        <h1 class="doc-title">{{ .Title }}</h1>
+        <p class="doc-subtitle">
+            {{ len $pages }} entries on Go, self-hosting, hardware and whatever else
+            took longer to figure out than it should have.
+        </p>
+        {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+    </div>
+
+    {{ $recurring := where site.Taxonomies.tags.ByCount "Count" "ge" 2 }}
+    {{ with $recurring }}
+    <div class="rail rail-gap filter-bar">
+        <p class="rail-aside label">Filter</p>
+        <div class="filter-group">
+            <ul class="filter">
+                <li><button type="button" aria-pressed="true">everything</button></li>
+                {{ range . }}
+                <li>
+                    <button type="button" aria-pressed="false" data-tag="{{ .Name | urlize }}">
+                        {{ .Name }} <span class="count">{{ .Count }}</span>
+                    </button>
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+    {{ end }}
+
+    {{ partial "entries" (dict "pages" $pages) }}
+    <p class="filter-empty" hidden>No entries with that tag.</p>
 </main>
+{{ end }}
+
+{{ define "scripts" }}
+{{ with resources.Get "js/filter.js" }}
+{{ $js := . | js.Build (dict "minify" true) | fingerprint }}
+<script defer src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+{{ end }}
 {{ end }}

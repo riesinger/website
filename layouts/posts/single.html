@@ -1,11 +1,14 @@
 {{ define "main" }}
-<main class="post-layout">
-    <h1>{{ page.Title }}</h1>
-    <div class="metadata">
-        <span>{{ printf "%d minute read" .ReadingTime }}</span>
+<main id="content" class="rail">
+    <div class="doc-meta rail-aside">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+        <span>{{ .ReadingTime }} min read</span>
         {{ partial "tags" . }}
     </div>
-
-    <article>{{ .Content }}</article>
+    <h1 class="doc-title">{{ .Title }}</h1>
+    {{ with .Params.subtitle }}
+    <p class="doc-subtitle">{{ . }}</p>
+    {{ end }}
+    <article class="doc-body prose">{{ .Content }}</article>
 </main>
 {{ end }}

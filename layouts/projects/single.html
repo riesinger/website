@@ -1,6 +1,29 @@
 {{ define "main" }}
-<main class="post-layout">
-    <h1>{{ page.Title }}</h1>
-    <article>{{ .Content }}</article>
+{{ $statusLabels := dict "active" "in progress" "maintenance" "maintained" "done" "finished" "archived" "archived" }}
+<main id="content" class="rail">
+    <div class="doc-meta rail-aside">
+        {{ with .Params.status }}
+        <span class="project-status" data-status="{{ . }}">{{ index $statusLabels . | default . }}</span>
+        {{ end }}
+        {{ if not .Date.IsZero }}
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006" }}</time>
+        {{ end }}
+    </div>
+    <h1 class="doc-title">{{ .Title }}</h1>
+    {{ with .Params.summary }}
+    <p class="doc-subtitle">{{ . }}</p>
+    {{ end }}
+    {{ with .Params.cover }}
+    {{ with $.Resources.GetMatch . }}
+    {{ $img := . }}
+    {{ if in (slice "image/jpeg" "image/png" "image/webp") .MediaType.Type }}
+    {{ $img = .Resize "1200x webp q82" }}
+    {{ end }}
+    <figure class="doc-hero">
+        <img src="{{ $img.RelPermalink }}" alt="{{ $.Title }}" loading="lazy" decoding="async" />
+    </figure>
+    {{ end }}
+    {{ end }}
+    <article class="doc-body prose">{{ .Content }}</article>
 </main>
 {{ end }}

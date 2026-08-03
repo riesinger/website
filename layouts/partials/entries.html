@@ -1,0 +1,19 @@
+{{- /* Dated index rows. Expects a dict: "pages" (page collection). */ -}}
+<ol class="entries">
+    {{- range .pages }}
+    {{- $tags := .Params.tags | default slice }}
+    {{- $slugs := slice }}
+    {{- range $tags }}{{ $slugs = $slugs | append (. | urlize) }}{{ end }}
+    <li class="entry"{{ with $slugs }} data-tags="{{ delimit . "," }}"{{ end }}>
+        <a class="entry-link" href="{{ .RelPermalink }}">
+            <time class="entry-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+            <span class="entry-title">{{ .Title }}</span>
+            {{- with $tags }}
+            <span class="entry-tags">
+                {{- range first 2 . }}<span>{{ . | lower }}</span>{{ end -}}
+            </span>
+            {{- end }}
+        </a>
+    </li>
+    {{- end }}
+</ol>
