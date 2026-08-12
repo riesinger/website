@@ -1,0 +1,36 @@
+:8080 {
+	encode zstd gzip
+	root * /site
+
+	# Legacy RSS feed path.
+	@rss path /feeds/feed.xml /feed.xml /rss/feed.xml
+	redir @rss /index.xml 301
+
+	# Fingerprinted CSS / JS (Hugo emits *.min.<hash>.{css,js,mjs}) are
+	# content-addressed and safe to cache forever.
+	@hashedAssets path_regexp hashed ^/(css|js|vendor)/.*\.min\.[a-f0-9]{8,}\.(css|js|mjs)$
+	header @hashedAssets Cache-Control "public, max-age=31536000, immutable"
+
+	# Hugo also emits filter.<hash>.js and similar top-level hashed bundles.
+	@hashedJs path_regexp hashedJs ^/js/[^/]+\.[a-f0-9]{8,}\.js$
+	header @hashedJs Cache-Control "public, max-age=31536000, immutable"
+
+	# Make sure ES modules are served with the correct MIME so dynamic
+	# import() doesn't fail on strict browsers / older file_server defaults.
+	@mjs path *.mjs
+	header @mjs Content-Type "text/javascript; charset=utf-8"
+
+	# Other static assets (fonts, raw images).
+	@assets path /img/* /fonts/* /images/*
+	header @assets Cache-Control "public, max-age=2592000"
+
+	# Hugo image-pipeline output is content-addressed via hash in the filename.
+	@processedImages path_regexp images \.(jpg|jpeg|png|webp|avif|svg|ico)$
+	header @processedImages Cache-Control "public, max-age=2592000"
+
+	# HTML pages get a short freshness window with stale-while-revalidate.
+	@html path *.html /
+	header @html Cache-Control "public, max-age=300, stale-while-revalidate=86400"
+
+	file_server
+}

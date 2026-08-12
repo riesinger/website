@@ -1,0 +1,15 @@
+services:
+  website:
+    image: ghcr.io/riesinger/website:main
+    networks:
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.riesinger.rule=Host(`riesinger.dev`)
+      - traefik.http.routers.riesinger.entrypoints=websecure
+      - traefik.http.routers.riesinger.tls.certresolver=letsencrypt
+      - traefik.http.services.riesinger.loadbalancer.server.port=8080
+
+networks:
+  traefik:
+    external: true
