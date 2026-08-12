@@ -9,7 +9,7 @@
       {{- $srcset = $srcset | append (printf "%s %dw" $variant.RelPermalink $variant.Width) -}}
     {{- end -}}
   {{- end -}}
-  {{- $fallback := $resource.Resize (printf "%dx webp q82" (int $resource.Width)) -}}
+  {{- $fallback := $resource -}}
   {{- $srcset = $srcset | append (printf "%s %dw" $fallback.RelPermalink $fallback.Width) -}}
   <img
     src="{{ $fallback.RelPermalink }}"
