@@ -1,0 +1,36 @@
+{{ define "main" }}
+<main id="content" class="frame topic-page">
+    <a class="back-link" href="/finance-intro/{{ if eq .Params.category "classic" }}#klassisch{{ else if eq .Params.category "market" }}#markt{{ end }}">{{ partial "icon" "back" }} Zur Übersicht</a>
+    <header class="topic-header">
+        <span class="eyebrow">{{ if eq .Params.category "glossary" }}Zum Nachschlagen{{ else if eq .Params.category "classic" }}Klassisch sparen{{ else }}Am Markt investieren{{ end }}</span>
+        <h1>{{ .Title }}</h1>
+        <p>{{ .Params.summary }}</p>
+    </header>
+    {{ if eq .Params.category "glossary" }}
+    <nav class="glossary-index" aria-label="Begriffe im Glossar">
+        {{ range .Fragments.Headings }}{{ range .Headings }}
+        <a href="#{{ .ID }}">{{ .Title | plainify }}</a>
+        {{ end }}{{ end }}
+    </nav>
+    {{ else }}
+    <div class="tradeoff-grid">
+        <section class="tradeoff-panel" aria-labelledby="benefits-title">
+            <h2 id="benefits-title">{{ partial "icon" "plus" }} Vorteile</h2>
+            <ul>{{ range .Params.benefits }}<li>{{ . }}</li>{{ end }}</ul>
+        </section>
+        <section class="tradeoff-panel" aria-labelledby="drawbacks-title">
+            <h2 id="drawbacks-title">{{ partial "icon" "minus" }} Nachteile</h2>
+            <ul>{{ range .Params.drawbacks }}<li>{{ . }}</li>{{ end }}</ul>
+        </section>
+    </div>
+    {{ end }}
+    <article class="reading{{ if eq .Params.category "glossary" }} glossary{{ end }}">{{ .Content }}</article>
+    {{ if ne .Params.category "glossary" }}
+    <aside class="note">{{ partial "icon" "book" }}<p>Ein Begriff ist unklar? Im <a href="/finance-intro/glossar/">Glossar</a> findest du kurze Erklärungen.</p></aside>
+    <nav class="related-topics" aria-label="Weitere Geldanlagen">
+        <h2>Auch interessant</h2>
+        <div class="term-links">{{ range where .Parent.RegularPages "Params.category" .Params.category }}{{ if ne .RelPermalink $.RelPermalink }}<a href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ end }}{{ end }}</div>
+    </nav>
+    {{ end }}
+</main>
+{{ end }}

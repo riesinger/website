@@ -33,6 +33,10 @@
     {{ $base := resources.Get "css/base.css" | minify | fingerprint }}
     <link rel="stylesheet" href="{{ $base.RelPermalink }}" integrity="{{ $base.Data.Integrity }}" />
 
+    {{ if eq .Section "finance-intro" }}
+    {{ $css := resources.Get "css/finance.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+    {{ else }}
     {{/* Each syntax theme is scoped to its scheme: stacking them would leave
          light-only token colours behind on a dark background. */}}
     {{ $main := resources.Get "css/main.css" }}
@@ -40,6 +44,8 @@
     {{ $dark := printf "@media (prefers-color-scheme: dark) {\n%s\n}" (resources.Get "css/chroma-dark.css").Content | resources.FromString "css/chroma-dark-scoped.css" }}
     {{ $css := slice $main $light $dark | resources.Concat "css/bundle.css" | minify | fingerprint }}
     <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+    {{ end }}
+
     {{/* Register pagereveal before the first rendering opportunity. */}}
     {{ $transitions := resources.Get "js/page-transitions.js" | js.Build (dict "minify" true) | fingerprint }}
     <script src="{{ $transitions.RelPermalink }}" integrity="{{ $transitions.Data.Integrity }}"></script>

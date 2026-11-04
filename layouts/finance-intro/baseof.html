@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="de">
+    {{ partial "head" . }}
+    <body class="finance-site">
+        <a class="skip-link" href="#content">Zum Inhalt springen</a>
+        <header class="site-header frame">
+            <a class="brand" href="/finance-intro/" aria-label="Finanzen verstehen – Übersicht">
+                <span class="brand-mark">{{ partial "icon" "book" }}</span>
+                <span>Finanzen verstehen</span>
+            </a>
+            <nav aria-label="Hauptnavigation">
+                <a href="/finance-intro/" {{ if .IsSection }}aria-current="page"{{ end }}>Übersicht</a>
+                <a href="/finance-intro/glossar/" {{ if eq .Params.category "glossary" }}aria-current="page"{{ end }}>Glossar</a>
+            </nav>
+        </header>
+        {{ block "main" . }}{{ end }}
+        <footer class="site-footer frame">
+            <p>Zum Verstehen, nicht als Anlageberatung. Jede Geldanlage hat Risiken.</p>
+            <a href="/">riesinger.dev {{ partial "icon" "external" }}</a>
+        </footer>
+    </body>
+</html>

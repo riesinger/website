@@ -17,6 +17,7 @@ No Tailwind or frontend build dependencies are needed.
 
 - `assets/css/base.css` owns shared theme tokens, typography, navigation, and footer.
 - `assets/css/main.css` owns the homepage, archives, articles, projects, and reference tables.
+- `assets/css/finance.css` adds finance-specific layouts without redefining the shared theme.
 - `layouts/partials/icon.html` contains the shared inline icons.
 
 The custom P/R monogram lives in `static/icon.svg`; this is the font-independent
@@ -44,7 +45,7 @@ The main archive's tag filter is progressively enhanced: without JavaScript,
 all entries remain visible. Wide reference pages use `wide: true` in frontmatter.
 
 Same-origin navigation uses native CSS View Transitions from `base.css`, with a
-steady header and a quick page fade by default. Writing and project
+steady header and a quick page fade by default. Writing, project, and investment
 card titles marked `data-transition-title` move into the destination `main h1`
 over 320ms; the remaining content then fades in over 180ms.
 
@@ -59,3 +60,18 @@ Reduced-motion preferences disable all page transitions. Without JavaScript,
 the required browser APIs, or session storage, navigation keeps the basic fade
 where supported, otherwise ordinary page changes. No client-side router is used;
 same-page anchors and opening links in a new tab retain their native behavior.
+
+## Finance introduction
+
+The German learning area starts at `/finance-intro/`. Its layouts live in
+`layouts/finance-intro/` and use the same shared design system as the main site.
+The finance area does not require JavaScript.
+
+Content lives in `content/finance-intro/`. Each investment page defines its
+`category` (`classic` or `market`), `weight`, `label`, `summary`, a short `benefit`
+and `drawback` for the overview, and `benefits` / `drawbacks` lists for the detail
+page. The overview and related-topic links are generated from these pages.
+
+Keep explanations brief, cite authoritative sources, and link unfamiliar terms to
+the explicit anchors in `glossar.md`. The glossary navigation is generated from
+its headings.

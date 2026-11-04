@@ -10,13 +10,9 @@ tags:
 You're debugging some DNS changes in your network and Safari (or `curl` / any other tool) keeps sending requests to an old DNS entry?
 With these commands, you can clear your system's DNS cache:
 
-| macOS version       | command                                                         |
-| ------------------- | --------------------------------------------------------------- |
-| 12 (Monterey)       | `sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder` |
-| 11 (Big Sur)        | `sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder` |
-| 10.15 (Catalina)    | `sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder` |
-| 10.14 (Mojave)      | `sudo killall -HUP mDNSResponder`                               |
-| 10.13 (High Sierra) | `sudo killall -HUP mDNSResponder`                               |
-| 10.12 (Sierra)      | `sudo killall -HUP mDNSResponder`                               |
+| macOS version          | command                                                         |
+| ---------------------- | --------------------------------------------------------------- |
+| >= 10.15 (Catalina)    | `sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder` |
+| <= 10.14 (Mojave)      | `sudo killall -HUP mDNSResponder`                               |
 
 I hope this helps 🙂
