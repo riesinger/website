@@ -1,10 +1,13 @@
 {{- define "main" }}
-<main id="content" class="rail">
-    <p class="rail-aside label">404</p>
-    <h1 class="doc-title">Nothing at this address</h1>
-    <p class="doc-subtitle">
-        The page either moved or never existed.
-    </p>
+<main id="content" class="frame document-page">
+    <a class="back-link" href="{{ site.Home.RelPermalink }}">{{ partial "icon" "back" }} Home</a>
+    <header class="page-heading">
+        <p class="eyebrow">404</p>
+        <h1 class="doc-title">Nothing at this address</h1>
+        <p class="doc-subtitle">
+            The page either moved or never existed.
+        </p>
+    </header>
     <div class="doc-body prose">
         <p>
             Start from the <a href="/posts/">writing index</a> or the

@@ -1,0 +1,18 @@
+{{ define "main" }}
+<main id="content" class="frame archive-page">
+    <header class="page-heading">
+        <p class="eyebrow">{{ .Data.Singular | humanize }}</p>
+        <h1 class="doc-title">{{ if eq .Data.Plural "tags" }}{{ .Title | lower }}{{ else }}{{ .Title }}{{ end }}</h1>
+        <p class="doc-subtitle">
+            {{ len .Pages }} {{ cond (eq (len .Pages) 1) "entry" "entries" }} ·
+            <a href="{{ .Parent.RelPermalink }}">browse all {{ .Data.Plural }}</a>
+        </p>
+        {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+    </header>
+    {{ if .Pages }}
+    {{ partial "entries" (dict "pages" .Pages) }}
+    {{ else }}
+    <p class="empty-state">No entries in this {{ .Data.Singular }} yet. <a href="{{ "posts/" | relURL }}">Browse all writing</a> instead.</p>
+    {{ end }}
+</main>
+{{ end }}

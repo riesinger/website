@@ -1,0 +1,74 @@
+{{ define "main" }}
+<main id="content" class="frame overview">
+    <section class="intro" aria-labelledby="intro-title">
+        <span class="eyebrow">Einfach anfangen</span>
+        <h1 id="intro-title">Dein Geld. Dein Verständnis.</h1>
+        <div class="intro-copy">{{ .Content }}</div>
+        <a class="button" href="#geldanlagen">Geldanlagen kennenlernen {{ partial "icon" "arrow" }}</a>
+        <a class="text-link" href="/finance-intro/glossar/">Ein Begriff ist neu? Zum Glossar</a>
+    </section>
+
+    <section class="basics" aria-labelledby="basics-title">
+        <div class="section-heading compact">
+            <h2 id="basics-title">Drei Fragen für jede Geldanlage</h2>
+            <p>Mehr Ertrag, weniger Risiko, jederzeit verfügbar? Nicht alles geht gleichzeitig.</p>
+        </div>
+        <div class="basics-grid">
+            <a href="/finance-intro/glossar/#risiko" class="basic-card">
+                <span class="basic-title">Wie sicher ist mein Geld? {{ partial "icon" "arrow" }}</span>
+                <span>Risiko: Wie viel kann ich verlieren?</span>
+            </a>
+            <a href="/finance-intro/glossar/#rendite" class="basic-card">
+                <span class="basic-title">Was kann daraus werden? {{ partial "icon" "arrow" }}</span>
+                <span>Rendite: Was bringt die Anlage – nach Kosten?</span>
+            </a>
+            <a href="/finance-intro/glossar/#liquiditaet" class="basic-card">
+                <span class="basic-title">Wann brauche ich das Geld? {{ partial "icon" "arrow" }}</span>
+                <span>Verfügbarkeit: Wie schnell komme ich wieder dran?</span>
+            </a>
+        </div>
+    </section>
+
+    <div id="geldanlagen" class="investments">
+        <nav class="section-nav" aria-label="Geldanlagen und Begriffe">
+            <a href="#klassisch">Klassisch sparen</a>
+            <a href="#markt">Am Markt investieren</a>
+            <a href="/finance-intro/glossar/">Begriffe nachschlagen {{ partial "icon" "external" }}</a>
+        </nav>
+        {{ range slice
+            (dict "id" "klassisch" "category" "classic" "icon" "shield" "title" "Klassisch sparen" "subtitle" "Zinsen vereinbaren, Geld zurücklegen." "description" "Meist ohne tägliche Kursschwankungen. Dafür können Zinsen niedrig sein oder dein Geld länger gebunden bleiben.")
+            (dict "id" "markt" "category" "market" "icon" "chart" "title" "Am Markt investieren" "subtitle" "An Unternehmen und Märkten teilhaben." "description" "Wertpapiere können Erträge bringen, aber auch an Wert verlieren. Wie groß das Risiko ist, hängt von der konkreten Anlage ab.")
+        }}
+        <section id="{{ .id }}" class="investment-section" aria-labelledby="{{ .id }}-title">
+            <div class="category-heading">
+                <span class="category-icon">{{ partial "icon" .icon }}</span>
+                <div><h2 id="{{ .id }}-title">{{ .title }}</h2><p>{{ .subtitle }}</p></div>
+            </div>
+            <p class="category-description">{{ .description }}</p>
+            <div class="investment-grid">
+                {{ range where $.RegularPages "Params.category" .category }}
+                <a class="investment-card" href="{{ .RelPermalink }}">
+                    <div class="card-heading"><span class="tag">{{ .Params.label }}</span>{{ partial "icon" "arrow" }}</div>
+                    <h3 data-transition-title>{{ .Title }}</h3>
+                    <p class="card-summary">{{ .Params.summary }}</p>
+                    <dl class="card-tradeoffs">
+                        <div><dt><span class="sr-only">Vorteil</span>{{ partial "icon" "plus" }}</dt><dd>{{ .Params.benefit }}</dd></div>
+                        <div><dt><span class="sr-only">Nachteil</span>{{ partial "icon" "minus" }}</dt><dd>{{ .Params.drawback }}</dd></div>
+                    </dl>
+                    <span class="card-more">Kurz erklärt <span class="sr-only">: {{ .Title }}</span></span>
+                </a>
+                {{ end }}
+            </div>
+        </section>
+        {{ end }}
+        <aside class="note">{{ partial "icon" "info" }}<p>„Klassisch“ und „modern“ sind keine festen Anlageklassen. Aktien gibt es schon lange; ETFs sind selbst Fonds. Die Einteilung hilft nur beim Einstieg.</p></aside>
+    </div>
+
+    <section class="glossary-callout" aria-labelledby="glossary-title">
+        <span class="category-icon">{{ partial "icon" "book" }}</span>
+        <div><h2 id="glossary-title">Kein Fachwort soll dich aufhalten.</h2><p>Broker, Depot oder Inflation? Kurz nachschlagen, dann weiterlesen.</p>
+            <div class="term-links"><a href="/finance-intro/glossar/#broker">Broker</a><a href="/finance-intro/glossar/#depot">Depot</a><a href="/finance-intro/glossar/#inflation">Inflation</a><a href="/finance-intro/glossar/">Alle Begriffe →</a></div>
+        </div>
+    </section>
+</main>
+{{ end }}

@@ -1,18 +1,22 @@
-{{- /* Dated index rows. Expects a dict: "pages" (page collection). */ -}}
+{{- /* Dated entry cards. Expects a dict: "pages" (page collection). */ -}}
 <ol class="entries">
     {{- range .pages }}
     {{- $tags := .Params.tags | default slice }}
     {{- $slugs := slice }}
     {{- range $tags }}{{ $slugs = $slugs | append (. | urlize) }}{{ end }}
-    <li class="entry"{{ with $slugs }} data-tags="{{ delimit . "," }}"{{ end }}>
+    <li class="entry" data-tags="{{ delimit $slugs "," }}">
         <a class="entry-link" href="{{ .RelPermalink }}">
             <time class="entry-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-            <span class="entry-title">{{ .Title }}</span>
+            <span class="entry-title" data-transition-title>{{ .Title }}</span>
+            {{- with .Params.subtitle | default .Params.summary }}
+            <span class="entry-summary">{{ . | plainify }}</span>
+            {{- end }}
             {{- with $tags }}
             <span class="entry-tags">
                 {{- range first 2 . }}<span>{{ . | lower }}</span>{{ end -}}
             </span>
             {{- end }}
+            <span class="entry-arrow" aria-hidden="true">{{ partial "icon" "arrow" }}</span>
         </a>
     </li>
     {{- end }}

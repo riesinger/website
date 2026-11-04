@@ -1,13 +1,13 @@
 {{ define "main" }}
-<main id="content">
-    <div class="rail">
+<main id="content" class="frame archive-page">
+    <header class="page-heading">
         <h1 class="doc-title">{{ .Title }}</h1>
         <p class="doc-subtitle">
             Side projects, university work and things I built to scratch an itch.
             Some are still running; some taught me what I needed and stopped there.
         </p>
         {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
-    </div>
+    </header>
     {{ partial "projects" (dict "pages" page.Pages) }}
 </main>
 {{ end }}

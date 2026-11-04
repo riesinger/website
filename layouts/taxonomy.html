@@ -1,0 +1,30 @@
+{{ define "main" }}
+<main id="content" class="frame archive-page">
+    <header class="page-heading">
+        <h1 class="doc-title">{{ .Title }}</h1>
+        <p class="doc-subtitle">
+            {{ if eq .Data.Plural "tags" }}
+            Every subject on the site, most-written-about first.
+            {{ else }}
+            Browse all {{ .Data.Plural }}, most-written-about first.
+            {{ end }}
+        </p>
+        {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+    </header>
+    {{ if gt (len .Data.Terms) 0 }}
+    <p class="label">{{ len .Data.Terms }} {{ cond (eq (len .Data.Terms) 1) .Data.Singular .Data.Plural }}</p>
+    <ul class="tag-cloud">
+        {{ range .Data.Terms.ByCount }}
+        <li>
+            <a href="{{ .Page.RelPermalink }}">
+                {{ if eq $.Data.Plural "tags" }}{{ .Page.Title | lower }}{{ else }}{{ .Page.Title }}{{ end }}
+                <span class="count">{{ .Count }}</span>
+            </a>
+        </li>
+        {{ end }}
+    </ul>
+    {{ else }}
+    <p class="empty-state">No {{ .Data.Plural }} yet. <a href="{{ "posts/" | relURL }}">Browse all writing</a> instead.</p>
+    {{ end }}
+</main>
+{{ end }}

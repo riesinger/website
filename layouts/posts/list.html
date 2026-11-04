@@ -1,22 +1,22 @@
 {{ define "main" }}
 {{ $pages := page.Pages }}
-<main id="content">
-    <div class="rail">
+<main id="content" class="frame archive-page">
+    <header class="page-heading">
         <h1 class="doc-title">{{ .Title }}</h1>
         <p class="doc-subtitle">
             {{ len $pages }} entries on Go, self-hosting, hardware and whatever else
             took longer to figure out than it should have.
         </p>
         {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
-    </div>
+    </header>
 
     {{ $recurring := where site.Taxonomies.tags.ByCount "Count" "ge" 2 }}
     {{ with $recurring }}
-    <div class="rail rail-gap filter-bar">
-        <p class="rail-aside label">Filter</p>
+    <nav class="filter-bar" aria-label="Filter posts by tag">
+        <p class="label">Filter</p>
         <div class="filter-group">
             <ul class="filter">
-                <li><button type="button" aria-pressed="true">everything</button></li>
+                <li><button type="button" aria-pressed="true" data-tag="">everything</button></li>
                 {{ range . }}
                 <li>
                     <button type="button" aria-pressed="false" data-tag="{{ .Name | urlize }}">
@@ -26,11 +26,11 @@
                 {{ end }}
             </ul>
         </div>
-    </div>
+    </nav>
     {{ end }}
 
     {{ partial "entries" (dict "pages" $pages) }}
-    <p class="filter-empty" hidden>No entries with that tag.</p>
+    <p class="filter-empty" role="status" hidden>No entries with that tag.</p>
 </main>
 {{ end }}
 

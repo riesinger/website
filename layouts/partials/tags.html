@@ -1,11 +1,7 @@
-{{ with .Params.tags }}
-<ul class="doc-meta-tags">
+{{ with .GetTerms "tags" }}
+<ul class="doc-meta-tags" aria-label="Tags">
     {{ range . }}
-    {{ with site.GetPage (printf "/tags/%s" (. | urlize)) }}
     <li><a href="{{ .RelPermalink }}">{{ .Title | lower }}</a></li>
-    {{ else }}
-    <li>{{ . | lower }}</li>
-    {{ end }}
     {{ end }}
 </ul>
 {{ end }}

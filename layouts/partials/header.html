@@ -1,4 +1,7 @@
-<header class="site-header">
-    <a class="wordmark" href="/">riesinger<span>.dev</span></a>
-    {{- block "nav" . }}{{ partial "nav" (dict "menuID" "main" "page" .) }}{{ end -}}
+<header class="site-header frame">
+    <a class="brand" href="/" aria-label="Pascal Riesinger — home">
+        <span class="brand-mark" aria-hidden="true"><img src="/icon.svg?v=2" alt="" width="38" height="38" /></span>
+        <span>{{ site.Title }}</span>
+    </a>
+    {{ partial "nav" (dict "menuID" "main" "page" .) }}
 </header>
