@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="{{ site.Language.Locale }}">
     {{ partial "head" . }}
-    <body{{ if .Params.wide }} class="wide"{{ end }}>
+    <body class="personal-site">
         <a class="skip-link" href="#content">Skip to content</a>
         {{ partial "header" . }}
         {{- block "main" . }}{{- end }}

@@ -1,18 +1,21 @@
 {{ define "main" }}
 {{ $statusLabels := dict "active" "in progress" "maintenance" "maintained" "done" "finished" "archived" "archived" }}
-<main id="content" class="rail">
-    <div class="doc-meta rail-aside">
-        {{ with .Params.status }}
-        <span class="project-status" data-status="{{ . }}">{{ index $statusLabels . | default . }}</span>
+<main id="content" class="frame document-page{{ if .Params.wide }} reference-page{{ end }}">
+    <a class="back-link" href="{{ "projects/" | relURL }}">{{ partial "icon" "back" }} All projects</a>
+    <header class="page-heading">
+        <div class="doc-meta">
+            {{ with .Params.status }}
+            <span class="project-status" data-status="{{ . }}">{{ index $statusLabels . | default . }}</span>
+            {{ end }}
+            {{ if not .Date.IsZero }}
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006" }}</time>
+            {{ end }}
+        </div>
+        <h1 class="doc-title">{{ .Title }}</h1>
+        {{ with .Params.summary }}
+        <p class="doc-subtitle">{{ . }}</p>
         {{ end }}
-        {{ if not .Date.IsZero }}
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006" }}</time>
-        {{ end }}
-    </div>
-    <h1 class="doc-title">{{ .Title }}</h1>
-    {{ with .Params.summary }}
-    <p class="doc-subtitle">{{ . }}</p>
-    {{ end }}
+    </header>
     {{ with .Params.cover }}
     {{ with $.Resources.GetMatch . }}
     {{ $img := . }}

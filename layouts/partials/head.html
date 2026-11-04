@@ -2,8 +2,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/svg+xml" sizes="any" href="/icon.svg" />
     <link rel="manifest" href="/site.webmanifest" />
 
     {{ $title := site.Title }}
@@ -28,6 +30,9 @@
     <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ site.Title }}" />
     {{- end }}
 
+    {{ $base := resources.Get "css/base.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $base.RelPermalink }}" integrity="{{ $base.Data.Integrity }}" />
+
     {{/* Each syntax theme is scoped to its scheme: stacking them would leave
          light-only token colours behind on a dark background. */}}
     {{ $main := resources.Get "css/main.css" }}
@@ -35,6 +40,9 @@
     {{ $dark := printf "@media (prefers-color-scheme: dark) {\n%s\n}" (resources.Get "css/chroma-dark.css").Content | resources.FromString "css/chroma-dark-scoped.css" }}
     {{ $css := slice $main $light $dark | resources.Concat "css/bundle.css" | minify | fingerprint }}
     <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+    {{/* Register pagereveal before the first rendering opportunity. */}}
+    {{ $transitions := resources.Get "js/page-transitions.js" | js.Build (dict "minify" true) | fingerprint }}
+    <script src="{{ $transitions.RelPermalink }}" integrity="{{ $transitions.Data.Integrity }}"></script>
 
     <script
         defer

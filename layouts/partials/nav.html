@@ -2,13 +2,13 @@
 {{- $menuID := .menuID }}
 
 {{- with index site.Menus $menuID }}
-<nav class="site-nav">
+<nav class="site-nav" aria-label="Main navigation">
     <ul>
         {{- range . }}
         <li>
             <a
                 href="{{ .URL }}"
-                {{ if or ($page.IsMenuCurrent .Menu .) ($page.HasMenuCurrent .Menu .) }}aria-current="page"{{ end }}
+                {{ if or ($page.IsMenuCurrent .Menu .) ($page.HasMenuCurrent .Menu .) (strings.HasPrefix $page.RelPermalink .URL) }}aria-current="page"{{ end }}
             >{{ .Name }}</a>
         </li>
         {{- end }}

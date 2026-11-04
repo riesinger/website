@@ -3,64 +3,14 @@ title: "ACRISS Car Codes"
 wide: true
 ---
 
-<style>
-/* Scoped to .prose so these win over the site's markdown table styles, which
-   assume a borderless table sitting in a column of running text. */
-.prose table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: var(--font-mono);
-    font-size: 0.8125rem;
-}
-
-.prose th,
-.prose tr > td,
-.prose tr > th:first-child,
-.prose tr > td:first-child {
-    padding: 0.4rem 0.6rem;
-}
-
-.prose td {
-    border: 1px solid var(--rule-strong);
-    vertical-align: top;
-
-    &.highlight {
-        background: var(--accent);
-        color: var(--paper);
-    }
-}
-
-.prose tr:nth-child(2n) td {
-    background: var(--panel);
-}
-
-.prose tr:nth-child(2n) td.highlight {
-    background: var(--accent);
-}
-
-input {
-    width: 100%;
-    max-width: 20rem;
-    padding: 0.55rem 0.7rem;
-    border: 1px solid var(--rule-strong);
-    border-radius: 3px;
-    background: var(--panel);
-    color: var(--ink);
-    font: inherit;
-    font-size: 0.9375rem;
-}
-
-input:focus-visible {
-    border-color: var(--accent);
-}
-</style>
 
 This is a mirror of the data on https://acriss.org/car-codes/, since it's too slow of a site for my tastes.
 
-<input type="text" id="decode" placeholder="Enter an ACRISS code to decode" maxlength="4"/>
+<label class="label" for="decode">Decode a car code</label>
+<input class="code-input" type="text" id="decode" placeholder="Enter an ACRISS code to decode" maxlength="4" autocomplete="off" spellcheck="false"/>
 
-<div class="scroll-x">
-<table>
+<div class="scroll-x" role="region" aria-label="ACRISS code reference" tabindex="0">
+<table class="acriss-table">
     <thead>
         <tr>
             <th>CATEGORY</th>

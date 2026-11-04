@@ -1,9 +1,12 @@
 {{ define "main" }}
-<main id="content" class="rail">
-    <h1 class="doc-title">{{ .Title }}</h1>
-    {{ with .Params.subtitle }}
-    <p class="doc-subtitle">{{ . }}</p>
-    {{ end }}
+<main id="content" class="frame document-page{{ if .Params.wide }} reference-page{{ end }}">
+    <a class="back-link" href="{{ site.Home.RelPermalink }}">{{ partial "icon" "back" }} Home</a>
+    <header class="page-heading">
+        <h1 class="doc-title">{{ .Title }}</h1>
+        {{ with .Params.subtitle }}
+        <p class="doc-subtitle">{{ . }}</p>
+        {{ end }}
+    </header>
     <article class="doc-body prose">{{ .Content }}</article>
 </main>
 {{ end }}

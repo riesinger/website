@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <title>Pascal Riesinger</title>
+  <style>
+    .tile { fill: #171717; }
+    .mark { fill: #ffffff; }
+    @media (prefers-color-scheme: dark) {
+      .tile { fill: #f5f5f5; }
+      .mark { fill: #111111; }
+    }
+  </style>
+  <rect class="tile" width="64" height="64" rx="16" />
+  <path class="mark" fill-rule="evenodd" d="M14 12h18c10 0 16 4 16 12s-6 12-16 12H22v16h-8V12Zm8 8v8h10c6 0 8-1 8-4s-2-4-8-4H22Z" />
+  <path class="mark" d="M29 40h11l10 12H39L29 40Z" />
+</svg>

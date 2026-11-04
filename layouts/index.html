@@ -1,40 +1,40 @@
 {{ define "main" }}
 {{ $posts := where site.RegularPages "Section" "posts" }}
 {{ $projects := (site.GetPage "/projects").Pages }}
-<main id="content">
-    <section class="hero">
-        <div class="rail">
-            <h1 class="hero-name reveal">
-                {{ .Params.firstName | default "Pascal" }}<span class="surname">{{ .Params.lastName | default "Riesinger" }}</span>
-            </h1>
-            <div class="hero-lead reveal reveal-2">{{ .Content }}</div>
+<main id="content" class="frame home-page">
+    <section class="hero" aria-labelledby="hero-title">
+        <span class="eyebrow">Software engineer · Germany</span>
+        <h1 id="hero-title">{{ .Params.firstName | default "Pascal" }} {{ .Params.lastName | default "Riesinger" }}</h1>
+        <div class="hero-lead">{{ .Content }}</div>
+        <div class="hero-actions">
+            <a class="button" href="/posts/">Explore the writing {{ partial "icon" "arrow" }}</a>
+            <a class="quiet-link" href="#about">A little about me {{ partial "icon" "arrow" }}</a>
         </div>
-        {{ partial "cadence" . }}
     </section>
 
     {{ with $posts }}
-    <section class="block">
-        <div class="rail block-head">
-            <h2 class="rail-aside label">Writing</h2>
-            <a class="more" href="/posts/">All {{ len . }} posts</a>
+    <section class="home-section" aria-labelledby="writing-title">
+        <div class="section-heading">
+            <div><h2 id="writing-title">Recent writing</h2><p>Notes from things I’ve built and figured out.</p></div>
+            <a class="more" href="/posts/">All {{ len . }} posts {{ partial "icon" "arrow" }}</a>
         </div>
-        {{ partial "entries" (dict "pages" (first 5 .)) }}
+        {{ partial "entries" (dict "pages" (first 4 .)) }}
     </section>
     {{ end }}
 
     {{ with $projects }}
-    <section class="block">
-        <div class="rail block-head">
-            <h2 class="rail-aside label">Projects</h2>
-            <a class="more" href="/projects/">All {{ len . }} projects</a>
+    <section class="home-section" aria-labelledby="projects-title">
+        <div class="section-heading">
+            <div><h2 id="projects-title">Things I’ve built</h2><p>Side projects, experiments, and useful little tools.</p></div>
+            <a class="more" href="/projects/">All projects {{ partial "icon" "arrow" }}</a>
         </div>
         {{ partial "projects" (dict "pages" (first 3 .)) }}
     </section>
     {{ end }}
 
     {{ with site.GetPage "/about" }}
-    <section class="block rail about">
-        <h2 class="rail-aside label">{{ .Title }}</h2>
+    <section id="about" class="about-panel" aria-labelledby="about-title">
+        <div><span class="eyebrow">Beyond the code</span><h2 id="about-title">{{ .Title }}</h2></div>
         <div class="prose">{{ .Content }}</div>
     </section>
     {{ end }}
