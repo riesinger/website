@@ -20,10 +20,14 @@ No Tailwind or frontend build dependencies are needed.
 - `assets/css/finance.css` adds finance-specific layouts without redefining the shared theme.
 - `layouts/partials/icon.html` contains the shared inline icons.
 
-The custom P/R monogram lives in `static/icon.svg`; this is the font-independent
-vector master used in the personal-site header and as the SVG favicon. Its colors
-adapt to light/dark preferences. PNG and ICO exports use the fixed dark tile;
-the Apple touch icon is opaque so the platform can apply its own mask.
+The editorial R in `static/icon.svg` is outlined from the site's Instrument Serif
+typeface, with slightly strengthened strokes for small sizes. This vector master
+has no runtime font dependency and is used in the personal-site header and as the
+SVG favicon. Its colors adapt to light/dark preferences. PNG and ICO exports use
+the fixed dark tile; the Apple touch icon is opaque for the platform's own mask.
+
+Icon URLs carry the `v=2` revision to avoid stale browser caches. When replacing
+the artwork, update that revision in the header, head links, and web manifest.
 
 Regenerate the raster exports with ImageMagick:
 
